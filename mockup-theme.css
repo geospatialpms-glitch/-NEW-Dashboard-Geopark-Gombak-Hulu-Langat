@@ -1,0 +1,46 @@
+/* GHLGp redesign – adapted from the supplied sidebar mockup, 23 Oct 2026 */
+:root{--green:#176744;--lime:#9bc348;--orange:#dc6b31;--ink:#24372e;--muted:#64786c;--cream:#f7f7f1;--line:#dce7d9;--panel:#fff;--shadow:0 10px 28px #16492e0b}
+html{scroll-padding-top:90px}
+body{color:var(--ink);background:#f7f7f1;font-family:Inter,Arial,sans-serif}
+.header{height:76px;position:sticky;top:0;z-index:70;padding:9px 3%;box-shadow:0 3px 18px #153c2220;background:linear-gradient(90deg,rgba(6,68,48,.98),rgba(6,86,57,.90) 50%,rgba(13,85,50,.25)),url('header-geopark.png') right center/cover no-repeat;border-bottom:1px solid #dde7df}
+.header .suo-logo{width:53px;height:53px;object-fit:contain}
+.header .header-title h1{font-size:18px;line-height:1.2}
+.header .header-title p{font-size:11px}
+.header .header-right .logo{max-height:55px;width:auto;max-width:155px}
+.shell{grid-template-columns:198px minmax(0,1fr);align-items:stretch;min-height:calc(100vh - 76px)}
+.sidebar{position:relative;top:0;padding:17px 10px;background:linear-gradient(170deg,rgba(5,80,53,.95),rgba(8,122,72,.95) 53%,rgba(112,167,53,.93)),url('sidebar-geopark.png') center/cover no-repeat;border:0;box-shadow:4px 0 16px #052d1b1a;min-height:calc(100vh - 76px)}
+.sidebar:before{content:"";position:absolute;inset:0;opacity:.16;pointer-events:none;background:repeating-radial-gradient(ellipse at 10% 75%,transparent 0 22px,#ffffff33 23px,transparent 24px,transparent 38px)}
+.sidebar>*{position:relative}
+.sidebar .navbtn,.sidebar button{border-radius:10px;transition:background .2s,transform .2s}
+.sidebar .navbtn:hover,.sidebar .navbtn.active,.sidebar button.active{background:linear-gradient(100deg,#ee4b2c,#fa8a25);color:white;box-shadow:0 6px 14px #0d332535}
+#utama{min-width:0;padding:0 3.3% 60px;background-color:#f7f7f1;background-image:repeating-radial-gradient(ellipse at 10% 20%,transparent 0 25px,#a5c0a512 26px 27px,transparent 28px 55px)}
+.ghl-mock-hero{min-height:300px;position:relative;margin:0 -3.55% 30px;overflow:hidden;background:linear-gradient(90deg,rgba(5,49,38,.96),rgba(5,49,38,.75) 48%,rgba(5,49,38,.10)),url('header-geopark.png') center/cover no-repeat;display:flex;align-items:center;color:#fff}
+.ghl-mock-hero:after{content:"";position:absolute;bottom:-1px;width:100%;height:25px;background:#f7f7f1;clip-path:polygon(0 55%,7% 72%,15% 58%,23% 70%,30% 55%,40% 66%,48% 52%,56% 70%,65% 56%,74% 68%,83% 54%,92% 67%,100% 49%,100% 100%,0 100%)}
+.ghl-mock-hero-inner{position:relative;z-index:1;max-width:710px;padding:42px 6%}
+.ghl-mock-hero small{display:block;text-transform:uppercase;letter-spacing:.22em;color:#cadf8b;font-weight:800}
+.ghl-mock-hero h2{font:600 clamp(32px,4vw,58px)/1.08 Georgia,serif;margin:14px 0;color:#fff}
+.ghl-mock-hero h2 em{font-style:normal;color:#d6ecab}
+.ghl-mock-hero p{color:#f0f4e5;font-size:15px;line-height:1.65}
+.ghl-mock-hero a{display:inline-block;background:#176744;color:#fff;border-radius:28px;padding:11px 20px;font-size:13px;font-weight:750}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;position:relative;z-index:2}
+.kpi,.panel,.filterbar,.map-panel,.table-panel,.chartbox{border:1px solid #dce7d9;border-radius:16px;background:#fff;box-shadow:0 10px 28px #16492e0b}
+.kpi{min-height:112px;padding:17px;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 14px 30px #16492e19}
+.kpi-icon{border-radius:14px;background:#e8f1dc}
+.kpi-label{font-size:12px;color:#60746a}
+.kpi-value{color:#073e30;font-size:clamp(21px,2.2vw,30px);font-weight:800}
+.filterbar{padding:17px;gap:12px}
+.filterbar select,.filterbar input,#mapSearch{border-radius:9px;border:1px solid #cfdfd1;background:#fff;color:#304e3d}
+.dashboard-main-grid{gap:17px}
+.panel-title{background:linear-gradient(90deg,#0d5c3f,#63a33e);color:#fff;font-weight:750}
+.panel-title .accent{color:#fff}
+#map{height:480px;min-height:380px;border-radius:0 0 14px 14px}
+.right-analysis{display:flex;flex-direction:column;gap:16px;min-width:0}
+.table-wrap{max-height:325px;overflow:auto}
+.data-table thead th{position:sticky;top:0;background:#ecf3e9;color:#315c40}
+.data-table tr:hover{background:#f3f8ec}
+.jejak-panel,.about-card,.chrono-phase,.component-item,.benefit{border-radius:15px}
+@media(max-width:1100px){.dashboard-main-grid{grid-template-columns:1fr!important}.right-analysis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.right-analysis>*{min-width:0}}
+@media(max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.sidebar{min-height:auto}.ghl-mock-hero{margin-left:-3.55%;margin-right:-3.55%}.header{height:76px}}
+@media(max-width:700px){#utama{padding-left:4%;padding-right:4%}.ghl-mock-hero{margin:0 -4.35% 22px;min-height:290px}.ghl-mock-hero-inner{padding:36px 6%}.ghl-mock-hero h2{font-size:37px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.kpi{padding:11px;min-height:95px}.right-analysis{display:flex}.filterbar{grid-template-columns:1fr!important}#map{height:345px;min-height:300px}}
+@media(prefers-reduced-motion:reduce){.kpi{transition:none}}
