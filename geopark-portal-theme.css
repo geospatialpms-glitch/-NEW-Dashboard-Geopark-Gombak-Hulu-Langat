@@ -35,3 +35,34 @@ body{background:var(--ghl-paper)!important}
 .dashboard-main-grid .data-table tbody tr:hover{background:#eaf3e5!important}
 @media(max-width:700px){.ghl-mock-hero{min-height:370px!important}.ghl-mock-hero-inner{padding:42px 6%!important}.ghl-mock-hero h2{font-size:40px!important}.ghl-mock-hero p{font-size:13px!important}}
 @media(prefers-reduced-motion:reduce){.ghl-mock-hero a,.kpi,.header .portal-geopark-link{transition:none!important}}
+
+/* SIDEBAR SCREENSHOT 2026-10-23 */
+.shell{grid-template-columns:194px minmax(0,1fr)!important}
+.sidebar{
+  position:relative!important;display:flex!important;flex-direction:column!important;
+  padding:12px 0 0!important;min-height:calc(100vh - 72px)!important;
+  background:linear-gradient(180deg,rgba(5,71,45,.89),rgba(5,107,53,.83) 46%,rgba(26,135,44,.69) 100%),url('sidebar-geopark.png') center center/cover no-repeat!important;
+  overflow:hidden!important;border:0!important;box-shadow:4px 0 16px #052d1b18!important
+}
+.sidebar::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.21;background:repeating-radial-gradient(ellipse at -30% 60%,transparent 0 27px,#d0f2c540 28px,transparent 29px,transparent 56px)}
+.sidebar>*{position:relative;z-index:2}
+.ghl-sidebar-brand{display:none!important}
+.sidebar .navbtn{
+  width:calc(100% - 20px)!important;min-height:46px!important;flex-shrink:0!important;
+  margin:0 10px 6px!important;padding:11px 13px!important;
+  background:transparent!important;color:#fff!important;border-radius:11px!important;
+  font-size:12px!important;font-weight:700!important;line-height:1.4!important;
+  box-shadow:none!important;display:flex!important;align-items:center!important;gap:10px!important;
+  text-align:left!important
+}
+.sidebar .navbtn:hover{background:#ffffff1e!important;transform:translateX(1px)}
+.sidebar .navbtn.active{background:linear-gradient(95deg,#eb5b2c,#bd262a)!important;box-shadow:0 9px 24px #831f1f55!important;color:white!important}
+.sidebar .navicon{width:18px!important;min-width:18px!important;height:18px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.sidebar .navicon svg{width:16px!important;height:16px!important;stroke:#fff!important}
+.jejak-sidebar-info[hidden]{display:none!important}
+.jejak-sidebar-submenu{display:flex!important;flex-direction:column!important;flex-shrink:0!important;gap:5px!important;margin:-1px 0 12px 40px!important;padding:1px 0 1px 13px!important;border-left:1px solid #ffffff55!important}
+.jejak-sidebar-link{background:transparent!important;color:#fff!important;border:0!important;padding:8px 2px!important;border-radius:4px!important;font-size:12px!important;font-weight:650!important;text-align:left!important;line-height:1.3!important}
+.jejak-sidebar-link:hover{background:#ffffff16!important;transform:translateX(2px)}
+.sidebar-slogan{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;margin-top:auto!important;padding:55px 8px 34px!important;text-align:center!important;font-size:15px!important;font-weight:800!important;line-height:1.35!important;text-shadow:0 2px 7px #003b264e;pointer-events:none!important}
+@media(max-width:900px){.shell{grid-template-columns:minmax(0,1fr)!important}.sidebar{min-height:700px!important}}
+@media(prefers-reduced-motion:reduce){.sidebar .navbtn,.jejak-sidebar-link{transition:none!important}}
