@@ -271,6 +271,17 @@ body{overflow:hidden}
 .hero>.credit{position:absolute}
 @media(prefers-reduced-motion:reduce){.ghlgp-home-video{display:none!important}}
 </style>
+
+<style id="ghlgp-home-video-cover-final">
+html,body{width:100%;min-height:100%;margin:0}
+main.hero{position:relative!important;isolation:isolate!important;overflow:hidden!important;width:100%!important;min-height:calc(100svh - 72px)!important;height:calc(100svh - 72px)!important}
+main.hero>.ghlgp-home-video{display:block!important;position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;min-width:100%!important;min-height:100%!important;object-fit:cover!important;object-position:center center!important;z-index:0!important;pointer-events:none!important}
+main.hero::after{z-index:1!important;pointer-events:none!important}
+main.hero>.hero-content,main.hero>.credit{z-index:2!important}
+@media(max-width:700px){main.hero{height:calc(100svh - 72px)!important;min-height:590px!important}}
+@media(prefers-reduced-motion:reduce){main.hero>.ghlgp-home-video{display:none!important}}
+</style>
+
 </head>
 <body>
 
