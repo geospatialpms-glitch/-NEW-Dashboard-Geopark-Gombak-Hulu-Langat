@@ -1,0 +1,50 @@
+name: Audit fungsi dashboard GHLGp
+on:
+  push:
+    paths: ['.github/workflows/ghlgp-smoke-test.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Uji halaman melalui pelayar sebenar
+        run: |
+          python3 -m http.server 8123 > /tmp/ghl-server.log 2>&1 &
+          cat > /tmp/ghl-audit.cjs <<'JS'
+          const {chromium}=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            let failures=[];
+            for(const viewport of [{width:1440,height:900},{width:390,height:844}]){
+              const page=await browser.newPage({viewport});
+              const errors=[];page.on('pageerror',e=>errors.push(e.message));
+              await page.goto('http://127.0.0.1:8123/dashboard.html',{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(8000);
+              const result=await page.evaluate(()=>{
+                const isVisible=sel=>{let e=document.querySelector(sel);return !!(e&&e.getBoundingClientRect().width>0)};
+                return {title:document.title,hero:isVisible('.ghl-mock-hero'),sidebar:isVisible('.sidebar'),kpi:document.querySelectorAll('.kpi').length,mapElement:isVisible('#map'),mapTiles:document.querySelectorAll('.leaflet-tile-loaded').length,canvas:isVisible('#areaChart'),tableRows:document.querySelectorAll('#tableBody tr').length,styles:[...document.styleSheets].map(s=>s.href||'inline').filter(Boolean),leaflet:typeof window.L,chart:typeof window.Chart,documentWidth:document.documentElement.scrollWidth,viewportWidth:innerWidth};
+              });
+              console.log('AUDIT '+JSON.stringify({viewport,result,errors}));
+              if(!result.hero||result.kpi!==4||!result.mapElement||!result.canvas||result.tableRows===0)failures.push('Missing main component on '+viewport.width);
+              if(viewport.width>900&&result.documentWidth>result.viewportWidth+10)failures.push('Desktop horizontal overflow');
+              if(errors.length)console.log('WARN JS console errors '+JSON.stringify(errors.slice(0,8)));
+              await page.screenshot({path:'/tmp/ghlgp-'+viewport.width+'.png',fullPage:false});
+              await page.close();
+            }
+            await browser.close();
+            if(failures.length){console.error('FAILED: '+failures.join('; '));process.exitCode=1;}
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+          node /tmp/ghl-audit.cjs
