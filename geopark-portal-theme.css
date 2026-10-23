@@ -1,0 +1,37 @@
+/* GHL Geopark destination-portal look: visual-only enhancement; dashboard logic preserved. */
+:root{--ghl-forest:#073d32;--ghl-forest-2:#0b5c41;--ghl-lime:#9dc34e;--ghl-sun:#e88b42;--ghl-paper:#f8f8f1}
+body{background:var(--ghl-paper)!important}
+.header{background:#fff!important;border-bottom:1px solid #d9e6dc!important}
+.header .portal-geopark-link{border-color:#b9d4c1!important;color:#14553d!important;transition:background .2s,transform .2s}
+.header .portal-geopark-link:hover{background:#edf5e9!important;transform:translateY(-1px)}
+.sidebar{background:linear-gradient(170deg,rgba(3,54,42,.96),rgba(9,112,69,.94) 57%,rgba(84,148,52,.9)),url('sidebar-geopark.png') center/cover no-repeat!important}
+.sidebar .navbtn.active{background:linear-gradient(105deg,#de672e,#f39a42)!important}
+.sidebar .navbtn:not(.active):hover{background:#ffffff24!important}
+.ghl-mock-hero{min-height:440px!important;background:linear-gradient(90deg,rgba(2,35,29,.93),rgba(5,58,39,.72) 46%,rgba(7,47,30,.12) 100%),url('header-geopark.png') center center/cover no-repeat!important}
+.ghl-mock-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,42,29,.25),transparent 50%);pointer-events:none}
+.ghl-mock-hero-inner{z-index:2!important;padding:55px 6%!important;max-width:850px}
+.ghl-mock-hero h2{font:600 clamp(42px,5.3vw,78px)/1.03 Georgia,'Times New Roman',serif!important;letter-spacing:-.025em;text-shadow:0 3px 20px #0005}
+.ghl-mock-hero h2 em{color:#d7e9ad!important}
+.ghl-mock-hero small{color:#d7e9ad!important}
+.ghl-mock-hero p{color:#f8fcf6!important;font-size:16px!important;max-width:620px}
+.ghl-mock-hero a{background:linear-gradient(115deg,#dc682e,#f19b4a)!important;box-shadow:0 9px 24px #0b311d55;transition:transform .2s,filter .2s}
+.ghl-mock-hero a:hover{transform:translateY(-2px);filter:brightness(1.08)}
+#utama{background-color:#f8f8f1!important}
+.ghl-legacy-intro{position:relative;padding:6px 0 12px;border-bottom:1px solid #dce8d8}
+.ghl-legacy-intro h2{color:#0b4938!important;font-size:clamp(28px,2.4vw,35px)!important}
+.ghl-legacy-intro h2::first-letter{color:#13804f}
+.ghl-legacy-intro .ghl-legacy-sub{color:#64806b!important}
+.kpi{border:1px solid #dae6d6!important;box-shadow:0 12px 30px #193b2214!important;transition:transform .22s,box-shadow .22s}
+.kpi:hover{transform:translateY(-4px)!important;box-shadow:0 18px 32px #193b2224!important}
+.kpi-value{color:#063f32!important}
+.filterbar{border:1px solid #d7e5d4!important}
+.filterbar .action{background:#eaf2e5!important;color:#19573d!important;font-weight:750}
+.filterbar .action:hover{background:#d7eacb!important}
+.dashboard-main-grid .map-panel{box-shadow:0 10px 28px #153b2720!important}
+.dashboard-main-grid .map-panel .panel-title{background:linear-gradient(95deg,#0a4d36,#237842 49%,#86b63e)!important}
+.dashboard-main-grid .right-analysis .panel{box-shadow:0 10px 28px #153b2714!important}
+.dashboard-main-grid .right-analysis .panel-title{background:#f3f7ec!important;color:#0d5037!important}
+.dashboard-main-grid .data-table tbody tr:nth-child(even){background:#fbfcf8}
+.dashboard-main-grid .data-table tbody tr:hover{background:#eaf3e5!important}
+@media(max-width:700px){.ghl-mock-hero{min-height:370px!important}.ghl-mock-hero-inner{padding:42px 6%!important}.ghl-mock-hero h2{font-size:40px!important}.ghl-mock-hero p{font-size:13px!important}}
+@media(prefers-reduced-motion:reduce){.ghl-mock-hero a,.kpi,.header .portal-geopark-link{transition:none!important}}
