@@ -1,0 +1,34 @@
+name: Inspect dashboard structure
+on:
+  push:
+    paths: ['.github/workflows/inspect-dashboard.yml']
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from collections import Counter
+          from pathlib import Path
+          import re
+          s=Path('dashboard.html').read_text(encoding='utf-8')
+          class P(HTMLParser):
+            def __init__(self): super().__init__(); self.tags=[]; self.classes=Counter(); self.ids=[] 
+            def handle_starttag(self, tag, attrs):
+              a=dict(attrs)
+              for c in a.get('class','').split(): self.classes[c]+=1
+              if 'id' in a: self.ids.append((a['id'],tag))
+              if tag in ('header','aside','nav','main','section','footer'): self.tags.append((tag,a.get('class',''),a.get('id','')))
+          p=P();p.feed(s)
+          report='SIZE:'+str(len(s))+'\nTOP CLASSES:\n'+str(p.classes.most_common(160))+'\nIDS:\n'+str(p.ids[:250])+'\nSTRUCTURES:\n'+str(p.tags[:150])+'\nCSS START:\n'+s[:3500]
+          Path('dashboard-structure-review.txt').write_text(report)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dashboard-structure-review.txt
+          git commit -m "Temporary dashboard layout inspection"
+          git push
