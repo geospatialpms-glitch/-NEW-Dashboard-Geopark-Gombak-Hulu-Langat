@@ -1,0 +1,36 @@
+name: Apply GHLGp mockup theme
+on:
+  push:
+    paths: ['.github/workflows/apply-mockup-theme.yml']
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply theme without replacing dashboard functionality
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('dashboard.html')
+          s=p.read_text(encoding='utf-8')
+          stylesheet='<link rel="stylesheet" href="mockup-theme.css?v=20261023">'
+          if 'mockup-theme.css' not in s:
+              s=s.replace('</head>',stylesheet+'\n</head>',1)
+          hero='''<div class="ghl-mock-hero" aria-label="Pengenalan Geopark Gombak Hulu Langat"><div class="ghl-mock-hero-inner"><small>Gombak–Hulu Langat Geopark · Selangor</small><h2>Gombak–Hulu Langat <em>Geopark</em></h2><p>Warisan suatu legasi — meneroka keunikan geologi, khazanah alam dan pengalaman jejak di Gombak serta Hulu Langat.</p><a href="#taburan">Terokai dashboard spatial ↗</a></div></div>'''
+          if 'ghl-mock-hero' not in s:
+              s,n=re.subn(r'(<main\b[^>]*\bid=["\\\']utama["\\\'][^>]*>)',lambda m:m.group(1)+'\n'+hero,s,count=1)
+              if n!=1: raise RuntimeError('main#utama missing, no safe insertion')
+          p.write_text(s,encoding='utf-8')
+          print('Theme applied; bytes',len(s))
+          PY
+      - name: Commit and remove temporary inspection assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dashboard.html
+          git rm -f --ignore-unmatch .github/workflows/inspect-dashboard.yml dashboard-structure-review.txt .github/workflows/apply-mockup-theme.yml
+          git commit -m "Convert GHLGp dashboard visual layout to supplied mockup style"
+          git push
