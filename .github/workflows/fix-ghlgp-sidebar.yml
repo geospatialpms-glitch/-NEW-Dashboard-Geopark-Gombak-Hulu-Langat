@@ -1,0 +1,51 @@
+name: Tetapkan sidebar statik GHLGp
+on:
+  push:
+    paths: ['.github/workflows/fix-ghlgp-sidebar.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Jadikan sidebar lebar tetap dan melekat di sebelah kiri
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('geopark-portal-theme.css')
+          css=p.read_text(encoding='utf-8')
+          marker='/* FIXED STATIC SIDEBAR GHLGp */'
+          css=css.split(marker)[0]+'''
+          /* FIXED STATIC SIDEBAR GHLGp */
+          @media(min-width:901px){
+            .shell{display:block!important;padding-left:194px!important;min-width:0!important}
+            .shell>.sidebar{
+              position:fixed!important;left:0!important;top:72px!important;bottom:0!important;
+              width:194px!important;min-width:194px!important;max-width:194px!important;
+              height:calc(100dvh - 72px)!important;min-height:0!important;
+              z-index:65!important;overflow-x:hidden!important;overflow-y:auto!important;
+              overscroll-behavior:contain;box-sizing:border-box!important
+            }
+            .shell>main{width:100%!important;min-width:0!important;margin-left:0!important}
+          }
+          @media(max-width:900px){
+            .shell{display:block!important;padding-left:0!important}
+            .shell>.sidebar{position:relative!important;left:auto!important;top:auto!important;bottom:auto!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;overflow:visible!important}
+            .shell>main{margin-left:0!important;width:100%!important}
+          }
+          '''
+          p.write_text(css,encoding='utf-8')
+          h=Path('dashboard.html')
+          html=h.read_text(encoding='utf-8').replace('geopark-portal-theme.css?v=20261023-sidebar2','geopark-portal-theme.css?v=20261023-fixed3')
+          h.write_text(html,encoding='utf-8')
+          PY
+      - name: Commit dan buang fail workflow sementara
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/fix-ghlgp-sidebar.yml
+          git add dashboard.html geopark-portal-theme.css
+          git commit -m "Kekalkan sidebar statik 194px semasa scroll"
+          git push
