@@ -1,0 +1,38 @@
+name: Betulkan nama makanan E1
+on:
+  push:
+    paths:
+      - '.github/workflows/kemas-kini-roti-e1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  kemas-kini:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Betulkan ejaan tajuk jejak makanan E1 sahaja
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('dashboard.html')
+          s=p.read_text(encoding='utf-8')
+          import re
+          pattern=r'Roti\s+Lelah\s+Batu\s+Arang'
+          updated,n=re.subn(pattern,'Roti Leleh Batu Arang',s,flags=re.I)
+          if n==0:
+              print('Tiada ejaan Roti Lelah Batu Arang ditemui; tiada perubahan.')
+          else:
+              print('Bilangan tajuk diperbetul:',n)
+              p.write_text(updated,encoding='utf-8')
+          PY
+      - name: Commit pembetulan dan buang workflow sementara
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- '.github/workflows/kemas-kini-roti-e1.yml'
+          git add dashboard.html
+          git commit -m "Betulkan nama Roti Leleh Batu Arang pada Jejak Makanan E1"
+          git push
