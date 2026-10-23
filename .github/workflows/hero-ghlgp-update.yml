@@ -1,0 +1,45 @@
+name: Kemas kini hero GHLGp
+on:
+  push:
+    paths: ['.github/workflows/hero-ghlgp-update.yml']
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('dashboard.html');s=p.read_text('utf8')
+          pat=r'<div class="ghl-mock-hero"[^>]*>.*?</div></div>'
+          new='''<div class="ghl-mock-hero" aria-label="Pengenalan Gombak Hulu Langat Geopark"><div class="ghl-mock-hero-inner"><small>SELANGOR URBAN OBSERVATORY</small><h2>Gombak - Hulu Langat <em>Geopark (GHLGp)</em></h2><p>Warisan suatu legasi</p><a href="#taburan">Terokai Dashboard ↗</a></div></div>'''
+          s,n=re.subn(pat,new,s,count=1,flags=re.S)
+          assert n==1,'hero not found'
+          s=s.replace('geopark-portal-theme.css?v=20261023-fixed3','geopark-portal-theme.css?v=20261023-hero6')
+          s=re.sub(r'(geopark-portal-theme\.css\?v=)[^"]+',r'\g<1>20261023-hero6',s)
+          p.write_text(s,'utf8')
+          css=Path('geopark-portal-theme.css')
+          c=css.read_text('utf8')
+          c+='''\n/* Sunrise GHLGp hero – image may be uploaded as geopark-sunrise-header.jpg */
+          .ghl-mock-hero{background-image:linear-gradient(90deg,rgba(0,47,34,.88),rgba(0,55,37,.56) 36%,rgba(0,40,25,.10) 100%),url("geopark-sunrise-header.jpg"),url("header-geopark.png")!important;background-size:cover,cover,cover!important;background-position:center,center center,center!important;min-height:460px!important}
+          .ghl-mock-hero-inner{width:100%!important;max-width:100%!important;padding:58px 5.8%!important}
+          .ghl-mock-hero small{font-size:11px!important;letter-spacing:.24em!important;color:#e4eab7!important}
+          .ghl-mock-hero h2{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(27px,3.7vw,70px)!important;font-weight:700!important;line-height:1.12!important;letter-spacing:-.025em!important;white-space:nowrap!important;color:#fffdf2!important;text-shadow:0 2px 16px #06271b77!important;margin:22px 0 8px!important}
+          .ghl-mock-hero h2 em{font-style:normal!important;color:#e5edbd!important}
+          .ghl-mock-hero p{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(20px,2.3vw,38px)!important;line-height:1.25!important;font-weight:600!important;color:#f7f6e9!important;margin:14px 0 27px!important}
+          .ghl-mock-hero a{background:linear-gradient(105deg,#dc652d,#edaa3d)!important;color:#fff!important;border-radius:999px!important;padding:13px 23px!important;font-family:Georgia,"Times New Roman",serif!important;font-size:15px!important;font-weight:700!important;text-decoration:none!important;box-shadow:0 9px 22px #05372340!important}
+          @media(max-width:1150px){.ghl-mock-hero h2{white-space:normal!important}}
+          @media(max-width:700px){.ghl-mock-hero{min-height:390px!important}.ghl-mock-hero-inner{padding:45px 6%!important}.ghl-mock-hero h2{font-size:clamp(28px,6vw,42px)!important;white-space:normal!important}.ghl-mock-hero p{font-size:23px!important}}
+          '''
+          css.write_text(c,'utf8')
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/hero-ghlgp-update.yml
+          git add dashboard.html geopark-portal-theme.css
+          git commit -m "Harmonikan hero GHLGp satu baris dan slogan"
+          git push
