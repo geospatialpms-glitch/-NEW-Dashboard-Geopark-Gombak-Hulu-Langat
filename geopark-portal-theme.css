@@ -66,3 +66,21 @@ body{background:var(--ghl-paper)!important}
 .sidebar-slogan{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;margin-top:auto!important;padding:55px 8px 34px!important;text-align:center!important;font-size:15px!important;font-weight:800!important;line-height:1.35!important;text-shadow:0 2px 7px #003b264e;pointer-events:none!important}
 @media(max-width:900px){.shell{grid-template-columns:minmax(0,1fr)!important}.sidebar{min-height:700px!important}}
 @media(prefers-reduced-motion:reduce){.sidebar .navbtn,.jejak-sidebar-link{transition:none!important}}
+
+/* FIXED STATIC SIDEBAR GHLGp */
+@media(min-width:901px){
+  .shell{display:block!important;padding-left:194px!important;min-width:0!important}
+  .shell>.sidebar{
+    position:fixed!important;left:0!important;top:72px!important;bottom:0!important;
+    width:194px!important;min-width:194px!important;max-width:194px!important;
+    height:calc(100dvh - 72px)!important;min-height:0!important;
+    z-index:65!important;overflow-x:hidden!important;overflow-y:auto!important;
+    overscroll-behavior:contain;box-sizing:border-box!important
+  }
+  .shell>main{width:100%!important;min-width:0!important;margin-left:0!important}
+}
+@media(max-width:900px){
+  .shell{display:block!important;padding-left:0!important}
+  .shell>.sidebar{position:relative!important;left:auto!important;top:auto!important;bottom:auto!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;overflow:visible!important}
+  .shell>main{margin-left:0!important;width:100%!important}
+}
