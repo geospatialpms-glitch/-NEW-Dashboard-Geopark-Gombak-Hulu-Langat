@@ -1,0 +1,79 @@
+name: Padankan kad peta donut dan jadual GHLGp
+on:
+  push:
+    paths: ['.github/workflows/ghlgp-card-map-20261023.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Kemaskan ikon KPI dan susunan peta analitik
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('dashboard.html')
+          s=p.read_text(encoding='utf-8')
+          start=s.index('<section class="kpis">')
+          end=s.index('</section>',start)+len('</section>')
+          kpi=s[start:end]
+          assert all(x in kpi for x in ['id="kTotal"','id="gombakCard"','id="huluLangatCard"'])
+          replacements=[('◆','▲'),('▱','🌿'),('●','📍'),('●','🧭')]
+          for old,new in replacements:
+              assert old in kpi
+              kpi=kpi.replace('<div class="kpi-icon">'+old+'</div>','<div class="kpi-icon">'+new+'</div>',1)
+          kpi=kpi.replace('20 <small>Tapak</small>','20 <small>Geotapak dikenal pasti</small>')
+          assert '📍' in kpi and '🧭' in kpi
+          s=s[:start]+kpi+s[end:]
+          s=s.replace('mockup-theme.css?v=20261023-final2','mockup-theme.css?v=20261023-mapcards3')
+          p.write_text(s,encoding='utf-8')
+          c=Path('mockup-theme.css')
+          css=c.read_text(encoding='utf-8')
+          css+="""
+
+          /* KPI pictograms and satellite map + doughnut + compact table (user visual reference) */
+          .kpis{gap:14px!important}
+          .kpi{min-width:0;display:flex!important;align-items:center!important;gap:13px!important;background:#fff!important;border-radius:16px!important;border:1px solid #dce7d9!important;box-shadow:0 10px 28px #16492e0b!important}
+          .kpi-icon{display:grid!important;place-items:center!important;background:#e8f1dc!important;color:#6c8973!important;font-family:Arial,sans-serif!important;font-size:29px!important;line-height:1!important;width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:17px!important}
+          .kpi:nth-child(2) .kpi-icon{background:#e8f3ed!important;color:#72af39!important}
+          .kpi:nth-child(3) .kpi-icon{background:#f0f5dc!important}
+          .kpi:nth-child(4) .kpi-icon{background:#fcebdc!important}
+          .kpi-label{font-weight:500!important;color:#60746a!important}
+          .kpi-value{color:#073e30!important;font-weight:800!important;line-height:1.16!important}
+          .kpi-value small{display:block!important;color:#6c7f72!important;font-size:11px!important;font-weight:400!important;margin-top:5px!important}
+          .dashboard-main-grid{display:grid!important;grid-template-columns:minmax(0,1.92fr) minmax(460px,.98fr)!important;gap:10px!important;align-items:stretch!important;min-height:0!important}
+          .dashboard-main-grid .map-panel{height:650px!important;min-height:650px!important;display:flex!important;flex-direction:column!important}
+          .dashboard-main-grid .map-panel>div:last-child{flex:1!important;min-height:0!important;position:relative!important}
+          .dashboard-main-grid #map{height:100%!important;min-height:0!important;width:100%!important}
+          .dashboard-main-grid .right-analysis{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:300px minmax(0,1fr)!important;gap:10px!important;min-width:0!important;min-height:0!important;height:650px!important}
+          .dashboard-main-grid .right-analysis>.panel{min-height:0!important;margin:0!important;overflow:hidden!important}
+          .dashboard-main-grid .right-analysis .area-panel-click{display:flex!important;flex-direction:column!important}
+          .dashboard-main-grid .right-analysis .chartbox{flex:1!important;min-height:0!important;padding:10px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+          .dashboard-main-grid .right-analysis .chartbox canvas{max-height:245px!important;width:100%!important}
+          .dashboard-main-grid .right-analysis .compact-table{display:flex!important;flex-direction:column!important}
+          .dashboard-main-grid .right-analysis .compact-table .table-wrap{flex:1!important;min-height:0!important;overflow:auto!important;max-height:none!important}
+          .dashboard-main-grid .panel-title{background:#f3f8f0!important;color:#0a4831!important;border-bottom:1px solid #d8e5d4!important;min-height:38px!important;padding:9px 12px!important}
+          .dashboard-main-grid .panel-title .accent{color:#0a4831!important}
+          .dashboard-main-grid .map-panel .panel-title{background:linear-gradient(90deg,#0d5c3f,#63a33e)!important;color:#fff!important;border-bottom:0!important}
+          .dashboard-main-grid .map-panel .panel-title .accent{color:#fff!important}
+          .dashboard-main-grid .map-panel .panel-sub{color:#f3f9e6!important}
+          .dashboard-main-grid .data-table{font-size:10px!important;min-width:490px}
+          .dashboard-main-grid .data-table td{padding:8px 7px!important}
+          .dashboard-main-grid .data-table th{background:#edf5e9!important;color:#315c40!important;padding:9px 7px!important;font-size:10px!important}
+          .dashboard-main-grid .compact-table .panel-sub{background:#eaf4e1;color:#477536!important;border-radius:20px;padding:3px 8px}
+          @media(max-width:1199px){.dashboard-main-grid{grid-template-columns:minmax(0,1fr)!important}.dashboard-main-grid .right-analysis{height:auto!important;min-height:620px!important;grid-template-rows:300px 320px!important}}
+          @media(max-width:700px){.kpi-icon{width:40px!important;height:40px!important;flex-basis:40px!important;font-size:21px!important}.dashboard-main-grid .map-panel{height:425px!important;min-height:425px!important}.dashboard-main-grid .right-analysis{min-height:590px!important;grid-template-rows:270px 310px!important}.dashboard-main-grid .data-table{min-width:485px}}
+          """
+          c.write_text(css,encoding='utf-8')
+          PY
+      - name: Simpan perubahan dan buang fail automasi sementara
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/ghlgp-card-map-20261023.yml
+          git add dashboard.html mockup-theme.css
+          git commit -m "Padankan ikon KPI dan susun atur peta donut jadual mengikut contoh"
+          git push
