@@ -303,6 +303,32 @@ body>main.hero::after{z-index:1!important}
 body>main.hero>.hero-content,body>main.hero>.credit{z-index:2!important}
 @supports not (height:100dvh){body>main.hero{height:calc(100vh - 72px)!important;max-height:calc(100vh - 72px)!important}}
 </style>
+<!-- GHLGp SERIF HOMEPAGE TITLE -->
+<style id="ghlgp-serif-home-title">
+/* Classic high-contrast serif inspired by the supplied screenshot. */
+.hero .hero-title,
+.hero .hero-title .hero-title-place,
+.hero .hero-title span {
+  font-family:Georgia,"Times New Roman",Times,serif!important;
+  font-weight:700!important;
+  color:#fff8eb!important;
+  letter-spacing:-.025em!important;
+  line-height:1.06!important;
+  text-shadow:0 3px 15px rgba(3,27,21,.55),0 1px 2px rgba(0,0,0,.36)!important;
+}
+.hero .hero-title{font-size:clamp(35px,4.25vw,74px)!important;max-width:1200px!important}
+.hero .hero-title .hero-title-place{
+  font-size:inherit!important;
+  line-height:inherit!important;
+  white-space:normal!important;
+}
+@media(max-width:720px){
+  .hero .hero-title{font-size:clamp(30px,7.4vw,48px)!important;letter-spacing:-.018em!important}
+  .hero .hero-title .hero-title-place{white-space:normal!important}
+}
+</style>
+<!-- END GHLGp SERIF HOMEPAGE TITLE -->
+
 </head>
 <body>
 
