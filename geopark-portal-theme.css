@@ -145,3 +145,13 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 .ghl-home-logo:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 .ghl-home-logo:focus-visible{outline:3px solid #f7ab55;outline-offset:3px}
 @media(max-width:900px){.shell>.sidebar{top:auto!important}.ghl-home-logo{min-height:64px;margin:7px 10px}.ghl-home-logo img{max-height:52px}}
+
+/* SUO branding above existing hero eyebrow; keep scenic imagery and content unchanged */
+#utama .ghl-mock-hero-inner .ghl-suo-mark{
+  display:block!important;width:80px!important;height:80px!important;
+  object-fit:contain!important;margin:0 0 12px!important;
+  border-radius:10px!important;background:rgba(255,255,255,.94)!important;
+  padding:5px!important;box-shadow:0 5px 20px rgba(0,28,20,.25)!important;
+}
+#utama .ghl-mock-hero-inner small{display:block!important;margin-bottom:4px!important}
+@media(max-width:700px){#utama .ghl-mock-hero-inner .ghl-suo-mark{width:64px!important;height:64px!important;margin-bottom:10px!important}}
