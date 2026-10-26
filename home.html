@@ -261,6 +261,22 @@ body{overflow:hidden}
 .hero-title{font-size:clamp(24px,3.85vw,54px) !important;}
 .hero-title .hero-title-place{font-family:inherit !important;font-size:inherit !important;font-weight:inherit !important;letter-spacing:inherit !important;line-height:inherit !important;color:inherit !important;white-space:nowrap;}
 @media(max-width:720px){.hero-title{font-size:clamp(20px,4.1vw,38px) !important;}}
+
+/* Homepage tanpa header: video penuh bermula dari bahagian atas */
+.topbar{display:none!important}
+html,body{margin:0!important;padding:0!important}
+body{overflow:hidden!important}
+main.hero,.hero{
+  position:relative!important;top:0!important;margin:0!important;
+  width:100%!important;height:100vh!important;height:100dvh!important;
+  min-height:0!important;overflow:hidden!important
+}
+.ghlgp-home-video{
+  position:absolute!important;inset:0!important;display:block!important;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;
+}
+
 </style>
 <style id="ghlgp-home-video-style">
 .hero{isolation:isolate}
@@ -331,18 +347,6 @@ body>main.hero>.hero-content,body>main.hero>.credit{z-index:2!important}
 
 </head>
 <body>
-
-<header class="topbar">
-  <div class="brand">
-    <a class="brand-logo" href="home.html" aria-label="Gombak Hulu Langat Geopark">
-      <img src="logo-ghlgp-transparent.png" alt="Logo Gombak Hulu Langat Geopark">
-    </a>
-    <div class="brand-copy">
-      <b>Dashboard Gombak - Hulu Langat Geopark (GHLGp)</b>
-      <small>Pemantauan Geotapak Dan Pengurusan Spatial GHL Geopark.</small>
-    </div>
-  </div>
-</header>
 
 <main class="hero">
 <video class="ghlgp-home-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="Video-Project-4-web.mp4" type="video/mp4"></video>
