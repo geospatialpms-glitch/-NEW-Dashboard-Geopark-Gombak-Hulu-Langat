@@ -155,3 +155,21 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 }
 #utama .ghl-mock-hero-inner small{display:block!important;margin-bottom:4px!important}
 @media(max-width:700px){#utama .ghl-mock-hero-inner .ghl-suo-mark{width:64px!important;height:64px!important;margin-bottom:10px!important}}
+
+/* Jejak galleries: cards aligned to the example, preserve existing click-to-popup handlers */
+#geoTrailModal .jejak-panel .jejak-list{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:stretch!important;gap:14px!important;width:100%!important;margin:18px 0!important;overflow:visible!important;max-height:none!important;background:transparent!important}
+#geoTrailModal .jejak-panel .jejak-entry{position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important;min-width:0!important;min-height:275px!important;height:auto!important;margin:0!important;padding:0 0 13px!important;border:1px solid #d8e6d8!important;border-radius:14px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 6px 18px #123c2610!important;text-align:left!important;white-space:normal!important;transition:transform .2s,box-shadow .2s!important}
+#geoTrailModal .jejak-panel .jejak-entry:hover{transform:translateY(-3px)!important;box-shadow:0 12px 27px #123c2627!important}
+#geoTrailModal .jejak-panel .jejak-entry:focus-visible{outline:3px solid #e98b4b!important;outline-offset:2px!important}
+#geoTrailModal .jejak-panel .jejak-entry .jejak-geology-photo,#geoTrailModal .jejak-panel .jejak-entry .jejak-food-photo,#geoTrailModal .jejak-panel .jejak-entry .jejak-heritage-photo{display:block!important;order:0!important;width:100%!important;height:148px!important;min-height:148px!important;max-height:148px!important;margin:0 0 10px!important;border:0!important;border-radius:0!important;box-shadow:none!important;float:none!important;background-color:#e5eee2!important}
+#geoTrailModal .jejak-panel .jejak-entry .jejak-code{order:1!important;align-self:flex-start!important;display:inline-flex!important;width:auto!important;height:auto!important;min-width:0!important;margin:1px 12px 8px!important;padding:4px 9px!important;border-radius:6px!important;background:#e6f3dd!important;color:#226c40!important;font-size:11px!important;font-weight:800!important;line-height:1.5!important}
+#geoTrailModal .jejak-panel .jejak-entry>span:not(.jejak-code):not(.jejak-geology-photo):not(.jejak-food-photo):not(.jejak-heritage-photo){order:2!important;display:block!important;padding:0 12px!important;min-width:0!important;color:#123e30!important;font-size:12px!important;line-height:1.55!important}
+#geoTrailModal .jejak-panel .jejak-entry b{display:block!important;font-size:12px!important;font-weight:750!important;line-height:1.5!important;overflow-wrap:anywhere!important}
+#geoTrailModal .jejak-panel .jejak-entry small{display:block!important;margin:5px 0 0!important;color:#627a6c!important;font-size:11px!important}
+#geoTrailModal .jejak-panel .jejak-entry:after{content:'Lihat butiran ↗';order:3;display:block;margin:auto 12px 0;padding-top:11px;color:#347354;font-size:11px;font-weight:600}
+#geoTrailModal .jejak-panel .jejak-subtabs{display:flex!important;gap:9px!important;flex-wrap:wrap!important}
+#geoTrailModal .jejak-panel .jejak-subtab{border-radius:25px!important;padding:9px 18px!important}
+@media(max-width:1180px){#geoTrailModal .jejak-panel .jejak-list{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:820px){#geoTrailModal .jejak-panel .jejak-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:490px){#geoTrailModal .jejak-panel .jejak-list{grid-template-columns:1fr!important}}
+@media(prefers-reduced-motion:reduce){#geoTrailModal .jejak-panel .jejak-entry{transition:none!important}}
