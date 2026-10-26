@@ -133,3 +133,15 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 #utama > .ghl-mock-hero h2{font-family:Georgia,"Times New Roman",serif!important;color:#fffdf2!important}
 #utama > .ghl-mock-hero p{color:#fff9eb!important}
 @media(max-width:1150px){#utama > .ghl-mock-hero h2{white-space:normal!important}}
+
+/* Headerless dashboard, fixed sidebar and accessible homepage logo */
+.header{display:none!important}
+@media(min-width:901px){
+  .shell{padding-left:194px!important}
+  .shell>.sidebar{top:0!important;height:100dvh!important;bottom:0!important}
+}
+.ghl-home-logo{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;min-height:82px;margin:2px 10px 14px;padding:12px 8px;border-radius:12px;text-decoration:none;background:rgba(0,57,32,.22);transition:background .2s,transform .2s}
+.ghl-home-logo img{width:100%;max-width:158px;max-height:65px;object-fit:contain}
+.ghl-home-logo:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+.ghl-home-logo:focus-visible{outline:3px solid #f7ab55;outline-offset:3px}
+@media(max-width:900px){.shell>.sidebar{top:auto!important}.ghl-home-logo{min-height:64px;margin:7px 10px}.ghl-home-logo img{max-height:52px}}
