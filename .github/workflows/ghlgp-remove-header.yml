@@ -1,0 +1,46 @@
+name: Buang header dan tambah butang logo Geopark
+on:
+  push:
+    paths: ['.github/workflows/ghlgp-remove-header.yml']
+permissions:
+  contents: write
+jobs:
+  modify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('dashboard.html');s=p.read_text('utf-8')
+          s,n=re.subn(r'<header class="header">.*?</header>','',s,count=1,flags=re.S)
+          assert n==1
+          assert '<aside class="sidebar">' in s
+          link='<a class="ghl-home-logo" href="home.html" title="Kembali ke halaman utama" aria-label="Halaman Utama Geopark"><img src="logo-ghlgp-transparent.png" alt="Logo GHL Geopark"></a>'
+          s=s.replace('<aside class="sidebar">','<aside class="sidebar">'+link,1)
+          s=re.sub(r'(geopark-portal-theme\.css\?v=)[^"]+',r'\g<1>20261026-noheader',s,count=1)
+          p.write_text(s,'utf-8')
+          c=Path('geopark-portal-theme.css');css=c.read_text('utf-8')
+          css+='''
+          /* Headerless dashboard, fixed sidebar and accessible homepage logo */
+          .header{display:none!important}
+          @media(min-width:901px){
+            .shell{padding-left:194px!important}
+            .shell>.sidebar{top:0!important;height:100dvh!important;bottom:0!important}
+          }
+          .ghl-home-logo{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;min-height:82px;margin:2px 10px 14px;padding:12px 8px;border-radius:12px;text-decoration:none;background:rgba(0,57,32,.22);transition:background .2s,transform .2s}
+          .ghl-home-logo img{width:100%;max-width:158px;max-height:65px;object-fit:contain}
+          .ghl-home-logo:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+          .ghl-home-logo:focus-visible{outline:3px solid #f7ab55;outline-offset:3px}
+          @media(max-width:900px){.shell>.sidebar{top:auto!important}.ghl-home-logo{min-height:64px;margin:7px 10px}.ghl-home-logo img{max-height:52px}}
+          '''
+          c.write_text(css,'utf-8')
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/ghlgp-remove-header.yml
+          git add dashboard.html geopark-portal-theme.css
+          git commit -m "Buang header putih dan tambah butang logo homepage pada sidebar"
+          git push
