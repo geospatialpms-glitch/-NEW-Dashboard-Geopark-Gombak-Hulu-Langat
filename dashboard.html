@@ -1614,7 +1614,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
         </div>
 
         <div class="about-card full">
-          <h3>8 Komponen Geopark</h3>
+          <h3 class="geopark-eight-heading">8 Komponen Geopark</h3>
           <p style="margin-bottom:10px">Geopark merupakan gagasan pembangunan (bukan perlindungan) yang tidak memerlukan perundangan atau pewartaan dan sentiasa menghormati hak dan bidang kuasa kerajaan negeri dan negara.</p>
           <div class="component-grid">
             <div class="component-item"><span class="component-no">1</span><span class="component-label">Geopark ialah peraga pembangunan wilayah lestari</span><span class="component-icon" role="img" aria-label="Simbol komponen 1"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M12 10v11M6 12l6 5 6-5M4 21h16M3 8l3-4 3 4M18 9l3-4 2 4"/></svg></span></div>
@@ -2528,5 +2528,18 @@ document.addEventListener('DOMContentLoaded',function(){
 @media(max-width:1080px){#aboutGeoparkModal .component-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:580px){#aboutGeoparkModal .component-grid{grid-template-columns:1fr!important;gap:10px!important}
 #aboutGeoparkModal .component-grid>.component-item{min-height:125px!important;padding:17px!important}}
+</style>
+
+<style id="ghlgp-eight-heading-serif-20261027">
+/* Tajuk 8 Komponen: gaya serif klasik seperti rujukan gambar. */
+#aboutGeoparkModal .about-card h3.geopark-eight-heading{
+ font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(28px,2.8vw,38px)!important;
+ font-weight:700!important;
+ line-height:1.2!important;
+ letter-spacing:-.45px!important;
+ color:#004f43!important;
+ border:0!important;padding-left:0!important;
+}
 </style>
 </body></html>
