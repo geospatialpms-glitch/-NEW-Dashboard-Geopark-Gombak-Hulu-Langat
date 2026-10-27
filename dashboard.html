@@ -1036,6 +1036,13 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  object-fit:cover!important;object-position:center!important;
  position:absolute!important;inset:0!important;max-width:none!important;
 }
+
+/* Set gambar lokasi Jejak Warisan secara konsisten di kad dan popup. */
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo,
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+ background-repeat:no-repeat!important;
+ background-position:center!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1643,6 +1650,7 @@ function showJejakCardPopup(detail){
 
 // Hasilkan satu foto sebenar bagi setiap lokasi daripada kolaj 3 x 4.
 // Kad dan popup menggunakan URL imej potongan yang SAMA.
+const heritagePhotoIndexByCode={W1:6,W2:7,W3:1,B5:3,B7:2,G9:9,G23:8,G26:10,G29:5,G30:4};
 const heritagePhotoCache=new Map();
 let heritageSpritePromise;
 function getHeritagePhoto(index){
@@ -1715,18 +1723,7 @@ function renderJejakList(group,listId,detailId){
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
     btn.append(photo);
     // W1: gambar Muzium Orang Asli (baris ketiga, kolum pertama kolaj foto asal).
-    if(item.code==="W1"){
-      photo.classList.add("heritage-w1-photo");
-      photo.style.setProperty("background-image","none","important");
-      const actualImage=document.createElement("img");
-      actualImage.src="w1-muzium-orang-asli.png?v=20261027-2";
-      actualImage.alt="Muzium Orang Asli, Gombak";
-      actualImage.className="heritage-w1-actual-image";
-      actualImage.loading="eager";
-      photo.appendChild(actualImage);
-    }else{
-      useHeritagePhoto(photo,originalIndex);
-    }
+    useHeritagePhoto(photo,heritagePhotoIndexByCode[item.code] ?? originalIndex);
   }
   if(group==="makanan"){
     const number=Number(item.code.replace(/\D/g,""))-1;
@@ -1761,7 +1758,7 @@ function renderJejakList(group,listId,detailId){
      const originalIndex=jejakData.warisan.indexOf(item);
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
      detail.append(photo);
-     useHeritagePhoto(photo,originalIndex);
+     useHeritagePhoto(photo,heritagePhotoIndexByCode[item.code] ?? originalIndex);
    }
    if(group==="makanan"){
      const number=Number(item.code.replace(/\D/g,""))-1;
