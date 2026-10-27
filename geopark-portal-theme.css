@@ -173,3 +173,29 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 @media(max-width:820px){#geoTrailModal .jejak-panel .jejak-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:490px){#geoTrailModal .jejak-panel .jejak-list{grid-template-columns:1fr!important}}
 @media(prefers-reduced-motion:reduce){#geoTrailModal .jejak-panel .jejak-entry{transition:none!important}}
+
+/* Harmonikan foto makanan dan warisan dengan geologi tanpa ubah saiz kad */
+#geoTrailModal .jejak-panel .jejak-entry .jejak-food-photo,
+#geoTrailModal .jejak-panel .jejak-entry .jejak-heritage-photo{
+  width:100%!important;
+  height:148px!important;
+  min-height:148px!important;
+  max-height:148px!important;
+  flex:0 0 148px!important;
+  display:block!important;
+  border:0!important;
+  border-radius:0!important;
+  margin:0 0 10px!important;
+  background-repeat:no-repeat!important;
+  background-color:#e5eee2!important;
+  box-shadow:none!important;
+  /* Background positioning and background-size of the original collage are preserved */
+}
+#geoTrailModal .jejak-panel .jejak-entry .jejak-geology-photo{
+  flex:0 0 148px!important;
+}
+#geoTrailModal .jejak-panel .jejak-entry .jejak-food-photo,
+#geoTrailModal .jejak-panel .jejak-entry .jejak-heritage-photo,
+#geoTrailModal .jejak-panel .jejak-entry .jejak-geology-photo{
+  box-sizing:border-box!important;
+}
