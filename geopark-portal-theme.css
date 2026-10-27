@@ -247,3 +247,21 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 #chronologyModal .chrono-detail ul{padding-left:20px!important;margin:5px 0!important}
 #chronologyModal .chrono-detail li{font-size:13px!important;line-height:1.7!important;color:#456257!important;margin-bottom:7px!important}
 @media(max-width:900px){#chronologyModal .ghl-chrono-hero{grid-template-columns:1fr}#chronologyModal .kronologi-narrative-cards{grid-template-columns:1fr!important}#chronologyModal .chrono-phase{grid-template-columns:1fr!important}#chronologyModal .chrono-year{grid-column:1!important;grid-row:auto!important;width:max-content;min-width:116px!important}#chronologyModal .chrono-plan,#chronologyModal .chrono-detail{grid-column:1!important;grid-row:auto!important}}
+
+/* Kronologi akhir tanpa gambar gunung dalam header */
+#chronologyModal .ghl-chrono-hero{
+ display:block!important;min-height:0!important;margin:0 0 24px!important;
+ padding:18px clamp(18px,3vw,38px) 25px!important;
+ background:linear-gradient(110deg,#f3f8f2,#fffdf8)!important;
+ border:0!important;border-bottom:1px solid #dce8dd!important;border-radius:0!important;
+}
+#chronologyModal .ghl-chrono-hero::before,
+#chronologyModal .ghl-chrono-hero::after,
+#chronologyModal .ghl-chrono-hero-photo{display:none!important;background-image:none!important}
+#chronologyModal .ghl-chrono-hero-text{display:block!important;max-width:920px!important}
+#chronologyModal .ghl-chrono-eyebrow{display:block;font-size:11px;font-weight:800;letter-spacing:.26em;color:#08714f;margin:0 0 12px}
+#chronologyModal .ghl-chrono-hero-text h2{font:700 clamp(45px,5vw,78px)/1 Georgia,serif;color:#073f30;margin:0}
+#chronologyModal .ghl-chrono-hero-text h3{font:700 clamp(25px,2.7vw,41px)/1.18 Georgia,serif;color:#12664d;margin:5px 0 13px}
+#chronologyModal .ghl-chrono-hero-text p{max-width:660px;font-size:14px;line-height:1.75;color:#566e62;margin:0}
+#chronologyModal .kronologi-narrative-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(max-width:900px){#chronologyModal .kronologi-narrative-cards{grid-template-columns:1fr!important}}
