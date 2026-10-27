@@ -1490,7 +1490,8 @@ function showJejakCardPopup(detail){
  const panel=document.createElement("div");panel.className="jejak-card-dialog";
  const close=document.createElement("button");close.type="button";close.className="jejak-card-close";close.textContent="×";close.setAttribute("aria-label","Tutup maklumat");close.addEventListener("click",closeJejakCardPopup);
  const body=detail.cloneNode(true);body.removeAttribute("id");body.removeAttribute("hidden");body.classList.add("jejak-card-popup-body");
- // Popup uses its original category-specific photo and sprite position.\n panel.append(close,body);overlay.append(panel);host.append(overlay);
+ // Popup preserves original image and full text for the selected location.
+ panel.append(close,body);overlay.append(panel);host.append(overlay);
  overlay.addEventListener("click",e=>{if(e.target===overlay)closeJejakCardPopup()});
  close.focus();
 }
