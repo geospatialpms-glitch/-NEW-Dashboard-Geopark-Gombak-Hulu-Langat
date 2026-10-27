@@ -2472,4 +2472,23 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 <script src="ghlgp-navigation.js?v=allbuttons20261027"></script><script src="ghlgp-card-photos.js?v=20261027"></script><script src="ghlgp-chronology-layout.js?v=20261027"></script>
 
+
+<style id="ghlgp-jejak-lihat-butiran-20261027">
+/* CTA seragam pada semua kad Jejak: kekalkan klik kad dan popup sedia ada. */
+#geoTrailModal .jejak-panel[data-jejak-panel="geologi"] .jejak-entry,
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-entry,
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"] .jejak-entry{position:relative!important;padding-bottom:52px!important}
+#geoTrailModal .jejak-panel[data-jejak-panel="geologi"] .jejak-entry::after,
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-entry::after,
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"] .jejak-entry::after{content:none!important;display:none!important}
+#geoTrailModal .jejak-panel[data-jejak-panel="geologi"] .jejak-entry::before,
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-entry::before,
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"] .jejak-entry::before{
+ content:"Lihat butiran ↗"!important;position:absolute!important;left:13px!important;bottom:14px!important;
+ display:block!important;width:auto!important;height:auto!important;margin:0!important;padding:0!important;
+ background:none!important;border:0!important;box-shadow:none!important;color:#567c6b!important;
+ font-family:Arial,sans-serif!important;font-size:12px!important;line-height:1.4!important;
+ font-weight:500!important;text-align:left!important;pointer-events:none!important
+}
+</style>
 </body></html>
