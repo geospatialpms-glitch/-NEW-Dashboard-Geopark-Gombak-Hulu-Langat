@@ -1704,7 +1704,8 @@ function renderJejakList(group,listId,detailId){
     photo.style.backgroundSize="300% 400%";
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
     btn.append(photo);
-    useHeritagePhoto(photo,originalIndex);
+    // W1: gambar Muzium Orang Asli (baris ketiga, kolum pertama kolaj foto asal).
+    useHeritagePhoto(photo,item.code==="W1"?6:originalIndex);
   }
   if(group==="makanan"){
     const number=Number(item.code.replace(/\D/g,""))-1;
