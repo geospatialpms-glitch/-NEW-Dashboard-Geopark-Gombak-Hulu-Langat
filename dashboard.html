@@ -1725,6 +1725,19 @@ function showJejakCardPopup(detail){
 // Hasilkan satu foto sebenar bagi setiap lokasi daripada kolaj 3 x 4.
 // Kad dan popup menggunakan URL imej potongan yang SAMA.
 const newHeritageFiles={W1:"W1.png",W2:"W2.png",W3:"W3.png",B5:"B5.png",B7:"B7.png",G9:"G9.png",G23:"G23.png",G26:"G26.png",G29:"G29.png",G30:"G30.png","—":"air terjun komanwel.png"};
+function applyNewFoodPhoto(node,code){
+ const filename=code+".jpeg";
+ const image=new Image();
+ image.onload=()=>{
+  node.style.setProperty("background-image",'url("'+filename+'?v=20261027-food2")',"important");
+  node.style.setProperty("background-size","cover","important");
+  node.style.setProperty("background-position","center","important");
+  node.style.setProperty("background-repeat","no-repeat","important");
+ };
+ // Gambar kolaj lama kekal sebagai fallback sehingga JPEG baharu dimuat naik.
+ image.onerror=()=>{};
+ image.src=filename+"?v=20261027-food2";
+}
 function renderJejakList(group,listId,detailId){
  const list=document.getElementById(listId),detail=document.getElementById(detailId);
  if(!list||!detail)return;
@@ -1779,6 +1792,7 @@ function renderJejakList(group,listId,detailId){
       photo.setAttribute("aria-label","Gambar "+item.name);
       photo.style.backgroundPosition=(4.167+(number%3)*45.833)+"% "+(2.273+Math.floor(number/3)*23.864)+"%";
       btn.append(photo);
+      applyNewFoodPhoto(photo,item.code);
     }
   }
   btn.append(code,info);list.append(btn);
@@ -1820,6 +1834,7 @@ function renderJejakList(group,listId,detailId){
        photo.setAttribute("aria-label","Gambar "+item.name);
        photo.style.backgroundPosition=(4.167+(number%3)*45.833)+"% "+(2.273+Math.floor(number/3)*23.864)+"%";
        detail.append(photo);
+       applyNewFoodPhoto(photo,item.code);
      }
    }
    const h=document.createElement("h3");h.textContent=item.code+" · "+item.name;detail.append(h);
