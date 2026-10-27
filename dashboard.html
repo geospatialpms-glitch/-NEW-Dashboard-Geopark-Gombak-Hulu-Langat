@@ -1043,6 +1043,25 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  background-repeat:no-repeat!important;
  background-position:center!important;
 }
+
+/* Gambar baharu Jejak Warisan: gambar PNG mengikut kod, bukan kolaj lama. */
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo:has(.heritage-real-img),
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo:has(.heritage-real-img){
+ background:none!important;position:relative!important;overflow:hidden!important;
+}
+#geoTrailModal .jejak-heritage-photo .heritage-real-img,
+#geoTrailModal .jejak-heritage-detail-photo .heritage-real-img{
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:cover!important;object-position:center!important;max-width:none!important;
+}
+#geoTrailModal .jejak-heritage-photo .heritage-real-img{
+ position:absolute!important;inset:0!important;
+}
+#geoTrailModal .jejak-heritage-detail-photo .heritage-real-img{
+ object-fit:contain!important;min-height:200px;
+}
+/* Buang gambar lama pada kad Jejak Makanan sahaja; maklumat dan popup dikekalkan. */
+#geoTrailModal #jejakMakananList .jejak-food-photo{display:none!important}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1650,6 +1669,7 @@ function showJejakCardPopup(detail){
 
 // Hasilkan satu foto sebenar bagi setiap lokasi daripada kolaj 3 x 4.
 // Kad dan popup menggunakan URL imej potongan yang SAMA.
+const newHeritageFiles={W1:"W1.png",W2:"W2.png",W3:"W3.png",B5:"B5.png",B7:"B7.png",G9:"G9.png",G23:"G23.png",G26:"G26.png",G29:"G29.png",G30:"G30.png"};
 const heritagePhotoIndexByCode={W1:6,W2:7,W3:1,B5:3,B7:2,G9:9,G23:8,G26:10,G29:5,G30:4};
 const heritagePhotoCache=new Map();
 let heritageSpritePromise;
@@ -1717,13 +1737,18 @@ function renderJejakList(group,listId,detailId){
     photo.className="jejak-heritage-photo";
     photo.setAttribute("role","img");
     photo.setAttribute("aria-label","Gambar "+item.name);
-    const originalIndex=jejakData.warisan.indexOf(item);
-    photo.style.backgroundImage="url('jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4')";
-    photo.style.backgroundSize="300% 400%";
-    photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
+    const file=newHeritageFiles[item.code];
+    if(file){
+      const img=document.createElement("img");
+      img.src=encodeURI(file)+"?v=20261027new";
+      img.alt=item.name;
+      img.loading="lazy";
+      img.className="heritage-real-img";
+      photo.append(img);
+    }else{
+      useHeritagePhoto(photo,jejakData.warisan.indexOf(item));
+    }
     btn.append(photo);
-    // W1: gambar Muzium Orang Asli (baris ketiga, kolum pertama kolaj foto asal).
-    useHeritagePhoto(photo,heritagePhotoIndexByCode[item.code] ?? originalIndex);
   }
   if(group==="makanan"){
     const number=Number(item.code.replace(/\D/g,""))-1;
@@ -1755,10 +1780,18 @@ function renderJejakList(group,listId,detailId){
      photo.className="jejak-heritage-detail-photo";
      photo.setAttribute("role","img");
      photo.setAttribute("aria-label","Gambar "+item.name);
-     const originalIndex=jejakData.warisan.indexOf(item);
-    photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
+     const file=newHeritageFiles[item.code];
+     if(file){
+       const img=document.createElement("img");
+       img.src=encodeURI(file)+"?v=20261027new";
+       img.alt=item.name;
+       img.loading="lazy";
+       img.className="heritage-real-img";
+       photo.append(img);
+     }else{
+       useHeritagePhoto(photo,jejakData.warisan.indexOf(item));
+     }
      detail.append(photo);
-     useHeritagePhoto(photo,heritagePhotoIndexByCode[item.code] ?? originalIndex);
    }
    if(group==="makanan"){
      const number=Number(item.code.replace(/\D/g,""))-1;
