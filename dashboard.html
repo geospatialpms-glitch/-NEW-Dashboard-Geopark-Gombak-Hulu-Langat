@@ -903,6 +903,27 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 </style>
 <link rel="stylesheet" href="mockup-theme.css?v=20261023-mapcards3">
 <link rel="stylesheet" href="geopark-portal-theme.css?v=20261027-photo-card3">
+<style id="ghlgp-kronologi-dua-kad">
+/* Dua kad kronologi: kandungan asal dikekalkan, pecahan bermula "Pada tahun 2019" */
+#chronologyModal .kronologi-intro-layout.kronologi-cards-layout{display:grid!important;grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr)!important;gap:22px!important;align-items:start!important;margin-bottom:30px!important}
+#chronologyModal .kronologi-narrative-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;min-width:0}
+#chronologyModal .kronologi-narrative-cards>.kronologi-text-card{display:flex!important;flex-direction:column;align-items:stretch;min-width:0;margin:0!important;padding:0!important;border:1px solid #dce9d8!important;border-radius:17px!important;overflow:hidden;background:#fff!important;box-shadow:0 10px 28px #173f2914!important;text-align:left!important}
+#chronologyModal .kronologi-card-heading{display:flex;align-items:center;gap:14px;padding:20px 20px 16px;background:linear-gradient(110deg,#e9f5e7,#f8fbf4);border-bottom:1px solid #dce9d8}
+#chronologyModal .kronologi-card-two .kronologi-card-heading{background:linear-gradient(110deg,#fff0de,#fffaf3);border-bottom-color:#f0dfd1}
+#chronologyModal .kronologi-card-number{display:grid;place-items:center;flex:0 0 43px;height:43px;border-radius:13px;background:#146b45;color:#fff;font-size:17px;font-weight:800}
+#chronologyModal .kronologi-card-two .kronologi-card-number{background:#d86f32}
+#chronologyModal .kronologi-card-heading small{font-size:10px;font-weight:800;letter-spacing:.14em;color:#487556}
+#chronologyModal .kronologi-card-two .kronologi-card-heading small{color:#a55d36}
+#chronologyModal .kronologi-card-heading h3{font:700 clamp(17px,1.3vw,21px)/1.25 Georgia,serif!important;color:#134c38!important;margin:3px 0 0!important}
+#chronologyModal .kronologi-card-copy{padding:20px 21px 22px;flex:1}
+#chronologyModal .kronologi-card-copy p{font-size:12.5px!important;line-height:1.8!important;color:#354d40!important;margin:0 0 16px!important;text-align:justify}
+#chronologyModal .kronologi-card-copy p:last-child{margin-bottom:0!important}
+#chronologyModal .kronologi-cards-layout>.kronologi-infografik{position:sticky!important;top:14px!important;margin:0!important;padding:12px!important;border:1px solid #dce9d8;border-radius:17px;background:#fff;box-shadow:0 10px 28px #173f2912}
+#chronologyModal .kronologi-cards-layout>.kronologi-infografik img{max-height:70vh!important;object-fit:contain}
+#chronologyModal .chronology-roadmap{margin-top:28px!important}
+@media(max-width:1380px){#chronologyModal .kronologi-intro-layout.kronologi-cards-layout{grid-template-columns:1fr!important}#chronologyModal .kronologi-cards-layout>.kronologi-infografik{position:static!important;width:min(720px,100%);margin:auto!important}}
+@media(max-width:800px){#chronologyModal .kronologi-narrative-cards{grid-template-columns:1fr!important}#chronologyModal .kronologi-card-heading{padding:16px}#chronologyModal .kronologi-card-copy{padding:16px}}
+</style>
 </head>
 <body><div class="topline"></div>
 
@@ -927,19 +948,25 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  <div class="geo-modal-card">
   <div class="geo-modal-head"><div><h2 id="chronologyTitle">Kronologi Geopark Gombak–Hulu Langat</h2></div><button class="geo-modal-close" id="chronologyClose" aria-label="Tutup">×</button></div>
   <div class="geo-modal-body">
-   <div class="kronologi-intro-layout">
-   <section class="geopark-narrative-frame" aria-label="Penubuhan Geopark">
-    <p>Penubuhan geopark menyumbang dan menyokong pencapaian lapan (8) daripada 17 Matlamat Pembangunan Lestari (SDGs). Gagasan Geopark menganjur inisiatif unik dalam penghasilan produk tempatan yang boleh dijadikan identiti sesuatu wilayah sebagai produk Geopark. Selain itu, ia mewujudkan jalinan kerjasama antara masyarakat setempat dalam memelihara dan melindungi warisan alam, memartabatkan sejarah dan budaya di samping mengukuhkan kecintaan terhadap keunikan tempatan. Di samping itu juga, rantaian aktiviti ekonomi dapat diwujudkan dan mengukuhkan pengurusan sumber asli sebagai aset Negeri Selangor dalam menyokong inisiatif <em>Central Forest Spine</em> (CFS) dan keberkesanan rangkaian koridor ekologi hutan terutamanya di B-SL1 (Hutan Simpan Raja Musa – Hutan Simpan Bukit Tarek – Hutan Simpan Bukit Gading).</p>
+   <div class="kronologi-intro-layout kronologi-cards-layout">
+<div class="kronologi-narrative-cards">
+<section class="geopark-narrative-frame kronologi-text-card kronologi-card-one" aria-label="Latar Belakang dan Penubuhan Geopark">
+<div class="kronologi-card-heading"><span class="kronologi-card-number">01</span><div><small>LATAR BELAKANG</small><h3>Asas Penubuhan Geopark</h3></div></div>
+<div class="kronologi-card-copy"><p>Penubuhan geopark menyumbang dan menyokong pencapaian lapan (8) daripada 17 Matlamat Pembangunan Lestari (SDGs). Gagasan Geopark menganjur inisiatif unik dalam penghasilan produk tempatan yang boleh dijadikan identiti sesuatu wilayah sebagai produk Geopark. Selain itu, ia mewujudkan jalinan kerjasama antara masyarakat setempat dalam memelihara dan melindungi warisan alam, memartabatkan sejarah dan budaya di samping mengukuhkan kecintaan terhadap keunikan tempatan. Di samping itu juga, rantaian aktiviti ekonomi dapat diwujudkan dan mengukuhkan pengurusan sumber asli sebagai aset Negeri Selangor dalam menyokong inisiatif <em>Central Forest Spine</em> (CFS) dan keberkesanan rangkaian koridor ekologi hutan terutamanya di B-SL1 (Hutan Simpan Raja Musa – Hutan Simpan Bukit Tarek – Hutan Simpan Bukit Gading).</p>
     <p>Dengan memperoleh pengiktirafan di peringkat kebangsaan mahupun dunia secara tidak langsung mewujudkan sumber-sumber baharu untuk manfaat penyelidikan saintifik dan ekonomi kepada Negeri Selangor secara keseluruhannya.</p>
     <p>Kajian Gombak–Hulu Langat Geopark ini juga adalah lanjutan daripada Kajian Dossier Permatang Kuarza Gombak Selangor (PKGS) yang telah disediakan pada tahun 2018 bagi tujuan pencalonan PKGS sebagai Tapak Warisan Dunia UNESCO. Walau bagaimanapun, hasil kajian tersebut mendapati PKGS belum bersedia untuk dicalonkan sebagai Tapak Warisan Dunia UNESCO kerana kekurangan kajian saintifik dan penyelidikan serta tahap integriti PKGS yang masih lemah.</p>
-    <p>Berdasarkan hasil kajian Dossier PKGS tersebut, Pasukan Pakar yang dilantik mendapati tapak PKGS sangat berpotensi sebagai salah satu geotapak bagi pembangunan Geopark di Negeri Selangor yang mana tapak geopark ini akan dicadangkan sebagai Tapak Geopark Kebangsaan terlebih dahulu sebelum diangkat sebagai Tapak Geopark Global UNESCO. Selain tapak PKGS, terdapat beberapa tapak lain dalam Daerah Gombak dan Hulu Langat telah dikenal pasti mempunyai nilai warisan yang tinggi untuk digabungkan bagi membentuk Gombak–Hulu Langat Geopark seterusnya bakal menjadi tapak Geopark pertama di Negeri Selangor yang diiktiraf di peringkat kebangsaan dan dunia (UNESCO).</p>
-    <p>Pada tahun 2019, Jabatan Perancangan Bandar dan Desa Negeri Selangor (PLANMalaysia Selangor) telah menjalankan kajian Gombak–Hulu Langat Geopark Selangor bagi mengenal pasti geotapak-geotapak lain yang berpotensi di dalam daerah Gombak dan Hulu Langat. Pada 15 Oktober 2020, cadangan pelaksanaan Projek Gombak–Hulu Langat Geopark Selangor telah dibentangkan dan dipersetujui dalam Mesyuarat Majlis Tindakan Ekonomi Selangor (MTES). Langkah ini amat penting bagi mendapatkan sokongan yang lebih komprehensif daripada setiap PBT dan agensi teknikal dalam usaha melaksanakan penubuhan Gombak–Hulu Langat Geopark.</p>
+    <p>Berdasarkan hasil kajian Dossier PKGS tersebut, Pasukan Pakar yang dilantik mendapati tapak PKGS sangat berpotensi sebagai salah satu geotapak bagi pembangunan Geopark di Negeri Selangor yang mana tapak geopark ini akan dicadangkan sebagai Tapak Geopark Kebangsaan terlebih dahulu sebelum diangkat sebagai Tapak Geopark Global UNESCO. Selain tapak PKGS, terdapat beberapa tapak lain dalam Daerah Gombak dan Hulu Langat telah dikenal pasti mempunyai nilai warisan yang tinggi untuk digabungkan bagi membentuk Gombak–Hulu Langat Geopark seterusnya bakal menjadi tapak Geopark pertama di Negeri Selangor yang diiktiraf di peringkat kebangsaan dan dunia (UNESCO).</p></div>
+</section>
+<section class="geopark-narrative-frame kronologi-text-card kronologi-card-two" aria-label="Kajian, Pembangunan dan Persempadanan Geopark">
+<div class="kronologi-card-heading"><span class="kronologi-card-number">02</span><div><small>PEMBANGUNAN & PENGURUSAN</small><h3>Kajian dan Pelaksanaan Geopark</h3></div></div>
+<div class="kronologi-card-copy"><p>Pada tahun 2019, Jabatan Perancangan Bandar dan Desa Negeri Selangor (PLANMalaysia Selangor) telah menjalankan kajian Gombak–Hulu Langat Geopark Selangor bagi mengenal pasti geotapak-geotapak lain yang berpotensi di dalam daerah Gombak dan Hulu Langat. Pada 15 Oktober 2020, cadangan pelaksanaan Projek Gombak–Hulu Langat Geopark Selangor telah dibentangkan dan dipersetujui dalam Mesyuarat Majlis Tindakan Ekonomi Selangor (MTES). Langkah ini amat penting bagi mendapatkan sokongan yang lebih komprehensif daripada setiap PBT dan agensi teknikal dalam usaha melaksanakan penubuhan Gombak–Hulu Langat Geopark.</p>
     <p>Kawasan Kajian Gombak–Hulu Langat Geopark (GHL Gp) melibatkan dua (2) daerah di bahagian timur Negeri Selangor iaitu Daerah Gombak dan Daerah Hulu Langat, yang meliputi kawasan seluas 112,955 hektar. Persempadanan geopark ini ditentukan berdasarkan peletakan geotapak-geotapak yang telah dikenal pasti.</p>
     <p>Pentadbiran Daerah Gombak berpusat di Pejabat Daerah dan Tanah Gombak dan melibatkan dua (2) PBT iaitu Majlis Perbandaran Selayang dan Majlis Perbandaran Ampang Jaya. Pentadbiran Daerah Hulu Langat pula berpusat di Pejabat Daerah dan Tanah Hulu Langat dan Pihak Berkuasa Tempatan yang terlibat dalam geopark di dalam Daerah Hulu Langat ialah Majlis Perbandaran Kajang.</p>
     <p>Secara keseluruhannya, terdapat 20 geotapak yang berpotensi telah dikenal pasti di Daerah Gombak dan Daerah Hulu Langat. Ia merangkumi 13 geotapak di Daerah Gombak dan 7 geotapak di Daerah Hulu Langat. Terdapat 12 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Selayang (MPS), 1 geotapak di bawah pentadbiran Majlis Perbandaran Ampang Jaya (MPAJ) serta tujuh (7) geotapak di bawah kawasan pentadbiran Majlis Perbandaran Kajang (MPKj).</p>
-    <p>Buku Coffee Table GHL Geopark ini akan memandu pihak berkepentingan untuk mengenali 20 geotapak yang terpilih ini dan memahami secara ringkas kronologi dan latar belakang Kajian Gombak–Hulu Langat Geopark.</p>
-   </section>
-   <figure class="kronologi-infografik"><img src="persetujuan-pihak-berkuasa-negeri.png" alt="Infografik Persetujuan Pihak Berkuasa Negeri" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
+    <p>Buku Coffee Table GHL Geopark ini akan memandu pihak berkepentingan untuk mengenali 20 geotapak yang terpilih ini dan memahami secara ringkas kronologi dan latar belakang Kajian Gombak–Hulu Langat Geopark.</p></div>
+</section>
+</div>
+<figure class="kronologi-infografik"><img src="persetujuan-pihak-berkuasa-negeri.png" alt="Infografik Persetujuan Pihak Berkuasa Negeri" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
    </div>
    
  <section class="chronology-roadmap" aria-label="Carta Kronologi dan Pelan Tindakan Geopark">
