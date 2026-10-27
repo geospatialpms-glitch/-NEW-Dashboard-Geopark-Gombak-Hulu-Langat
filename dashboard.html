@@ -1490,20 +1490,7 @@ function showJejakCardPopup(detail){
  const panel=document.createElement("div");panel.className="jejak-card-dialog";
  const close=document.createElement("button");close.type="button";close.className="jejak-card-close";close.textContent="×";close.setAttribute("aria-label","Tutup maklumat");close.addEventListener("click",closeJejakCardPopup);
  const body=detail.cloneNode(true);body.removeAttribute("id");body.removeAttribute("hidden");body.classList.add("jejak-card-popup-body");
- // Keep Jejak Makanan and Jejak Warisan popup photos identical to the selected card.
- const pairs=[["jejak-food-photo","jejak-food-detail-photo"],["jejak-heritage-photo","jejak-heritage-detail-photo"]];
- for(const [cardClass,detailClass] of pairs){
-  const card=document.querySelector("#geoTrailModal .jejak-entry.active ."+cardClass);
-  const photo=body.querySelector("."+detailClass);
-  if(!card||!photo)continue;
-  const style=getComputedStyle(card);
-  photo.style.backgroundImage=style.backgroundImage;
-  photo.style.backgroundPosition=style.backgroundPosition;
-  photo.style.backgroundSize=style.backgroundSize;
-  photo.style.backgroundRepeat="no-repeat";
-  // Photo dimensions follow the shared geology popup CSS (responsive).
- }
- panel.append(close,body);overlay.append(panel);host.append(overlay);
+ // Popup uses its original category-specific photo and sprite position.\n panel.append(close,body);overlay.append(panel);host.append(overlay);
  overlay.addEventListener("click",e=>{if(e.target===overlay)closeJejakCardPopup()});
  close.focus();
 }
