@@ -965,6 +965,16 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  /* background-position ditetapkan mengikut indeks lokasi melalui JavaScript */
  object-fit:unset!important;
 }
+
+/* Thumbnail kad Jejak Warisan memaparkan potongan foto yang tepat sama dengan popup. */
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo{
+ background-image:url('jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4')!important;
+ background-size:300% 400%!important;
+ background-repeat:no-repeat!important;
+ aspect-ratio:10 / 9!important;
+ height:auto!important;
+ object-fit:unset!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1604,6 +1614,8 @@ function renderJejakList(group,listId,detailId){
     photo.setAttribute("role","img");
     photo.setAttribute("aria-label","Gambar "+item.name);
     const originalIndex=jejakData.warisan.indexOf(item);
+    photo.style.backgroundImage="url('jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4')";
+    photo.style.backgroundSize="300% 400%";
     photo.style.backgroundPosition=((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%";
     btn.append(photo);
   }
