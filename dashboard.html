@@ -976,15 +976,26 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  object-fit:unset!important;
 }
 
-/* Paparan Jejak Warisan: gambar asal penuh yang sama pada kad dan popup.
-   Hentikan potongan sprite lama yang menyebabkan kedua-duanya nampak berbeza. */
+
+/* Warisan: pulihkan potongan foto asal mengikut lokasi, sama untuk kad & popup. */
 #geoTrailModal #jejakWarisanList .jejak-heritage-photo,
 #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
   background-image:url('jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4')!important;
-  background-size:contain!important;
-  background-position:center center!important;
+  background-size:300% 400%!important;
   background-repeat:no-repeat!important;
-  background-color:#f0f4ed!important;
+  background-color:#e8efe4!important;
+  aspect-ratio:1 / 1!important;
+}
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo{
+  width:86px!important;height:86px!important;flex:0 0 86px!important;
+}
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+  width:270px!important;height:270px!important;max-width:100%!important;
+}
+@media(max-width:760px){
+ #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+  width:min(270px,100%)!important;height:auto!important;aspect-ratio:1!important;
+ }
 }
 </style>
 </head>
@@ -1627,7 +1638,7 @@ function renderJejakList(group,listId,detailId){
     const originalIndex=jejakData.warisan.indexOf(item);
     photo.style.backgroundImage="url('jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4')";
     photo.style.backgroundSize="300% 400%";
-    photo.style.backgroundPosition=((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%";
+    photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
     btn.append(photo);
   }
   if(group==="makanan"){
@@ -1661,7 +1672,7 @@ function renderJejakList(group,listId,detailId){
      photo.setAttribute("role","img");
      photo.setAttribute("aria-label","Gambar "+item.name);
      const originalIndex=jejakData.warisan.indexOf(item);
-    photo.style.backgroundPosition=((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%";
+    photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
      detail.append(photo);
    }
    if(group==="makanan"){
