@@ -360,7 +360,13 @@ main{
 @media(max-width:650px){#geoTrailModal .jejak-geology-photo{width:68px;height:76px}#geoTrailModal .jejak-geology-detail-photo{width:130px;height:143px}}
 .popup-footer .popup-actions{display:flex;align-items:center;gap:5px}.popup-info-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #27824b;border-radius:7px;background:#f0f8ed;color:#176b36;font-size:8px;font-weight:800;padding:5px 6px;white-space:nowrap;cursor:pointer}.popup-info-btn:hover{background:#deefda}.popup-info-btn .info-circle{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#176b36;color:white;width:12px;height:12px;font-size:9px;font-weight:900;font-family:Georgia,serif}.geotapak-more-overlay{position:fixed;inset:0;z-index:5100;background:#061b12aa;display:flex;align-items:center;justify-content:center;padding:16px}.geotapak-more-card{background:#fff;border-radius:14px;box-shadow:0 16px 55px #0005;width:min(510px,95vw);max-height:85vh;overflow-y:auto}.geotapak-more-head{background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}.geotapak-more-head button{border:0;background:#ffffff29;color:#fff;border-radius:50%;font-size:18px;width:28px;height:28px;cursor:pointer}.geotapak-more-content{padding:16px;font-size:13px;line-height:1.7}.geotapak-more-content img{max-height:230px;object-fit:cover;width:100%;border-radius:9px;margin-bottom:10px}
 /* Halaman khusus jejak: paparkan kandungan jejak sahaja, tanpa dashboard */
-body.jejak-page .topline,body.jejak-page .header,body.jejak-page .shell{display:none!important}
+body.jejak-page .topline,body.jejak-page .header{display:none!important}
+/* Kandungan jejak ditempatkan dalam .shell, jadi shell mesti kekal terlihat. */
+body.jejak-page .shell{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+body.jejak-page .shell>.sidebar{display:none!important}
+body.jejak-page .shell>main#utama{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+body.jejak-page #jejakFrame{display:block!important;min-height:100dvh!important;margin:0!important;border:0!important;border-radius:0!important}
+body.jejak-page #jejakFrame.jejak-show-detail #geoTrailModal{display:flex!important;position:relative!important;inset:auto!important;width:100%!important;padding:0!important}
 body.jejak-page #geoTrailModal{display:flex!important;position:fixed;inset:0;padding:0;background:#f3f8f1;z-index:9999}
 body.jejak-page #geoTrailModal .geo-modal-card{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;border:0;border-radius:0;box-shadow:none}
 body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
