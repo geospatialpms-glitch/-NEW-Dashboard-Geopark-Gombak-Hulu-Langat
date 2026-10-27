@@ -1160,6 +1160,20 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #section-jejak .ghl-trail-card a{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
 #section-jejak .ghl-trail-card a:hover,#section-jejak .ghl-trail-card a:focus-visible{background:#e6f4e9!important;color:#075a3b!important;transform:translateY(-2px);box-shadow:0 0 0 3px #73ca9b80,0 7px 18px #063e2d36;outline:none}
 #section-jejak .ghl-trail-card a:active{transform:translateY(0);box-shadow:0 0 0 3px #e88c4880}
+
+/* Kad kronologi interaktif, fokus dan penanda aktif. */
+#section-kronologi .ghl-years article[data-chrono-year]{
+ cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
+}
+#section-kronologi .ghl-years article[data-chrono-year]:hover,
+#section-kronologi .ghl-years article[data-chrono-year]:focus-visible{
+ transform:translateY(-3px);border-color:#21864d;box-shadow:0 8px 22px rgba(9,104,54,.18);
+ outline:2px solid transparent;
+}
+#section-kronologi .ghl-years article[data-chrono-year].chrono-selected{
+ border-color:#0d7947!important;background:#edf8ef!important;
+ box-shadow:0 0 0 2px #62bc82,0 8px 22px rgba(9,104,54,.18)!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1283,7 +1297,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 </section>
 <section class="ghl-scroll-sections" id="ghlExplore" aria-label="Terokai Jejak GHLGp">
 <section id="section-about" class="ghl-scroll-block"><h2>Apa Itu Geopark?</h2><p>Kenali warisan geologi, alam semula jadi dan komuniti di Gombak–Hulu Langat Geopark.</p><button class="ghl-outline" type="button" data-ghl-original="aboutGeoparkBtn">Maklumat Lanjut ↗</button></section>
-<section id="section-kronologi" class="ghl-scroll-block"><h2>Kronologi Geopark</h2><p>Perkembangan asas penubuhan dan pengurusan geopark.</p><div class="ghl-years"><article><strong>2019</strong><h3>Pelan Tindakan Pembangunan Geopark</h3><p>Pengenalan konsep geopark dan dokumentasi awal.</p></article><article><strong>2020</strong><h3>Pelan Pengurusan Geopark Fasa 1</h3><p>Penyelarasan pengurusan, rangka kerja dan hala tuju geopark.</p></article><article><strong>2021–2025</strong><h3>Projek Pelaksanaan Geopark Fasa 2</h3><p>Inisiatif geopark, kerjasama berkepentingan dan pengiktirafan.</p></article></div><button class="ghl-outline" type="button" data-ghl-original="chronologyBtn">Lihat Kronologi Penuh ↗</button></section>
+<section id="section-kronologi" class="ghl-scroll-block"><h2>Kronologi Geopark</h2><p>Perkembangan asas penubuhan dan pengurusan geopark.</p><div class="ghl-years"><article role="button" tabindex="0" data-chrono-year="2019" aria-label="Lihat kronologi 2019"><strong>2019</strong><h3>Pelan Tindakan Pembangunan Geopark</h3><p>Pengenalan konsep geopark dan dokumentasi awal.</p></article><article role="button" tabindex="0" data-chrono-year="2020" aria-label="Lihat kronologi 2020"><strong>2020</strong><h3>Pelan Pengurusan Geopark Fasa 1</h3><p>Penyelarasan pengurusan, rangka kerja dan hala tuju geopark.</p></article><article role="button" tabindex="0" data-chrono-year="2021–2025" aria-label="Lihat kronologi 2021 hingga 2025"><strong>2021–2025</strong><h3>Projek Pelaksanaan Geopark Fasa 2</h3><p>Inisiatif geopark, kerjasama berkepentingan dan pengiktirafan.</p></article></div><button class="ghl-outline" type="button" data-ghl-original="chronologyBtn">Lihat Kronologi Penuh ↗</button></section>
 <section id="section-jejak" class="ghl-scroll-block"><h2>Terokai Jejak GHLGp</h2><p>Tiga pengalaman untuk mengenali landskap, makanan dan warisan tempatan.</p>
 <div class="ghl-trail-cards">
 <article id="section-geologi" class="ghl-trail-card"><img src="jejak-geologi-kad.webp" loading="lazy" alt="Jejak Geologi"><div><h3>Jejak Geologi</h3><p>Teroka formasi batuan, gua, permatang kuarza dan air terjun.</p><a href="jejak-geologi.html">Teroka Jejak ↗</a></div></article>
@@ -2422,4 +2436,32 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 <script src="ghlgp-navigation.js?v=allbuttons20261027"></script><script src="ghlgp-card-photos.js?v=20261027"></script><script src="ghlgp-chronology-layout.js?v=20261027"></script>
+<script id="chronology-interactive-cards">
+(function(){
+ function init(){
+ const cards=document.querySelectorAll('#section-kronologi .ghl-years [data-chrono-year]');
+ cards.forEach(card=>{
+  const open=()=>{
+   cards.forEach(el=>{el.classList.toggle('chrono-selected',el===card);el.setAttribute('aria-pressed',String(el===card));});
+   const btn=document.getElementById('chronologyBtn');
+   if(btn)btn.click();
+   const year=card.getAttribute('data-chrono-year');
+   const modal=document.getElementById('chronologyModal');
+   if(!modal)return;
+   const phases=Array.from(modal.querySelectorAll('.chrono-phase'));
+   const target=phases.find(p=>p.querySelector('.chrono-year')?.textContent.trim()===year);
+   if(target){
+    target.scrollIntoView({block:'center',behavior:'smooth'});
+    target.style.transition='box-shadow .3s ease';
+    target.style.boxShadow='0 0 0 3px #ea913a,0 9px 24px #176a3a33';
+    setTimeout(()=>{target.style.boxShadow=''},2200);
+   }
+  };
+  card.addEventListener('click',open);
+  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+ });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 </body></html>
