@@ -28,6 +28,16 @@ document.addEventListener('DOMContentLoaded',()=>{
      if(spec.id==='jejakMakananList'){
       const n=Number(card.querySelector('.jejak-code')?.textContent?.replace(/\D/g,''));if(Number.isFinite(n)&&n>0)index=n-1;
      }
+     if(spec.id==='jejakWarisanList'){
+      // Restore the original unsorted collage index from existing sprite position.
+      const pos=photo.style.backgroundPosition.trim().split(/\\s+/);
+      const x=parseFloat(pos[0]),y=parseFloat(pos[1]);
+      if(Number.isFinite(x)&&Number.isFinite(y)){
+        const col=Math.max(0,Math.min(2,Math.round(x/50)));
+        const row=Math.max(0,Math.min(3,Math.round(y/(100/3))));
+        index=row*3+col;
+      }
+     }
      if(index<0||!pieces[index])return;
      const img=document.createElement('img');
      img.className='ghl-uncropped-thumb';img.src=pieces[index];img.alt=photo.getAttribute('aria-label')||'Gambar Jejak';
