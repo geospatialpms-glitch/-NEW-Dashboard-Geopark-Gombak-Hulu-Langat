@@ -1026,6 +1026,16 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  height:145px!important;min-height:145px!important;flex-basis:145px!important;
  }
 }
+
+/* W1 sahaja: fail foto sebenar, bukan crop kolaj CSS. */
+#geoTrailModal #jejakWarisanList .jejak-entry .heritage-w1-photo{
+ background:none!important;overflow:hidden!important;position:relative!important;
+}
+#geoTrailModal #jejakWarisanList .heritage-w1-photo .heritage-w1-actual-image{
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:cover!important;object-position:center!important;
+ position:absolute!important;inset:0!important;max-width:none!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1706,9 +1716,14 @@ function renderJejakList(group,listId,detailId){
     btn.append(photo);
     // W1: gambar Muzium Orang Asli (baris ketiga, kolum pertama kolaj foto asal).
     if(item.code==="W1"){
-      photo.style.setProperty("background-image",'url("w1-muzium-orang-asli.png?v=20261027")',"important");
-      photo.style.setProperty("background-size","cover","important");
-      photo.style.setProperty("background-position","center","important");
+      photo.classList.add("heritage-w1-photo");
+      photo.style.setProperty("background-image","none","important");
+      const actualImage=document.createElement("img");
+      actualImage.src="w1-muzium-orang-asli.png?v=20261027-2";
+      actualImage.alt="Muzium Orang Asli, Gombak";
+      actualImage.className="heritage-w1-actual-image";
+      actualImage.loading="eager";
+      photo.appendChild(actualImage);
     }else{
       useHeritagePhoto(photo,originalIndex);
     }
