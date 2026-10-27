@@ -1630,6 +1630,41 @@ function showJejakCardPopup(detail){
  overlay.addEventListener("click",e=>{if(e.target===overlay)closeJejakCardPopup()});
  close.focus();
 }
+
+// Hasilkan satu foto sebenar bagi setiap lokasi daripada kolaj 3 x 4.
+// Kad dan popup menggunakan URL imej potongan yang SAMA.
+const heritagePhotoCache=new Map();
+let heritageSpritePromise;
+function getHeritagePhoto(index){
+ if(heritagePhotoCache.has(index))return Promise.resolve(heritagePhotoCache.get(index));
+ if(!heritageSpritePromise){
+   heritageSpritePromise=new Promise((resolve,reject)=>{
+     const image=new Image();
+     image.onload=()=>resolve(image);
+     image.onerror=reject;
+     image.src="jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4";
+   });
+ }
+ return heritageSpritePromise.then(image=>{
+   if(heritagePhotoCache.has(index))return heritagePhotoCache.get(index);
+   const col=index%3,row=Math.floor(index/3),w=image.naturalWidth/3,h=image.naturalHeight/4;
+   const canvas=document.createElement("canvas");
+   canvas.width=Math.round(w);canvas.height=Math.round(h);
+   canvas.getContext("2d").drawImage(image,col*w,row*h,w,h,0,0,canvas.width,canvas.height);
+   const url=canvas.toDataURL("image/png");
+   heritagePhotoCache.set(index,url);
+   return url;
+ });
+}
+function useHeritagePhoto(element,index){
+ getHeritagePhoto(index).then(url=>{
+   if(!element.isConnected)return;
+   element.style.setProperty("background-image",'url("'+url+'")',"important");
+   element.style.setProperty("background-size","contain","important");
+   element.style.setProperty("background-position","center","important");
+   element.style.setProperty("background-repeat","no-repeat","important");
+ }).catch(()=>{ /* kolaj CSS asal kekal jika imej gagal dimuatkan */ });
+}
 function renderJejakList(group,listId,detailId){
  const list=document.getElementById(listId),detail=document.getElementById(detailId);
  if(!list||!detail)return;
@@ -1669,6 +1704,7 @@ function renderJejakList(group,listId,detailId){
     photo.style.backgroundSize="300% 400%";
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
     btn.append(photo);
+    useHeritagePhoto(photo,originalIndex);
   }
   if(group==="makanan"){
     const number=Number(item.code.replace(/\D/g,""))-1;
@@ -1703,6 +1739,7 @@ function renderJejakList(group,listId,detailId){
      const originalIndex=jejakData.warisan.indexOf(item);
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
      detail.append(photo);
+     useHeritagePhoto(photo,originalIndex);
    }
    if(group==="makanan"){
      const number=Number(item.code.replace(/\D/g,""))-1;
