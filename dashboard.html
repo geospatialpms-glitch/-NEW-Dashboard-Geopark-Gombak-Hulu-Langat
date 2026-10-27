@@ -1198,6 +1198,17 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  #section-kronologi .ghl-years > article:hover,
  #section-kronologi .ghl-years > article:focus-visible{transform:none!important}
 }
+
+/* Pastikan infografik Kronologi berada tepat di tengah dua kad. */
+#chronologyModal .kronologi-intro-layout.kronologi-cards-layout>.kronologi-infografik{
+ grid-column:1/-1!important;justify-self:center!important;align-self:start!important;
+ margin-left:auto!important;margin-right:auto!important;
+ width:min(960px,100%)!important;max-width:960px!important;
+ position:static!important;float:none!important;
+}
+#chronologyModal .kronologi-intro-layout.kronologi-cards-layout>.kronologi-infografik img{
+ display:block!important;margin:0 auto!important;width:100%!important;height:auto!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1244,7 +1255,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
     <p>Kawasan Kajian Gombak–Hulu Langat Geopark (GHL Gp) melibatkan dua (2) daerah di bahagian timur Negeri Selangor iaitu Daerah Gombak dan Daerah Hulu Langat, yang meliputi kawasan seluas 112,955 hektar. Persempadanan geopark ini ditentukan berdasarkan peletakan geotapak-geotapak yang telah dikenal pasti.</p>
     <p>Pentadbiran Daerah Gombak berpusat di Pejabat Daerah dan Tanah Gombak dan melibatkan dua (2) PBT iaitu Majlis Perbandaran Selayang dan Majlis Perbandaran Ampang Jaya. Pentadbiran Daerah Hulu Langat pula berpusat di Pejabat Daerah dan Tanah Hulu Langat dan Pihak Berkuasa Tempatan yang terlibat dalam geopark di dalam Daerah Hulu Langat ialah Majlis Perbandaran Kajang.</p>
     <p>Secara keseluruhannya, terdapat 20 geotapak yang berpotensi telah dikenal pasti di Daerah Gombak dan Daerah Hulu Langat. Ia merangkumi 13 geotapak di Daerah Gombak dan 7 geotapak di Daerah Hulu Langat. Terdapat 12 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Selayang (MPS), 1 geotapak di bawah pentadbiran Majlis Perbandaran Ampang Jaya (MPAJ) serta tujuh (7) geotapak di bawah kawasan pentadbiran Majlis Perbandaran Kajang (MPKj).</p>
-    <p>Buku Coffee Table GHL Geopark ini akan memandu pihak berkepentingan untuk mengenali 20 geotapak yang terpilih ini dan memahami secara ringkas kronologi dan latar belakang Kajian Gombak–Hulu Langat Geopark.</p></div>
+    </div>
 </section>
 </div>
 <figure class="kronologi-infografik"><img src="persetujuan-pihak-berkuasa-negeri.png" alt="Infografik Persetujuan Pihak Berkuasa Negeri" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
