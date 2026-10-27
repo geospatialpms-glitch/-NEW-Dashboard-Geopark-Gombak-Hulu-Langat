@@ -1174,6 +1174,30 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  border-color:#0d7947!important;background:#edf8ef!important;
  box-shadow:0 0 0 2px #62bc82,0 8px 22px rgba(9,104,54,.18)!important;
 }
+
+/* Kesan hover glow untuk tiga kad kronologi utama sahaja. */
+#section-kronologi .ghl-years > article{
+ position:relative;
+ cursor:pointer;
+ transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease!important;
+}
+#section-kronologi .ghl-years > article:hover,
+#section-kronologi .ghl-years > article:focus-visible{
+ transform:translateY(-5px)!important;
+ border-color:#158451!important;
+ background:linear-gradient(135deg,#fff 35%,#f1fcf1 100%)!important;
+ box-shadow:0 0 0 2px rgba(35,164,93,.2),0 0 24px rgba(47,190,101,.29),0 13px 30px rgba(18,91,58,.18)!important;
+ outline:none;
+}
+#section-kronologi .ghl-years > article:hover strong,
+#section-kronologi .ghl-years > article:focus-visible strong{
+ color:#087947!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #section-kronologi .ghl-years > article{transition:none!important}
+ #section-kronologi .ghl-years > article:hover,
+ #section-kronologi .ghl-years > article:focus-visible{transform:none!important}
+}
 </style>
 </head>
 <body><div class="topline"></div>
