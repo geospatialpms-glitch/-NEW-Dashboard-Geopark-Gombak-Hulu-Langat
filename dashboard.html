@@ -1060,8 +1060,8 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #geoTrailModal .jejak-heritage-detail-photo .heritage-real-img{
  object-fit:contain!important;min-height:200px;
 }
-/* Buang gambar lama pada kad Jejak Makanan sahaja; maklumat dan popup dikekalkan. */
-#geoTrailModal #jejakMakananList .jejak-food-photo{display:none!important}
+/* Kembalikan foto pada kad Jejak Makanan seperti versi asal. */
+#geoTrailModal #jejakMakananList .jejak-food-photo{display:block!important}
 
 /* PNG terkini menjadi sumber tunggal foto kad dan popup Warisan. */
 #geoTrailModal #jejakWarisanList .jejak-heritage-photo,
@@ -1075,6 +1075,24 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  max-width:none!important;object-fit:cover!important;object-position:center!important;
 }
 #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo .heritage-real-img{object-fit:contain!important}
+
+/* Jejak Warisan: kad dan popup membaca PNG mengikut kod, tanpa gambar kolaj lama. */
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo{
+ background-image:none!important;
+ display:block!important;position:relative!important;overflow:hidden!important;
+ width:86px!important;height:82px!important;min-width:86px!important;flex:0 0 86px!important;
+ border-radius:10px!important;
+}
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo img.heritage-real-img{
+ position:absolute!important;inset:0!important;display:block!important;
+ width:100%!important;height:100%!important;object-fit:cover!important;max-width:none!important;
+}
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+ background-image:none!important;
+}
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo img.heritage-real-img{
+ display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
