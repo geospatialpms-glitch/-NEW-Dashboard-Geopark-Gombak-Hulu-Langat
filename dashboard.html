@@ -1175,10 +1175,10 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  box-shadow:0 0 0 2px #62bc82,0 8px 22px rgba(9,104,54,.18)!important;
 }
 
-/* Kesan hover glow untuk tiga kad kronologi utama sahaja. */
+/* Kesan hover glow untuk tiga kad kronologi utama sahaja; tidak boleh diklik. */
 #section-kronologi .ghl-years > article{
  position:relative;
- cursor:pointer;
+ cursor:default;
  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease!important;
 }
 #section-kronologi .ghl-years > article:hover,
@@ -1321,7 +1321,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 </section>
 <section class="ghl-scroll-sections" id="ghlExplore" aria-label="Terokai Jejak GHLGp">
 <section id="section-about" class="ghl-scroll-block"><h2>Apa Itu Geopark?</h2><p>Kenali warisan geologi, alam semula jadi dan komuniti di Gombak–Hulu Langat Geopark.</p><button class="ghl-outline" type="button" data-ghl-original="aboutGeoparkBtn">Maklumat Lanjut ↗</button></section>
-<section id="section-kronologi" class="ghl-scroll-block"><h2>Kronologi Geopark</h2><p>Perkembangan asas penubuhan dan pengurusan geopark.</p><div class="ghl-years"><article role="button" tabindex="0" data-chrono-year="2019" aria-label="Lihat kronologi 2019"><strong>2019</strong><h3>Pelan Tindakan Pembangunan Geopark</h3><p>Pengenalan konsep geopark dan dokumentasi awal.</p></article><article role="button" tabindex="0" data-chrono-year="2020" aria-label="Lihat kronologi 2020"><strong>2020</strong><h3>Pelan Pengurusan Geopark Fasa 1</h3><p>Penyelarasan pengurusan, rangka kerja dan hala tuju geopark.</p></article><article role="button" tabindex="0" data-chrono-year="2021–2025" aria-label="Lihat kronologi 2021 hingga 2025"><strong>2021–2025</strong><h3>Projek Pelaksanaan Geopark Fasa 2</h3><p>Inisiatif geopark, kerjasama berkepentingan dan pengiktirafan.</p></article></div><button class="ghl-outline" type="button" data-ghl-original="chronologyBtn">Lihat Kronologi Penuh ↗</button></section>
+<section id="section-kronologi" class="ghl-scroll-block"><h2>Kronologi Geopark</h2><p>Perkembangan asas penubuhan dan pengurusan geopark.</p><div class="ghl-years"><article><strong>2019</strong><h3>Pelan Tindakan Pembangunan Geopark</h3><p>Pengenalan konsep geopark dan dokumentasi awal.</p></article><article><strong>2020</strong><h3>Pelan Pengurusan Geopark Fasa 1</h3><p>Penyelarasan pengurusan, rangka kerja dan hala tuju geopark.</p></article><article><strong>2021–2025</strong><h3>Projek Pelaksanaan Geopark Fasa 2</h3><p>Inisiatif geopark, kerjasama berkepentingan dan pengiktirafan.</p></article></div><button class="ghl-outline" type="button" data-ghl-original="chronologyBtn">Lihat Kronologi Penuh ↗</button></section>
 <section id="section-jejak" class="ghl-scroll-block"><h2>Terokai Jejak GHLGp</h2><p>Tiga pengalaman untuk mengenali landskap, makanan dan warisan tempatan.</p>
 <div class="ghl-trail-cards">
 <article id="section-geologi" class="ghl-trail-card"><img src="jejak-geologi-kad.webp" loading="lazy" alt="Jejak Geologi"><div><h3>Jejak Geologi</h3><p>Teroka formasi batuan, gua, permatang kuarza dan air terjun.</p><a href="jejak-geologi.html">Teroka Jejak ↗</a></div></article>
@@ -2460,32 +2460,5 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 <script src="ghlgp-navigation.js?v=allbuttons20261027"></script><script src="ghlgp-card-photos.js?v=20261027"></script><script src="ghlgp-chronology-layout.js?v=20261027"></script>
-<script id="chronology-interactive-cards">
-(function(){
- function init(){
- const cards=document.querySelectorAll('#section-kronologi .ghl-years [data-chrono-year]');
- cards.forEach(card=>{
-  const open=()=>{
-   cards.forEach(el=>{el.classList.toggle('chrono-selected',el===card);el.setAttribute('aria-pressed',String(el===card));});
-   const btn=document.getElementById('chronologyBtn');
-   if(btn)btn.click();
-   const year=card.getAttribute('data-chrono-year');
-   const modal=document.getElementById('chronologyModal');
-   if(!modal)return;
-   const phases=Array.from(modal.querySelectorAll('.chrono-phase'));
-   const target=phases.find(p=>p.querySelector('.chrono-year')?.textContent.trim()===year);
-   if(target){
-    target.scrollIntoView({block:'center',behavior:'smooth'});
-    target.style.transition='box-shadow .3s ease';
-    target.style.boxShadow='0 0 0 3px #ea913a,0 9px 24px #176a3a33';
-    setTimeout(()=>{target.style.boxShadow=''},2200);
-   }
-  };
-  card.addEventListener('click',open);
-  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
- });
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
+
 </body></html>
