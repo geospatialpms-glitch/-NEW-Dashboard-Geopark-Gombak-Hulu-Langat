@@ -1062,6 +1062,19 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 }
 /* Buang gambar lama pada kad Jejak Makanan sahaja; maklumat dan popup dikekalkan. */
 #geoTrailModal #jejakMakananList .jejak-food-photo{display:none!important}
+
+/* PNG terkini menjadi sumber tunggal foto kad dan popup Warisan. */
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo,
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+ background:none!important;position:relative!important;overflow:hidden!important;
+}
+#geoTrailModal #jejakWarisanList .jejak-heritage-photo .heritage-real-img,
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo .heritage-real-img{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;min-height:0!important;
+ max-width:none!important;object-fit:cover!important;object-position:center!important;
+}
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo .heritage-real-img{object-fit:contain!important}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1670,39 +1683,6 @@ function showJejakCardPopup(detail){
 // Hasilkan satu foto sebenar bagi setiap lokasi daripada kolaj 3 x 4.
 // Kad dan popup menggunakan URL imej potongan yang SAMA.
 const newHeritageFiles={W1:"W1.png",W2:"W2.png",W3:"W3.png",B5:"B5.png",B7:"B7.png",G9:"G9.png",G23:"G23.png",G26:"G26.png",G29:"G29.png",G30:"G30.png","—":"air terjun komanwel.png"};
-const heritagePhotoIndexByCode={W1:6,W2:7,W3:1,B5:3,B7:2,G9:9,G23:8,G26:10,G29:5,G30:4};
-const heritagePhotoCache=new Map();
-let heritageSpritePromise;
-function getHeritagePhoto(index){
- if(heritagePhotoCache.has(index))return Promise.resolve(heritagePhotoCache.get(index));
- if(!heritageSpritePromise){
-   heritageSpritePromise=new Promise((resolve,reject)=>{
-     const image=new Image();
-     image.onload=()=>resolve(image);
-     image.onerror=reject;
-     image.src="jejak-warisan-foto-w1-w3-b7-b5-g30-g29.png?v=4";
-   });
- }
- return heritageSpritePromise.then(image=>{
-   if(heritagePhotoCache.has(index))return heritagePhotoCache.get(index);
-   const col=index%3,row=Math.floor(index/3),w=image.naturalWidth/3,h=image.naturalHeight/4;
-   const canvas=document.createElement("canvas");
-   canvas.width=Math.round(w);canvas.height=Math.round(h);
-   canvas.getContext("2d").drawImage(image,col*w,row*h,w,h,0,0,canvas.width,canvas.height);
-   const url=canvas.toDataURL("image/png");
-   heritagePhotoCache.set(index,url);
-   return url;
- });
-}
-function useHeritagePhoto(element,index){
- getHeritagePhoto(index).then(url=>{
-   if(!element.isConnected)return;
-   element.style.setProperty("background-image",'url("'+url+'")',"important");
-   element.style.setProperty("background-size","contain","important");
-   element.style.setProperty("background-position","center","important");
-   element.style.setProperty("background-repeat","no-repeat","important");
- }).catch(()=>{ /* kolaj CSS asal kekal jika imej gagal dimuatkan */ });
-}
 function renderJejakList(group,listId,detailId){
  const list=document.getElementById(listId),detail=document.getElementById(detailId);
  if(!list||!detail)return;
@@ -1745,8 +1725,6 @@ function renderJejakList(group,listId,detailId){
       img.loading="lazy";
       img.className="heritage-real-img";
       photo.append(img);
-    }else{
-      useHeritagePhoto(photo,jejakData.warisan.indexOf(item));
     }
     btn.append(photo);
   }
@@ -1788,8 +1766,6 @@ function renderJejakList(group,listId,detailId){
        img.loading="lazy";
        img.className="heritage-real-img";
        photo.append(img);
-     }else{
-       useHeritagePhoto(photo,jejakData.warisan.indexOf(item));
      }
      detail.append(photo);
    }
