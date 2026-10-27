@@ -1117,6 +1117,19 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  margin:12px 0 0!important;
  }
 }
+
+/* Gambar baharu Jejak Makanan E1–E13: kad dan popup berkongsi JPEG yang sama. */
+#geoTrailModal .jejak-food-photo:has(>.jejak-food-new-img),
+#geoTrailModal .jejak-food-detail-photo:has(>.jejak-food-new-img),
+#geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo:has(>.jejak-food-new-img){
+ background:none!important;overflow:hidden!important;position:relative!important;
+}
+#geoTrailModal .jejak-food-new-img{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;max-width:none!important;
+ object-fit:cover!important;object-position:center!important;
+ border:0!important;border-radius:inherit!important;box-shadow:none!important;
+}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1726,17 +1739,18 @@ function showJejakCardPopup(detail){
 // Kad dan popup menggunakan URL imej potongan yang SAMA.
 const newHeritageFiles={W1:"W1.png",W2:"W2.png",W3:"W3.png",B5:"B5.png",B7:"B7.png",G9:"G9.png",G23:"G23.png",G26:"G26.png",G29:"G29.png",G30:"G30.png","—":"air terjun komanwel.png"};
 function applyNewFoodPhoto(node,code){
+ // Fail JPEG baharu digunakan terus pada kedua-dua kad dan popup.
  const filename=code+".jpeg";
- const image=new Image();
- image.onload=()=>{
-  node.style.setProperty("background-image",'url("'+filename+'?v=20261027-food2")',"important");
-  node.style.setProperty("background-size","cover","important");
-  node.style.setProperty("background-position","center","important");
-  node.style.setProperty("background-repeat","no-repeat","important");
- };
- // Gambar kolaj lama kekal sebagai fallback sehingga JPEG baharu dimuat naik.
- image.onerror=()=>{};
- image.src=filename+"?v=20261027-food2";
+ node.style.setProperty("background-image","none","important");
+ node.style.setProperty("background-color","transparent","important");
+ node.replaceChildren();
+ const img=document.createElement("img");
+ img.src=filename+"?v=20261027-food3";
+ img.alt="Gambar Jejak Makanan "+code;
+ img.loading="eager";
+ img.decoding="async";
+ img.className="jejak-food-new-img";
+ node.appendChild(img);
 }
 function renderJejakList(group,listId,detailId){
  const list=document.getElementById(listId),detail=document.getElementById(detailId);
