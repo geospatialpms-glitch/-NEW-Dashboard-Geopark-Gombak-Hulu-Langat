@@ -210,3 +210,40 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   object-fit:cover;object-position:center;transform:scale(1.025);
   transform-origin:center;max-width:none;max-height:none;
 }
+
+/* Kronologi premium two-card timeline 20261027 */
+#chronologyModal .geo-modal-card{width:min(1540px,calc(100vw - 28px))!important;max-height:calc(100dvh - 24px)!important;border-radius:18px!important}
+#chronologyModal .geo-modal-body{background:#f6f8f2!important;padding:22px clamp(14px,3vw,36px) 36px!important}
+#chronologyModal .ghl-chrono-hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);overflow:hidden;margin-bottom:24px;background:linear-gradient(100deg,#e8f3e9,#fffaf0);border:1px solid #dbe7d8;border-radius:20px;min-height:235px}
+#chronologyModal .ghl-chrono-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:25px clamp(18px,3vw,38px)}
+#chronologyModal .ghl-chrono-hero-copy small{font-weight:800;font-size:10px;letter-spacing:.2em;color:#317855}
+#chronologyModal .ghl-chrono-hero-copy h3{font:700 clamp(31px,3.5vw,56px)/1.06 Georgia,serif;color:#0b503c;margin:10px 0 8px}
+#chronologyModal .ghl-chrono-hero-copy p{font-size:13px;color:#526c60;line-height:1.7;max-width:560px;margin:0}
+#chronologyModal .ghl-chrono-hero-photo{min-height:215px;background:linear-gradient(90deg,#13452b18,#12392308),url("geopark-sunrise-header.svg.jpg") center 52%/cover no-repeat}
+#chronologyModal .kronologi-intro-layout.kronologi-cards-layout{display:block!important;margin:0 0 32px!important}
+#chronologyModal .kronologi-narrative-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important}
+#chronologyModal .kronologi-text-card{display:flex!important;flex-direction:column!important;width:auto!important;max-width:none!important;min-width:0!important;margin:0!important;padding:24px!important;border:1px solid #d9e6db!important;border-radius:18px!important;background:linear-gradient(180deg,#eff8f0,#fff)!important;box-shadow:0 12px 28px #153d2210!important}
+#chronologyModal .kronologi-card-two{background:linear-gradient(180deg,#fff6ea,#fffdf9)!important;border-color:#f0dfcc!important}
+#chronologyModal .kronologi-card-heading{display:flex!important;align-items:center!important;gap:14px!important;margin:0 0 18px!important}
+#chronologyModal .kronologi-card-number{flex:0 0 46px!important;width:46px!important;height:46px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:linear-gradient(145deg,#17885c,#0a5a40)!important;color:#fff!important;font-size:19px!important;font-weight:800!important}
+#chronologyModal .kronologi-card-two .kronologi-card-number{background:linear-gradient(145deg,#f1a146,#df7026)!important}
+#chronologyModal .kronologi-card-heading small{font-size:10px!important;letter-spacing:.12em!important;font-weight:800!important;color:#58806a!important}
+#chronologyModal .kronologi-card-heading h3{font:700 clamp(18px,2vw,23px)/1.25 Georgia,serif!important;color:#104c39!important;margin:4px 0 0!important}
+#chronologyModal .kronologi-card-copy{font-size:13px!important;line-height:1.82!important;color:#40594f!important}
+#chronologyModal .kronologi-card-copy p{margin:0 0 14px!important;text-align:left!important}
+#chronologyModal .kronologi-infografik{margin:24px auto 0!important;width:min(880px,100%)!important;max-width:none!important;position:static!important}
+#chronologyModal .kronologi-infografik img{max-height:none!important;width:100%!important;height:auto!important;object-fit:contain!important;border-radius:16px!important}
+#chronologyModal .chronology-roadmap{background:transparent!important;border:0!important;box-shadow:none!important;margin:18px 0 0!important;padding:0!important}
+#chronologyModal .chronology-roadmap>h3{font:700 clamp(23px,2.3vw,32px)/1.2 Georgia,serif!important;color:#104b38!important;text-align:left!important;margin:0 0 22px!important}
+#chronologyModal .chrono-phases{position:relative!important;display:grid!important;grid-template-columns:1fr!important;gap:18px!important;padding:0 0 0 28px!important}
+#chronologyModal .chrono-phases:before{content:"";position:absolute;top:14px;bottom:15px;left:9px;width:3px;border-radius:3px;background:linear-gradient(#118459,#e68b35)}
+#chronologyModal .chrono-phase{position:relative!important;display:grid!important;grid-template-columns:140px minmax(0,1fr)!important;column-gap:16px!important;row-gap:9px!important;align-items:start!important;padding:20px!important;background:#fff!important;border:1px solid #dce6d8!important;border-radius:16px!important;box-shadow:0 9px 26px #174a2610!important}
+#chronologyModal .chrono-phase:before{content:"";position:absolute;left:-27px;top:30px;width:16px;height:16px;border:4px solid #198a5d;border-radius:50%;background:#fff}
+#chronologyModal .chrono-phase:nth-child(even):before{border-color:#e88a2f}
+#chronologyModal .chrono-year{grid-column:1!important;grid-row:1/3!important;display:flex!important;justify-content:center!important;align-items:center!important;min-height:48px!important;border-radius:26px!important;background:linear-gradient(120deg,#0e8559,#0a6447)!important;color:#fff!important;font-size:19px!important;font-weight:800!important;padding:8px!important}
+#chronologyModal .chrono-phase:nth-child(even) .chrono-year{background:linear-gradient(120deg,#eb9c3e,#df702b)!important}
+#chronologyModal .chrono-plan{grid-column:2!important;grid-row:1!important;font-size:13px!important;font-weight:800!important;color:#125941!important;background:#eef6ea!important;border-radius:8px!important;padding:10px 12px!important}
+#chronologyModal .chrono-detail{grid-column:2!important;grid-row:2!important;width:100%!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#chronologyModal .chrono-detail ul{padding-left:20px!important;margin:5px 0!important}
+#chronologyModal .chrono-detail li{font-size:13px!important;line-height:1.7!important;color:#456257!important;margin-bottom:7px!important}
+@media(max-width:900px){#chronologyModal .ghl-chrono-hero{grid-template-columns:1fr}#chronologyModal .kronologi-narrative-cards{grid-template-columns:1fr!important}#chronologyModal .chrono-phase{grid-template-columns:1fr!important}#chronologyModal .chrono-year{grid-column:1!important;grid-row:auto!important;width:max-content;min-width:116px!important}#chronologyModal .chrono-plan,#chronologyModal .chrono-detail{grid-column:1!important;grid-row:auto!important}}
