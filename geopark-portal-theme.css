@@ -199,13 +199,3 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 #geoTrailModal .jejak-panel .jejak-entry .jejak-geology-photo{
   box-sizing:border-box!important;
 }
-
-/* Elak regangan foto kolaj: guna skala seragam mengikut tinggi, bukan paksa lebar */
-#geoTrailModal .jejak-panel .jejak-entry .jejak-food-photo,
-#geoTrailModal .jejak-panel .jejak-entry .jejak-heritage-photo{
-  /* Kolaj 4 baris: skala X dan Y adalah sama, supaya imej tidak melebar */
-  background-size:auto 400%!important;
-  background-repeat:no-repeat!important;
-  background-position-x:center;
-  /* background-position-y dikawal oleh skrip mengikut lokasi */
-}
