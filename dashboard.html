@@ -2491,4 +2491,42 @@ document.addEventListener('DOMContentLoaded',function(){
  font-weight:500!important;text-align:left!important;pointer-events:none!important
 }
 </style>
+
+<style id="ghlgp-8-komponen-layout-20261027">
+/* Reka bentuk 8 komponen: kad putih, empat lajur dan dua baris seperti contoh. */
+#aboutGeoparkModal .component-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-top:17px!important;align-items:stretch!important}
+#aboutGeoparkModal .component-grid>.component-item,
+#aboutGeoparkModal .component-grid>.component-item:nth-child(even),
+#aboutGeoparkModal .component-grid>.component-item:nth-child(odd){
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ justify-content:flex-start!important;position:relative!important;gap:11px!important;
+ padding:20px!important;min-height:155px!important;background:#fff!important;
+ border:1px solid #d7e6d3!important;border-radius:15px!important;
+ box-shadow:none!important;transition:border-color .2s,box-shadow .2s,transform .2s!important;
+}
+#aboutGeoparkModal .component-grid>.component-item:first-child{border-color:#9dc384!important}
+#aboutGeoparkModal .component-grid>.component-item:hover{border-color:#83b57a!important;box-shadow:0 8px 19px rgba(24,78,47,.1)!important;transform:translateY(-2px)}
+#aboutGeoparkModal .component-grid .component-icon,
+#aboutGeoparkModal .component-grid .component-item:nth-child(even) .component-icon{
+ order:0!important;display:grid!important;place-items:center!important;
+ width:34px!important;height:34px!important;min-width:34px!important;
+ margin:0 0 3px!important;color:#27874b!important;background:transparent!important;
+}
+#aboutGeoparkModal .component-grid .component-icon svg{width:29px!important;height:29px!important}
+#aboutGeoparkModal .component-grid .component-label,
+#aboutGeoparkModal .about-grid .component-item .component-label{
+ order:1!important;display:block!important;flex:none!important;font-family:Arial,sans-serif!important;
+ font-size:13px!important;line-height:1.5!important;font-weight:700!important;color:#075944!important;
+}
+#aboutGeoparkModal .component-grid .component-no,
+#aboutGeoparkModal .component-grid .component-item:nth-child(even) .component-no{
+ order:2!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-width:24px!important;width:24px!important;height:24px!important;border-radius:7px!important;
+ background:#e9f3e7!important;color:#26734c!important;font-size:11px!important;font-weight:800!important;
+ margin-top:auto!important;
+}
+@media(max-width:1080px){#aboutGeoparkModal .component-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:580px){#aboutGeoparkModal .component-grid{grid-template-columns:1fr!important;gap:10px!important}
+#aboutGeoparkModal .component-grid>.component-item{min-height:125px!important;padding:17px!important}}
+</style>
 </body></html>
