@@ -1705,7 +1705,13 @@ function renderJejakList(group,listId,detailId){
     photo.style.setProperty("background-position",((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%","important");
     btn.append(photo);
     // W1: gambar Muzium Orang Asli (baris ketiga, kolum pertama kolaj foto asal).
-    useHeritagePhoto(photo,item.code==="W1"?6:originalIndex);
+    if(item.code==="W1"){
+      photo.style.setProperty("background-image",'url("w1-muzium-orang-asli.png?v=20261027")',"important");
+      photo.style.setProperty("background-size","cover","important");
+      photo.style.setProperty("background-position","center","important");
+    }else{
+      useHeritagePhoto(photo,originalIndex);
+    }
   }
   if(group==="makanan"){
     const number=Number(item.code.replace(/\D/g,""))-1;
