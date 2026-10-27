@@ -997,6 +997,35 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
   width:min(270px,100%)!important;height:auto!important;aspect-ratio:1!important;
  }
 }
+
+/* Pembetulan susun atur kad Warisan: imej merentasi keseluruhan lebar kad. */
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"] #jejakWarisanList .jejak-entry{
+ position:relative!important;display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:flex-start!important;
+ gap:8px!important;min-width:0!important;min-height:260px!important;
+ padding:0 0 50px!important;overflow:hidden!important;text-align:left!important;
+}
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"] #jejakWarisanList .jejak-heritage-photo{
+ display:block!important;order:0!important;align-self:stretch!important;
+ width:100%!important;height:165px!important;min-width:0!important;min-height:165px!important;
+ flex:0 0 165px!important;aspect-ratio:auto!important;
+ margin:0!important;border:0!important;border-radius:14px 14px 0 0!important;
+ background-size:300% 400%!important;background-repeat:no-repeat!important;
+}
+#geoTrailModal #jejakWarisanList .jejak-entry>.jejak-code{
+ order:1!important;margin:3px 12px 0!important;
+}
+#geoTrailModal #jejakWarisanList .jejak-entry>span:not(.jejak-heritage-photo):not(.jejak-code){
+ order:2!important;display:block!important;margin:0 12px!important;min-width:0!important;
+}
+@media(max-width:600px){
+ #geoTrailModal .jejak-panel[data-jejak-panel="warisan"] #jejakWarisanList .jejak-entry{
+ min-height:235px!important;
+ }
+ #geoTrailModal .jejak-panel[data-jejak-panel="warisan"] #jejakWarisanList .jejak-heritage-photo{
+ height:145px!important;min-height:145px!important;flex-basis:145px!important;
+ }
+}
 </style>
 </head>
 <body><div class="topline"></div>
