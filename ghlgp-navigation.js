@@ -42,30 +42,18 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Restore the complete original homepage when returning via the Utama sidebar button.
-   Do not change the native gallery slideshow or other sidebar handlers. */
+/* Utama: restore the full initial homepage state, not only the map section. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
  sidebar.addEventListener('click',event=>{
   const button=event.target.closest('button,a,[role="button"]');
   if(!button)return;
-  const label=(button.textContent||'').trim().toLowerCase();
-  if(label!=='utama' && button.dataset.ghlGo!=='utama')return;
-  const main=document.getElementById('utama');
-  // The native dashboard owns page navigation; use its existing controls first.
-  if(typeof window.closeJejakFrame==='function')window.closeJejakFrame();
-  // Clear only transient gallery photo overlays, leaving original homepage elements intact.
-  document.querySelectorAll('.ghl-gallery-photos-only').forEach(node=>node.remove());
-  if(main){
-   main.classList.remove('jejak-frame-active');
-   main.style.removeProperty('display');
-   main.style.removeProperty('visibility');
-   main.style.removeProperty('opacity');
-  }
-  requestAnimationFrame(()=>{
-   window.scrollTo({top:0,behavior:'instant'});
-   window.dispatchEvent(new Event('resize'));
-  });
- },false);
+  const text=(button.textContent||button.getAttribute('aria-label')||'').trim().toLowerCase();
+  if(text!=='utama'&&button.dataset.ghlGo!=='utama')return;
+  // A full home navigation resets all native sections, map and gallery state.
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  window.location.assign(new URL('home.html',window.location.href).href);
+ },true);
 });
