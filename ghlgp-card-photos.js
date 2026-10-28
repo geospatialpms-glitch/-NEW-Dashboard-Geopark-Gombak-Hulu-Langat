@@ -53,3 +53,66 @@ document.addEventListener('DOMContentLoaded',()=>{
   source.src=spec.url;
  }
 });
+
+
+/* Batu Arang gallery slideshow: 1.png–9.png only; do not alter native controls. */
+(function(){
+ const FILES=Array.from({length:9},(_,i)=>new URL((i+1)+'.png',document.baseURI).href);
+ const NOTICE=/9 gambar arkib batu arang masih perlu dimuat naik/i;
+ const TITLE=/galeri warisan batu arang/i;
+ function tick(){
+  document.querySelectorAll('#ghl-uploaded-gallery,.ghl-uploaded-grid,.ghl-native-slide-photo,.ghl-slideshow-replacement,.ghl-current-archive-photo').forEach(el=>el.remove());
+  const leaves=[...document.querySelectorAll('body *')].filter(el=>!el.children.length);
+  const note=leaves.find(el=>NOTICE.test(el.textContent||''));
+  if(!note)return;
+  let stage=note;
+  // Central archival message is INSIDE the actual picture stage, not the footer.
+  for(let n=0;n<9&&stage;n++,stage=stage.parentElement){
+   const r=stage.getBoundingClientRect();
+   if(r.width>450&&r.height>320)break;
+  }
+  if(!stage)return;
+  const stageRect=stage.getBoundingClientRect();
+  if(stageRect.width<450||stageRect.height<320)return;
+  let wrapper=stage;
+  for(let n=0;n<5&&wrapper.parentElement;n++){
+   if(wrapper.querySelectorAll('button').length>=2)break;
+   wrapper=wrapper.parentElement;
+  }
+  const nodes=[...wrapper.querySelectorAll('*')];
+  let count=nodes.find(el=>el.children.length===0&&/^0?[1-9]\s*\/\s*0?9$/.test((el.textContent||'').trim()));
+  const match=count?.textContent.match(/\d+/);
+  const index=Math.max(0,Math.min(8,(match?Number(match[0]):1)-1));
+  if(getComputedStyle(stage).position==='static')stage.style.position='relative';
+  let cover=stage.querySelector(':scope > .ghl-batu-arang-photo');
+  if(!cover){
+   cover=document.createElement('div');
+   cover.className='ghl-batu-arang-photo';
+   cover.setAttribute('aria-label','Gambar Galeri Warisan Batu Arang');
+   Object.assign(cover.style,{position:'absolute',inset:'0',zIndex:'2147483000',backgroundSize:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat',pointerEvents:'none',borderRadius:'inherit'});
+   stage.appendChild(cover);
+  }
+  if(cover.dataset.frame!==String(index)){
+   cover.style.backgroundImage='url("'+FILES[index]+'")';
+   cover.dataset.frame=String(index);
+  }
+  // Recreate only the counter in the photograph zone so it remains visible above the cover.
+  let badge=stage.querySelector(':scope > .ghl-batu-arang-counter');
+  if(!badge){
+   badge=document.createElement('span');badge.className='ghl-batu-arang-counter';
+   Object.assign(badge.style,{position:'absolute',top:'24px',left:'24px',zIndex:'2147483001',padding:'10px 18px',borderRadius:'30px',color:'#fff',background:'#075141',font:'bold 12px Arial,sans-serif',pointerEvents:'none'});
+   stage.appendChild(badge);
+  }
+  badge.textContent=String(index+1).padStart(2,'0')+' / 09';
+  if(count)count.style.visibility='hidden';
+ }
+ let pending=false;
+ function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;tick()})}
+ function setup(){
+  schedule();
+  new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true});
+  document.addEventListener('click',schedule,true);
+  setInterval(schedule,1000);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
+})();
