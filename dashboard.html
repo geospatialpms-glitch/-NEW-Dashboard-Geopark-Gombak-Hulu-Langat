@@ -2838,4 +2838,32 @@ document.addEventListener('DOMContentLoaded',function(){
  background-color:#005a41!important;
 }
 </style>
+
+<style id="ghlgp-kpi-geopark-glow-20261028">
+/* Empat kad KPI beridentiti hijau-oren Geopark. Kekalkan fungsi klik daerah. */
+#utama .kpis>.kpi{--kpi-accent:#177b4c;--kpi-pale:#e6f2e7;
+ position:relative!important;overflow:hidden!important;
+ background:linear-gradient(130deg,#fff 60%,#f7fbf5)!important;
+ border:1px solid #d9e7d8!important;border-radius:16px!important;
+ box-shadow:0 5px 16px #114b2b10!important;
+ transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
+}
+#utama .kpis>.kpi:nth-child(2){--kpi-accent:#29844b;--kpi-pale:#e5f3e9}
+#utama .kpis>.kpi:nth-child(3){--kpi-accent:#77a543;--kpi-pale:#edf5dc}
+#utama .kpis>.kpi:nth-child(4){--kpi-accent:#eb8d31;--kpi-pale:#fff0df}
+#utama .kpis>.kpi::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--kpi-accent);opacity:.75;pointer-events:none}
+#utama .kpis>.kpi .kpi-icon{
+ background:var(--kpi-pale)!important;color:var(--kpi-accent)!important;
+ border-radius:14px!important;flex-shrink:0!important;
+}
+#utama .kpis>.kpi .kpi-label{color:#356351!important}
+#utama .kpis>.kpi .kpi-value,#utama .kpis>.kpi .kpi-value.red{color:#064d3d!important}
+#utama .kpis>.kpi:hover{
+ transform:translateY(-5px)!important;border-color:var(--kpi-accent)!important;
+ box-shadow:0 0 0 2px color-mix(in srgb,var(--kpi-accent) 18%,transparent),0 0 22px color-mix(in srgb,var(--kpi-accent) 27%,transparent),0 14px 28px #0b47251e!important;
+}
+#utama .kpis>.kpi.click:focus-visible{outline:3px solid var(--kpi-accent)!important;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){#utama .kpis>.kpi{transition:none!important}}
+@media(hover:none){#utama .kpis>.kpi:hover{transform:none!important}}
+</style>
 </body></html>
