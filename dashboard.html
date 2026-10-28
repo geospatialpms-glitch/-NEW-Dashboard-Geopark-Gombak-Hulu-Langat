@@ -2727,4 +2727,19 @@ document.addEventListener('DOMContentLoaded',function(){
  transition:none!important;object-fit:cover!important;
 }
 </style>
+
+<style id="ghlgp-jejak-bottom-gradient-20261028">
+/* Lapisan gelap hanya di bawah imej, seperti rujukan; glow kad dikekalkan. */
+#section-jejak .ghl-trail-card{isolation:isolate!important}
+#section-jejak .ghl-trail-card::before{
+ content:""!important;position:absolute!important;inset:0!important;
+ z-index:1!important;pointer-events:none!important;
+ background:linear-gradient(to bottom,rgba(0,34,25,0) 22%,rgba(0,40,30,.10) 43%,rgba(0,31,24,.66) 80%,rgba(0,25,20,.88) 100%)!important;
+ border-radius:inherit!important;
+}
+#section-jejak .ghl-trail-card>div{
+ position:relative!important;z-index:2!important;
+}
+#section-jejak .ghl-trail-card img{z-index:0!important}
+</style>
 </body></html>
