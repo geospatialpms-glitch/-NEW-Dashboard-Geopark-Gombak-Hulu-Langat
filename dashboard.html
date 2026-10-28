@@ -1338,6 +1338,13 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 <article id="section-makanan" class="ghl-trail-card"><img src="jejak-makanan-kad.webp" loading="lazy" alt="Jejak Makanan"><div><h3>Jejak Makanan</h3><p>Kenali sajian dan tempat makan yang membentuk identiti setempat.</p><a href="#jejakFrame" onclick="event.preventDefault();event.stopPropagation();openGeoTrailCategory('makanan');">Teroka Jejak ↗</a></div></article>
 <article id="section-warisan" class="ghl-trail-card"><img src="jejak-warisan-kad.webp" loading="lazy" alt="Jejak Warisan"><div><h3>Jejak Warisan</h3><p>Hayati sejarah, komuniti dan budaya unik Gombak–Hulu Langat.</p><a href="#jejakFrame" onclick="event.preventDefault();event.stopPropagation();openGeoTrailCategory('warisan');">Teroka Jejak ↗</a></div></article>
 </div></section>
+<section id="section-galeri-ghlgp" class="ghl-scroll-block" aria-label="Galeri GHLGp">
+ <div class="ghl-gallery-heading"><div><h2>Galeri GHLGp</h2><p>Terokai koleksi gambar Geopark Gombak–Hulu Langat melalui slideshow interaktif.</p></div><div class="ghl-gallery-tabs" role="tablist" aria-label="Pilih galeri"><button type="button" data-gallery="batu" class="active" aria-selected="true">Batu Arang</button><button type="button" data-gallery="selayang" aria-selected="false">Selayang</button></div></div>
+ <div class="ghl-gallery-viewer" aria-live="polite">
+  <div class="ghl-gallery-visual"><img id="ghlGalleryPhoto" src="jejak-warisan-kad.webp" alt="Pratonton Galeri GHLGp" loading="lazy"><span id="ghlGalleryCounter">01 / 09</span><div class="ghl-gallery-empty" id="ghlGalleryEmpty"><strong>Galeri Batu Arang</strong><span>9 gambar daripada arkib Batu Arang menunggu pemuatan ke repositori.</span></div></div>
+  <div class="ghl-gallery-controls"><div><h3 id="ghlGalleryCaption">Galeri Warisan Batu Arang</h3><small id="ghlGallerySubcaption">Galeri foto Batu Arang</small></div><div class="ghl-gallery-buttons"><button type="button" id="ghlGalleryPrev" aria-label="Gambar sebelumnya">‹</button><button type="button" id="ghlGalleryNext" aria-label="Gambar seterusnya">›</button><button type="button" id="ghlGalleryPlay">Ⅱ Jeda Slideshow</button><span>Tukar setiap 5 saat</span></div></div>
+ </div>
+</section>
 </section>
 <div class="footer-note">Sumber: Coffee Table Gombak-Hulu Langat Geopark Edisi 2024</div>
 </main></div>
@@ -2982,4 +2989,47 @@ document.addEventListener('DOMContentLoaded',function(){
  box-shadow:none!important;border:0!important;
 }
 </style>
-</body></html>
+<style id="ghlgp-gallery-20261028">
+#section-galeri-ghlgp{padding-top:34px!important}
+.ghl-gallery-heading{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+.ghl-gallery-heading h2{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(27px,3vw,37px)!important;color:#064b3b!important;margin:0 0 7px!important}
+.ghl-gallery-heading p{margin:0!important;font-size:13px!important;color:#658075!important}
+.ghl-gallery-tabs{display:flex;gap:9px;flex-wrap:wrap}.ghl-gallery-tabs button{border:1px solid #b8d5c3;background:#fff;color:#176448;padding:10px 17px;border-radius:999px;font:700 12px Arial;cursor:pointer;transition:.25s}
+.ghl-gallery-tabs button.active,.ghl-gallery-tabs button:hover{background:#076445;color:white;box-shadow:0 0 0 3px #58b77d38}
+.ghl-gallery-viewer{overflow:hidden;border-radius:20px;background:linear-gradient(110deg,#06382e,#067450);box-shadow:0 15px 34px #002e2330}
+.ghl-gallery-visual{position:relative;height:clamp(290px,42vw,610px);background:#0b3a2e;overflow:hidden}
+.ghl-gallery-visual>img{width:100%;height:100%;object-fit:cover;display:block}
+.ghl-gallery-visual:after{content:"";position:absolute;inset:45% 0 0;pointer-events:none;background:linear-gradient(transparent,#002c2791)}
+#ghlGalleryCounter{position:absolute;z-index:2;left:22px;top:22px;padding:10px 16px;background:#003c32dd;border:1px solid #b0d7bf88;border-radius:25px;color:#fff;font:700 13px Arial}
+.ghl-gallery-empty{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:min(85%,490px);display:flex;flex-direction:column;gap:8px;padding:20px 24px;background:#003d36d9;backdrop-filter:blur(7px);border-radius:14px;text-align:center;color:white}
+.ghl-gallery-empty strong{font:700 23px Georgia,serif}.ghl-gallery-empty span{font:12px/1.5 Arial,sans-serif}
+.ghl-gallery-controls{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 26px;color:#fff}
+.ghl-gallery-controls h3{color:#fff!important;font:700 24px Georgia,serif!important;margin:0 0 5px!important}.ghl-gallery-controls small{color:#d3eee3!important;font-size:11px!important}
+.ghl-gallery-buttons{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.ghl-gallery-buttons button{border:0;background:#fff;color:#07513e;min-height:43px;padding:0 15px;border-radius:99px;cursor:pointer;font-weight:700;transition:transform .2s,box-shadow .2s}.ghl-gallery-buttons button:hover{transform:translateY(-2px);box-shadow:0 0 16px #bdebc795}.ghl-gallery-buttons button:first-child,.ghl-gallery-buttons button:nth-child(2){width:43px;padding:0;font-size:24px}.ghl-gallery-buttons span{font-size:11px;color:#e2f2e7;margin-left:5px}
+@media(max-width:730px){.ghl-gallery-controls{flex-direction:column;align-items:flex-start;padding:18px}.ghl-gallery-buttons span{display:none}}
+</style><script id="ghlgp-gallery-controller-20261028">
+(function(){
+ const datasets={
+ batu:{title:"Galeri Warisan Batu Arang",label:"Batu Arang",images:Array.from({length:9},(_,i)=>"galeri-batu-arang/"+(i+1)+".png")},
+ selayang:{title:"Galeri Selayang",label:"Selayang",images:[]}
+ };
+ const area=document.getElementById("section-galeri-ghlgp");if(!area)return;
+ const img=document.getElementById("ghlGalleryPhoto"),count=document.getElementById("ghlGalleryCounter"),empty=document.getElementById("ghlGalleryEmpty"),title=document.getElementById("ghlGalleryCaption"),sub=document.getElementById("ghlGallerySubcaption"),play=document.getElementById("ghlGalleryPlay");
+ let group="batu",index=0,playing=true;
+ function render(){
+  const d=datasets[group];title.textContent=d.title;sub.textContent=d.images.length?"Galeri foto "+String(index+1).padStart(2,"0"):"Galeri foto "+d.label;
+  count.textContent=String(d.images.length?index+1:0).padStart(2,"0")+" / "+String(d.images.length).padStart(2,"0");
+  img.onerror=function(){img.onerror=null;img.src="jejak-warisan-kad.webp";empty.hidden=false;};
+  if(d.images.length){empty.hidden=true;img.src=d.images[index];}
+  else{img.src="jejak-warisan-kad.webp";empty.hidden=false;}
+  empty.querySelector("strong").textContent=d.title;
+  empty.querySelector("span").textContent=group==="batu"?"9 gambar arkib Batu Arang masih perlu dimuat naik ke repositori GitHub.":"Gambar Galeri Selayang belum dibekalkan.";
+ }
+ function move(n){const d=datasets[group];if(d.images.length){index=(index+n+d.images.length)%d.images.length;render();}}
+ area.querySelectorAll("[data-gallery]").forEach(btn=>btn.addEventListener("click",()=>{group=btn.dataset.gallery;index=0;area.querySelectorAll("[data-gallery]").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-selected",String(b===btn));});render()}));
+ document.getElementById("ghlGalleryPrev").addEventListener("click",()=>move(-1));
+ document.getElementById("ghlGalleryNext").addEventListener("click",()=>move(1));
+ play.addEventListener("click",()=>{playing=!playing;play.textContent=playing?"Ⅱ Jeda Slideshow":"▶ Main Slideshow";});
+ setInterval(()=>{if(playing&&datasets[group].images.length)move(1)},5000);render();
+})();
+</script></body></html>
