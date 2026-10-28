@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded',()=>{
    if(label==='utama'||button.getAttribute('data-ghl-go')==='utama'){
      homeSelected=true;
      clearGalleryOverlay();
-   }else if(label){homeSelected=false;}
+   }else if(label){
+     // Never leave gallery photos on top of other sidebar views.
+     homeSelected=true;
+     clearGalleryOverlay();
+   }
  },true);
  function findStage(){
    const msg=[...document.querySelectorAll('p,small,span,div')].find(e=>e.children.length===0&&noticeText.test(e.textContent||''));
@@ -93,9 +97,21 @@ document.addEventListener('DOMContentLoaded',()=>{
    return null;
  }
  function draw(){
-  if(homeSelected){clearGalleryOverlay();return;}
+  if(homeSelected){
+   // Re-enable only when the actual gallery section is in view.
+   const title=[...document.querySelectorAll('h1,h2,h3,h4')].find(el=>/galeri ghlgp/i.test(el.textContent||''));
+   if(!title || title.getBoundingClientRect().top>window.innerHeight || title.getBoundingClientRect().bottom<0){
+     clearGalleryOverlay();return;
+   }
+   homeSelected=false;
+  }
   const result=findStage();if(!result)return;
   const {stage,wrap}=result;
+  // A map or dashboard pane is never a gallery image stage.
+  if(stage.querySelector('.leaflet-container') || stage.closest('.leaflet-container') ||
+     stage.querySelector('#map') || stage.querySelector('[id*="map"]')){
+    clearGalleryOverlay();return;
+  }
   const counter=[...wrap.querySelectorAll('*')].find(e=>e.children.length===0&&/^0?[1-9]\s*\/\s*0?9$/.test((e.textContent||'').trim()));
   if(!counter)return;
   const index=Math.max(0,Math.min(8,Number(counter.textContent.match(/\d+/)[0])-1));
