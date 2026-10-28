@@ -55,57 +55,61 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Galeri GHLGp / Batu Arang / Selayang - original repository photos 1.png–9.png. */
+/* Use uploaded 1.png - 9.png inside existing Batu Arang / Selayang slideshow.
+   Preserve its native arrows, autoplay timer, pause button, labels and counter. */
 (function(){
- const sources=Array.from({length:9},(_,i)=>String(i+1)+'.png');
- const norm=t=>(t||'').replace(/\\s+/g,' ').trim().toLowerCase();
- function mount(){
-  const titles=Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,[role="heading"],.section-title,.gallery-title'));
-  let title=titles.find(el=>norm(el.textContent).includes('galeri ghlgp'));
-  if(!title){
-    const candidates=Array.from(document.querySelectorAll('section,article,div'));
-    title=candidates.find(el=>el.children.length<5 && norm(el.textContent)==='galeri ghlgp');
+ const paths=Array.from({length:9},(_,i)=>String(i+1)+'.png');
+ const normalized=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+ function locate(){
+  // Match the slideshow's existing central archival notice, not the main page heading.
+  const nodes=[...document.querySelectorAll('div,p,span,small,strong,h1,h2,h3,h4')];
+  const notice=nodes.find(n=>n.children.length===0 && /gambar arkib batu arang masih perlu dimuat naik/i.test(n.textContent||''));
+  const label=notice || nodes.find(n=>n.children.length===0 && /galeri warisan batu arang/i.test(n.textContent||''));
+  if(!label)return;
+  let el=label, host=null;
+  for(let i=0;el&&i<10;i++,el=el.parentElement){
+   const bounds=el.getBoundingClientRect();
+   const txt=normalized(el.textContent);
+   if(bounds.width>450&&bounds.height>350&&txt.includes('galeri warisan batu arang')&&(/jeda slideshow|tukar setiap|\d\s*\/\s*09/.test(txt))){host=el;break;}
   }
-  if(!title)return false;
-  if(document.getElementById('ghl-uploaded-gallery'))return true;
-  const section=document.createElement('section');
-  section.id='ghl-uploaded-gallery';
-  section.setAttribute('aria-label','Galeri GHLGp Batu Arang dan Selayang');
-  const strip=document.createElement('div');strip.className='ghl-uploaded-grid';
-  sources.forEach((src,i)=>{
-   const link=document.createElement('a');
-   link.className='ghl-uploaded-photo';
-   link.href=src;link.target='_blank';link.rel='noopener noreferrer';
-   link.setAttribute('aria-label','Buka foto galeri '+(i+1));
-   const img=document.createElement('img');
-   img.src=src;img.alt='Foto '+(i+1)+' Galeri GHLGp, Batu Arang dan Selayang';
-   img.loading='lazy';img.decoding='async';
-   link.append(img);strip.append(link);
-  });
-  section.append(strip);
-  // Insert at the existing gallery heading, never at the end of the dashboard.
-  title.insertAdjacentElement('afterend',section);
-  return true;
+  if(!host)return;
+  let overlay=host.querySelector(':scope > .ghl-native-slide-photo');
+  if(!overlay){
+   // Native gallery surface may use an image or CSS background; keep it untouched and
+   // place the repository photograph over it but below all existing controls and captions.
+   const st=getComputedStyle(host);
+   if(st.position==='static')host.style.position='relative';
+   overlay=document.createElement('div');
+   overlay.className='ghl-native-slide-photo';
+   Object.assign(overlay.style,{position:'absolute',inset:'0 0 89px 0',backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat',pointerEvents:'none',zIndex:'0',borderRadius:'inherit'});
+   host.prepend(overlay);
+   // Keep existing counter, captions and slideshow controls visible above image.
+   [...host.children].filter(x=>x!==overlay).forEach(x=>{const p=getComputedStyle(x).position;if(p==='static')x.style.position='relative';x.style.zIndex='1';});
+  }
+  const match=host.textContent.match(/(?:^|\s)(0?[1-9])\s*\/\s*0?9(?:\s|$)/);
+  const num=match?Math.max(1,Math.min(9,Number(match[1]))):1;
+  const file=paths[num-1];
+  if(overlay.dataset.file!==file){
+   overlay.style.backgroundImage='url("'+file+'")';
+   overlay.dataset.file=file;
+  }
+  if(notice){
+   const box=notice.parentElement;
+   if(box && box!==host && !box.querySelector('button'))box.style.display='none';
+  }
  }
  function setup(){
-  if(!document.getElementById('ghl-uploaded-style')){
-   const st=document.createElement('style');st.id='ghl-uploaded-style';
-   st.textContent=`
- #ghl-uploaded-gallery{width:100%;margin:18px 0 30px}
- #ghl-uploaded-gallery .ghl-uploaded-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
- #ghl-uploaded-gallery .ghl-uploaded-photo{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:16px;background:#173c27;box-shadow:0 6px 18px rgba(12,52,28,.16)}
- #ghl-uploaded-gallery img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
- #ghl-uploaded-gallery .ghl-uploaded-photo:hover img{transform:scale(1.06)}
- #ghl-uploaded-gallery .ghl-uploaded-photo:focus-visible{outline:3px solid #ed9637;outline-offset:3px}
- @media(max-width:700px){#ghl-uploaded-gallery .ghl-uploaded-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}}
- @media(max-width:420px){#ghl-uploaded-gallery .ghl-uploaded-grid{grid-template-columns:1fr}}
- @media(prefers-reduced-motion:reduce){#ghl-uploaded-gallery img{transition:none}}`;
-   document.head.append(st);
-  }
-  mount();
-  const observer=new MutationObserver(()=>{if(!document.getElementById('ghl-uploaded-gallery'))mount()});
-  observer.observe(document.body,{childList:true,subtree:true});
+  locate();
+  let pending=false;
+  const observer=new MutationObserver(()=>{
+   if(pending)return;
+   pending=true;
+   requestAnimationFrame(()=>{pending=false;locate();});
+  });
+  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['style','class']});
+  document.addEventListener('click',e=>{
+   if(e.target.closest('button'))requestAnimationFrame(locate);
+  },true);
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});
- else setup();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
