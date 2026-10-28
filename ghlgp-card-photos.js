@@ -55,70 +55,58 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Use uploaded 1.png - 9.png inside existing Batu Arang / Selayang slideshow.
-   Preserve its native arrows, autoplay timer, pause button, labels and counter. */
+/* Repository slideshow images: 1.png–9.png. No separate gallery grid. */
 (function(){
- const paths=Array.from({length:9},(_,i)=>String(i+1)+'.png');
- const normalized=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
- function removeSeparateGrid(){
-  // Remove only the gallery-grid added by the previous update; preserve other galleries.
-  document.querySelectorAll('#ghl-uploaded-gallery, .ghl-uploaded-grid').forEach(el=>{
-   if(el.id==='ghl-uploaded-gallery'||el.classList.contains('ghl-uploaded-grid'))el.remove();
-  });
+ const photos=Array.from({length:9},(_,i)=>String(i+1)+'.png');
+ function update(){
+  document.querySelectorAll('#ghl-uploaded-gallery,.ghl-uploaded-grid').forEach(x=>x.remove());
   document.getElementById('ghl-uploaded-style')?.remove();
+  // Find the native gallery via its existing 09-frame counter and caption.
+  const all=[...document.querySelectorAll('body *')];
+  const count=all.find(e=>e.children.length===0 && /^0?[1-9]\s*\/\s*0?9$/.test((e.textContent||'').trim()));
+  if(!count)return;
+  let gallery=count;
+  for(let i=0;i<12&&gallery;i++,gallery=gallery.parentElement){
+   if(!gallery.querySelectorAll('button').length)continue;
+   if(!/galeri warisan batu arang/i.test(gallery.textContent||''))continue;
+   const rect=gallery.getBoundingClientRect();
+   if(rect.width<500||rect.height<350)continue;
+   break;
+  }
+  if(!gallery)return;
+  const number=Number((count.textContent||'').match(/\d+/)?.[0]||1);
+  const src=photos[Math.max(0,Math.min(8,number-1))];
+  const root=getComputedStyle(gallery);
+  if(root.position==='static')gallery.style.position='relative';
+  let image=gallery.querySelector(':scope > .ghl-slideshow-replacement');
+  if(!image){
+   image=document.createElement('img');
+   image.className='ghl-slideshow-replacement';
+   image.alt='Galeri Warisan Batu Arang';
+   Object.assign(image.style,{position:'absolute',inset:'0',width:'100%',height:'calc(100% - 88px)',objectFit:'cover',zIndex:'20',pointerEvents:'none',borderRadius:'16px 16px 0 0'});
+   gallery.append(image);
+   // Native footer, arrows and number badge remain on top and functional.
+   const footer=[...gallery.querySelectorAll('*')].filter(n=>n.children.length===0 && (/galeri foto 0?[1-9]|jeda slideshow|tukar setiap 5 saat|\/\s*09/.test((n.textContent||'').toLowerCase())));
+   footer.forEach(node=>{
+    let ancestor=node;
+    for(let j=0;j<5&&ancestor&&ancestor!==gallery;j++,ancestor=ancestor.parentElement){
+     if(getComputedStyle(ancestor).position==='static')ancestor.style.position='relative';
+     ancestor.style.zIndex='30';
+    }
+   });
+  }
+  if(image.getAttribute('src')!==src)image.setAttribute('src',src);
  }
- function locate(){
-  removeSeparateGrid();
-  // Match the slideshow's existing central archival notice, not the main page heading.
-  const nodes=[...document.querySelectorAll('div,p,span,small,strong,h1,h2,h3,h4')];
-  const notice=nodes.find(n=>n.children.length===0 && /gambar arkib batu arang masih perlu dimuat naik/i.test(n.textContent||''));
-  const label=notice || nodes.find(n=>n.children.length===0 && /galeri warisan batu arang/i.test(n.textContent||''));
-  if(!label)return;
-  let el=label, host=null;
-  for(let i=0;el&&i<10;i++,el=el.parentElement){
-   const bounds=el.getBoundingClientRect();
-   const txt=normalized(el.textContent);
-   if(bounds.width>450&&bounds.height>350&&txt.includes('galeri warisan batu arang')&&(/jeda slideshow|tukar setiap|\d\s*\/\s*09/.test(txt))){host=el;break;}
-  }
-  if(!host)return;
-  let overlay=host.querySelector(':scope > .ghl-native-slide-photo');
-  if(!overlay){
-   // Native gallery surface may use an image or CSS background; keep it untouched and
-   // place the repository photograph over it but below all existing controls and captions.
-   const st=getComputedStyle(host);
-   if(st.position==='static')host.style.position='relative';
-   overlay=document.createElement('div');
-   overlay.className='ghl-native-slide-photo';
-   Object.assign(overlay.style,{position:'absolute',inset:'0 0 89px 0',backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat',pointerEvents:'none',zIndex:'0',borderRadius:'inherit'});
-   host.prepend(overlay);
-   // Keep existing counter, captions and slideshow controls visible above image.
-   [...host.children].filter(x=>x!==overlay).forEach(x=>{const p=getComputedStyle(x).position;if(p==='static')x.style.position='relative';x.style.zIndex='1';});
-  }
-  const match=host.textContent.match(/(?:^|\s)(0?[1-9])\s*\/\s*0?9(?:\s|$)/);
-  const num=match?Math.max(1,Math.min(9,Number(match[1]))):1;
-  const file=paths[num-1];
-  if(overlay.dataset.file!==file){
-   overlay.style.backgroundImage='url("'+file+'")';
-   overlay.dataset.file=file;
-  }
-  if(notice){
-   const box=notice.parentElement;
-   if(box && box!==host && !box.querySelector('button'))box.style.display='none';
-  }
+ let scheduled=false;
+ function schedule(){
+  if(scheduled)return;
+  scheduled=true;
+  requestAnimationFrame(()=>{scheduled=false;update()});
  }
- function setup(){
-  removeSeparateGrid();
-  locate();
-  let pending=false;
-  const observer=new MutationObserver(()=>{
-   if(pending)return;
-   pending=true;
-   requestAnimationFrame(()=>{pending=false;locate();});
-  });
-  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['style','class']});
-  document.addEventListener('click',e=>{
-   if(e.target.closest('button'))requestAnimationFrame(locate);
-  },true);
+ function start(){
+  update();
+  new MutationObserver(schedule).observe(document.body,{childList:true,characterData:true,subtree:true});
+  document.addEventListener('click',schedule,true);
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
