@@ -92,9 +92,34 @@ document.addEventListener('DOMContentLoaded',()=>{
    Object.assign(cover.style,{position:'absolute',inset:'0',zIndex:'2147483000',backgroundSize:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat',pointerEvents:'none',borderRadius:'inherit'});
    stage.appendChild(cover);
   }
-  if(cover.dataset.frame!==String(index)){
-   cover.style.backgroundImage='url("'+FILES[index]+'")';
-   cover.dataset.frame=String(index);
+  if(cover.dataset.frame!==String(index) && cover.dataset.pending!==String(index)){
+   const nextUrl=FILES[index];
+   // Crossfade only after the next image has loaded; no flash of the old slide.
+   const token=String(index);
+   cover.dataset.pending=token;
+   const preloaded=new Image();
+   preloaded.onload=()=>{
+    if(cover.dataset.pending!==token||!cover.isConnected)return;
+    if(!cover.dataset.frame){
+     cover.style.backgroundImage='url("'+nextUrl+'")';
+     cover.dataset.frame=String(index);
+     return;
+    }
+    const incoming=document.createElement('div');
+    incoming.className='ghl-batu-arang-fade';
+    Object.assign(incoming.style,{position:'absolute',inset:'0',backgroundImage:'url("'+nextUrl+'")',backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat',opacity:'0',transition:'opacity 850ms ease-in-out',pointerEvents:'none'});
+    cover.appendChild(incoming);
+    requestAnimationFrame(()=>{incoming.style.opacity='1'});
+    const finish=()=>{
+     if(cover.dataset.pending!==token)return;
+     cover.style.backgroundImage='url("'+nextUrl+'")';
+     cover.dataset.frame=String(index);
+     incoming.remove();
+    };
+    incoming.addEventListener('transitionend',finish,{once:true});
+    setTimeout(finish,1050);
+   };
+   preloaded.src=nextUrl;
   }
   // Recreate only the counter in the photograph zone so it remains visible above the cover.
   let badge=stage.querySelector(':scope > .ghl-batu-arang-counter');
