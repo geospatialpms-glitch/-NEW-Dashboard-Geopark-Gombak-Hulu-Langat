@@ -40,27 +40,3 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
   // Card links go to detailed trail pages; never hijack those links.
 });
-
-
-/* Utama returns to the existing dashboard content, not home.html. */
-document.addEventListener('DOMContentLoaded',()=>{
- const sidebar=document.querySelector('.sidebar');
- if(!sidebar)return;
- sidebar.addEventListener('click',event=>{
-  const btn=event.target.closest('button,a,[role="button"]');
-  if(!btn)return;
-  const name=(btn.textContent||btn.getAttribute('aria-label')||'').trim().toLowerCase();
-  if(name!=='utama'&&btn.dataset.ghlGo!=='utama')return;
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  if(typeof window.closeJejakFrame==='function')window.closeJejakFrame();
-  const target=document.getElementById('utama');
-  if(target){
-   target.classList.remove('jejak-frame-active');
-   target.style.removeProperty('display');
-   target.scrollIntoView({behavior:'smooth',block:'start'});
-  }
-  document.querySelectorAll('.sidebar .navbtn').forEach(el=>el.classList.toggle('active',el===btn));
-  window.dispatchEvent(new Event('resize'));
- },true);
-});
