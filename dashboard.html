@@ -1300,8 +1300,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 </div>
 
 <section id="jejakFrame" aria-label="Pilihan Jejak GHLGp" hidden>
- <div class="jejak-frame-head"><strong>Jejak GHLGp</strong><button type="button" id="jejakFrameBack">← Kembali ke Dashboard</button></div>
- <p>Terokai rangkaian geopelancongan Gombak–Hulu Langat melalui tiga jenis jejak. Pilih kategori untuk melihat maklumat lanjut.</p>
+ <div class="jejak-frame-head"><div class="jejak-frame-heading"><div class="jejak-frame-eyebrow">GOMBAK – HULU LANGAT GEOPARK</div><h2>Terokai Jejak GHLGp</h2><p>Pilih pengalaman geologi, makanan atau warisan untuk menerokai keunikan Geopark.</p></div><button type="button" id="jejakFrameBack"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M10 21v-7h4v7"/></svg> Halaman Utama</button></div>
  <div class="jejak-frame-image" aria-label="Pilihan tiga jejak">
   <button type="button" class="jejak-frame-hotspot geologi" aria-label="Buka Jejak Geologi" onclick="openGeoTrailCategory('geologi')"></button>
   <button type="button" class="jejak-frame-hotspot warisan" aria-label="Buka Jejak Warisan" onclick="openGeoTrailCategory('warisan')"></button>
@@ -2585,5 +2584,48 @@ document.addEventListener('DOMContentLoaded',function(){
 /* Sembunyikan hanya header Apa Itu Geopark; kandungan dan kad kekal. */
 #aboutGeoparkModal .geo-modal-head{display:none!important}
 #aboutGeoparkModal .geo-modal-body{border-top:0!important}
+</style>
+
+<style id="ghlgp-jejak-hero-glow-20261028">
+/* Header Jejak pilihan mengikut contoh, font serif sama keluarga tajuk Kronologi. */
+#jejakFrame:not(.jejak-show-detail){background:#fff!important}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-head{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:24px!important;
+ margin:-20px -20px 20px!important;padding:22px 24px!important;border-radius:13px 13px 0 0!important;
+ background:#f8faf5 url("topographic-contour.png") center/cover no-repeat!important;
+ color:#075644!important;box-shadow:none!important;
+}
+#jejakFrame .jejak-frame-heading{min-width:0!important}
+#jejakFrame .jejak-frame-eyebrow{font:800 11px/1.4 Arial,sans-serif!important;letter-spacing:2.3px!important;color:#267e65!important;margin-bottom:7px!important}
+#jejakFrame .jejak-frame-heading h2{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(25px,2.5vw,35px)!important;letter-spacing:-.7px!important;font-weight:700!important;line-height:1.18!important;color:#004f43!important;margin:0 0 8px!important}
+#jejakFrame .jejak-frame-heading p{font:400 13px/1.55 Arial,sans-serif!important;color:#537b72!important;margin:0!important}
+#jejakFrame:not(.jejak-show-detail) #jejakFrameBack{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;
+ border:0!important;border-radius:999px!important;padding:14px 21px!important;white-space:nowrap!important;
+ background:linear-gradient(110deg,#f76528,#f6a322)!important;color:#fff!important;
+ font:700 13px/1.25 Arial,sans-serif!important;box-shadow:0 8px 20px #ec7a2829!important;
+ transition:transform .22s ease,box-shadow .22s ease,filter .22s ease!important;
+}
+#jejakFrame:not(.jejak-show-detail) #jejakFrameBack:hover,
+#jejakFrame:not(.jejak-show-detail) #jejakFrameBack:focus-visible{
+ transform:translateY(-2px)!important;filter:brightness(1.07)!important;
+ box-shadow:0 0 0 4px #fa9f4140,0 0 22px 6px #ffa12970,0 10px 24px #ea692b55!important;
+}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-image .jejak-frame-hotspot{
+ border:2px solid transparent!important;border-radius:15px!important;
+ transition:background .25s ease,box-shadow .25s ease,border-color .25s ease,transform .25s ease!important;
+}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-image .jejak-frame-hotspot:hover,
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-image .jejak-frame-hotspot:focus-visible{
+ border-color:#ffc36c!important;background:rgba(255,227,144,.15)!important;
+ box-shadow:0 0 0 4px #ffbb7240,0 0 18px 6px #f8ad4cbb,0 0 36px 12px #ffcf6370!important;
+ transform:scale(1.035)!important;outline:none!important;
+}
+@media(max-width:700px){#jejakFrame:not(.jejak-show-detail)>.jejak-frame-head{
+ flex-direction:column!important;align-items:flex-start!important;padding:19px 16px!important;
+ margin:-20px -20px 15px!important;gap:15px!important}
+#jejakFrame:not(.jejak-show-detail) #jejakFrameBack{align-self:flex-start!important;padding:12px 17px!important}
+}
+@media(prefers-reduced-motion:reduce){#jejakFrame .jejak-frame-hotspot,#jejakFrameBack{transition:none!important}}
 </style>
 </body></html>
