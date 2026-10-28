@@ -60,6 +60,21 @@ document.addEventListener('DOMContentLoaded',()=>{
  const frames=Array.from({length:9},(_,i)=>new URL((i+1)+'.png',document.baseURI).href);
  const noticeText=/9 gambar arkib batu arang masih perlu dimuat naik/i;
  let mounted=null, current=-1, pending=-1;
+ let homeSelected=false;
+ function clearGalleryOverlay(){
+   document.querySelectorAll('.ghl-gallery-photos-only').forEach(el=>el.remove());
+   mounted=null;current=-1;pending=-1;
+ }
+ // Home navigation must always restore the native hero; never use a gallery photo there.
+ document.addEventListener('click',e=>{
+   const button=e.target.closest('.sidebar button,.sidebar a,.sidebar [role="button"]');
+   if(!button)return;
+   const label=(button.textContent||button.getAttribute('aria-label')||'').trim().toLowerCase();
+   if(label==='utama'||button.getAttribute('data-ghl-go')==='utama'){
+     homeSelected=true;
+     clearGalleryOverlay();
+   }else if(label){homeSelected=false;}
+ },true);
  function findStage(){
    const msg=[...document.querySelectorAll('p,small,span,div')].find(e=>e.children.length===0&&noticeText.test(e.textContent||''));
    if(!msg)return null;
@@ -78,6 +93,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    return null;
  }
  function draw(){
+  if(homeSelected){clearGalleryOverlay();return;}
   const result=findStage();if(!result)return;
   const {stage,wrap}=result;
   const counter=[...wrap.querySelectorAll('*')].find(e=>e.children.length===0&&/^0?[1-9]\s*\/\s*0?9$/.test((e.textContent||'').trim()));
