@@ -96,6 +96,33 @@ document.addEventListener('DOMContentLoaded',()=>{
    });
   }
   if(image.getAttribute('src')!==src)image.setAttribute('src',src);
+  // Remove the old Batu Caves background/slide so that no two photos overlap.
+  for(const element of [gallery,...gallery.querySelectorAll('*')]){
+   if(element===image||element.contains(image)&&element!==gallery)continue;
+   if(element.classList?.contains('ghl-slideshow-replacement'))continue;
+   const box=element.getBoundingClientRect();
+   const photoRegion=box.width>=gallery.getBoundingClientRect().width*.65&&box.height>=gallery.getBoundingClientRect().height*.55;
+   if(element===gallery){
+    gallery.style.backgroundImage='none';
+   }else if(photoRegion){
+    if(element.tagName==='IMG'||element.tagName==='PICTURE'){
+     element.style.visibility='hidden';
+    }else if(getComputedStyle(element).backgroundImage!=='none'){
+     element.style.backgroundImage='none';
+    }
+   }
+  }
+  // Remove the obsolete centered notice saying archive images still need uploading.
+  const notices=[...gallery.querySelectorAll('p,span,small,div')].filter(el=>el.children.length===0&&/gambar arkib batu arang masih perlu dimuat naik/i.test(el.textContent||''));
+  notices.forEach(el=>{
+   let panel=el;
+   for(let i=0;i<3&&panel.parentElement&&panel.parentElement!==gallery;i++){
+    const parent=panel.parentElement;
+    if(parent.querySelector('button')||parent.getBoundingClientRect().width>gallery.getBoundingClientRect().width*.6)break;
+    panel=parent;
+   }
+   panel.style.display='none';
+  });
  }
  let scheduled=false;
  function schedule(){
