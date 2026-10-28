@@ -55,85 +55,81 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Repository slideshow images: 1.png–9.png. No separate gallery grid. */
+/* GHLGp gallery: replace the legacy Batu Caves slide inside the existing slideshow. */
 (function(){
- const photos=Array.from({length:9},(_,i)=>String(i+1)+'.png');
- function update(){
-  document.querySelectorAll('#ghl-uploaded-gallery,.ghl-uploaded-grid').forEach(x=>x.remove());
+ const images=Array.from({length:9},(_,i)=>String(i+1)+'.png');
+ let lastFrame='';
+ const clean=()=>{
+  document.querySelectorAll('#ghl-uploaded-gallery,.ghl-uploaded-grid,.ghl-native-slide-photo,.ghl-slideshow-replacement').forEach(e=>e.remove());
   document.getElementById('ghl-uploaded-style')?.remove();
-  // Find the native gallery via its existing 09-frame counter and caption.
-  const all=[...document.querySelectorAll('body *')];
-  const count=all.find(e=>e.children.length===0 && /^0?[1-9]\s*\/\s*0?9$/.test((e.textContent||'').trim()));
-  if(!count)return;
-  let gallery=count;
-  for(let i=0;i<12&&gallery;i++,gallery=gallery.parentElement){
-   if(!gallery.querySelectorAll('button').length)continue;
-   if(!/galeri warisan batu arang/i.test(gallery.textContent||''))continue;
-   const rect=gallery.getBoundingClientRect();
-   if(rect.width<500||rect.height<350)continue;
-   break;
+ };
+ function apply(){
+  clean();
+  const leaves=[...document.querySelectorAll('body *')].filter(e=>e.children.length===0);
+  const notice=leaves.find(e=>/9 gambar arkib batu arang masih perlu dimuat naik/i.test(e.textContent||''));
+  const title=leaves.find(e=>/galeri warisan batu arang/i.test(e.textContent||''));
+  const seed=notice||title;
+  if(!seed)return;
+  // Find the gallery surface by its archive notice + wide picture; don't depend on CSS names.
+  let photo=seed, whole=null;
+  for(let i=0;i<12&&photo;i++,photo=photo.parentElement){
+   const r=photo.getBoundingClientRect();
+   if(r.width>550 && r.height>320){whole=photo;break}
   }
-  if(!gallery)return;
-  const number=Number((count.textContent||'').match(/\d+/)?.[0]||1);
-  const src=photos[Math.max(0,Math.min(8,number-1))];
-  const root=getComputedStyle(gallery);
-  if(root.position==='static')gallery.style.position='relative';
-  let image=gallery.querySelector(':scope > .ghl-slideshow-replacement');
-  if(!image){
-   image=document.createElement('img');
-   image.className='ghl-slideshow-replacement';
-   image.alt='Galeri Warisan Batu Arang';
-   Object.assign(image.style,{position:'absolute',inset:'0',width:'100%',height:'calc(100% - 88px)',objectFit:'cover',zIndex:'20',pointerEvents:'none',borderRadius:'16px 16px 0 0'});
-   gallery.append(image);
-   // Native footer, arrows and number badge remain on top and functional.
-   const footer=[...gallery.querySelectorAll('*')].filter(n=>n.children.length===0 && (/galeri foto 0?[1-9]|jeda slideshow|tukar setiap 5 saat|\/\s*09/.test((n.textContent||'').toLowerCase())));
-   footer.forEach(node=>{
-    let ancestor=node;
-    for(let j=0;j<5&&ancestor&&ancestor!==gallery;j++,ancestor=ancestor.parentElement){
-     if(getComputedStyle(ancestor).position==='static')ancestor.style.position='relative';
-     ancestor.style.zIndex='30';
-    }
-   });
+  if(!whole)return;
+  let slider=whole;
+  for(let i=0;i<4&&slider?.parentElement;i++){
+   if(slider.querySelectorAll('button').length>=2)break;
+   slider=slider.parentElement;
   }
-  if(image.getAttribute('src')!==src)image.setAttribute('src',src);
-  // Remove the old Batu Caves background/slide so that no two photos overlap.
-  for(const element of [gallery,...gallery.querySelectorAll('*')]){
-   if(element===image||element.contains(image)&&element!==gallery)continue;
-   if(element.classList?.contains('ghl-slideshow-replacement'))continue;
-   const box=element.getBoundingClientRect();
-   const photoRegion=box.width>=gallery.getBoundingClientRect().width*.65&&box.height>=gallery.getBoundingClientRect().height*.55;
-   if(element===gallery){
-    gallery.style.backgroundImage='none';
-   }else if(photoRegion){
-    if(element.tagName==='IMG'||element.tagName==='PICTURE'){
-     element.style.visibility='hidden';
-    }else if(getComputedStyle(element).backgroundImage!=='none'){
-     element.style.backgroundImage='none';
-    }
+  const text=(slider.textContent||'');
+  const match=text.match(/(?:^|\D)(0?[1-9])\s*\/\s*0?9(?:\D|$)/);
+  const number=match?Number(match[1]):1;
+  const src=images[Math.min(8,Math.max(0,number-1))];
+  // Native slider is an image, CSS background, or a slide containing a photo.
+  // Hide the old photo only in the slideshow's picture zone, not its controls/footer.
+  const target=whole;
+  if(getComputedStyle(target).position==='static')target.style.position='relative';
+  const backgroundNodes=[target,...target.querySelectorAll('*')];
+  for(const el of backgroundNodes){
+   if(el.classList?.contains('ghl-current-archive-photo'))continue;
+   if(el===target){el.style.backgroundImage='none';continue}
+   const r=el.getBoundingClientRect(),b=target.getBoundingClientRect();
+   if(r.width>=b.width*.7 && r.height>=b.height*.65){
+    if(el.tagName==='IMG')el.style.visibility='hidden';
+    else if(getComputedStyle(el).backgroundImage!=='none')el.style.backgroundImage='none';
    }
   }
-  // Remove the obsolete centered notice saying archive images still need uploading.
-  const notices=[...gallery.querySelectorAll('p,span,small,div')].filter(el=>el.children.length===0&&/gambar arkib batu arang masih perlu dimuat naik/i.test(el.textContent||''));
-  notices.forEach(el=>{
-   let panel=el;
-   for(let i=0;i<3&&panel.parentElement&&panel.parentElement!==gallery;i++){
-    const parent=panel.parentElement;
-    if(parent.querySelector('button')||parent.getBoundingClientRect().width>gallery.getBoundingClientRect().width*.6)break;
-    panel=parent;
+  let newPhoto=target.querySelector(':scope > .ghl-current-archive-photo');
+  if(!newPhoto){
+   newPhoto=document.createElement('img');
+   newPhoto.className='ghl-current-archive-photo';
+   newPhoto.alt='Foto Galeri Batu Arang';
+   Object.assign(newPhoto.style,{position:'absolute',inset:'0',width:'100%',height:'100%',objectFit:'cover',display:'block',zIndex:'999',pointerEvents:'none'});
+   target.append(newPhoto);
+  }
+  if(newPhoto.getAttribute('src')!==src){newPhoto.src=src;lastFrame=src;}
+  // Preserve the existing counter, slideshow controls and bottom information bar.
+  const counter=leaves.find(el=>/^0?[1-9]\s*\/\s*0?9$/.test((el.textContent||'').trim()));
+  if(counter&&slider.contains(counter)){
+   let n=counter;while(n&&n!==target&&n!==slider){n.style.position='relative';n.style.zIndex='1001';n=n.parentElement}
+  }
+  if(notice){
+   let panel=notice;
+   for(let i=0;i<3&&panel.parentElement&&panel.parentElement!==target;i++){
+    if(panel.parentElement.querySelector('button'))break;
+    panel=panel.parentElement;
    }
    panel.style.display='none';
-  });
+  }
  }
- let scheduled=false;
- function schedule(){
-  if(scheduled)return;
-  scheduled=true;
-  requestAnimationFrame(()=>{scheduled=false;update()});
- }
- function start(){
-  update();
-  new MutationObserver(schedule).observe(document.body,{childList:true,characterData:true,subtree:true});
+ let busy=false;
+ function schedule(){if(busy)return;busy=true;requestAnimationFrame(()=>{busy=false;apply()})}
+ function boot(){
+  schedule();
+  new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true});
   document.addEventListener('click',schedule,true);
+  setInterval(schedule,1500);
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
