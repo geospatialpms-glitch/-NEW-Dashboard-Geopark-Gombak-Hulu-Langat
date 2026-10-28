@@ -2742,4 +2742,48 @@ document.addEventListener('DOMContentLoaded',function(){
 }
 #section-jejak .ghl-trail-card img{z-index:0!important}
 </style>
+
+<style id="ghlgp-jejak-card-final-fix-20261028">
+/* Buang garisan aksen, pulihkan semua teks di atas imej dan kekalkan hover. */
+#section-jejak .ghl-trail-card,
+#section-jejak .ghl-trail-card:nth-child(2),
+#section-jejak .ghl-trail-card:nth-child(3){
+ border:0!important;outline:0!important;border-radius:16px!important;
+ overflow:hidden!important;isolation:isolate!important;
+}
+#section-jejak .ghl-trail-card::after{content:none!important;display:none!important}
+#section-jejak .ghl-trail-card::before{
+ content:""!important;position:absolute!important;inset:0!important;z-index:1!important;
+ pointer-events:none!important;border-radius:inherit!important;
+ background:linear-gradient(to bottom,transparent 29%,rgba(0,32,26,.09) 46%,rgba(0,28,23,.52) 76%,rgba(0,25,20,.85) 100%)!important;
+}
+#section-jejak .ghl-trail-card>img{z-index:0!important}
+#section-jejak .ghl-trail-card>div{
+ position:absolute!important;z-index:4!important;bottom:16px!important;
+ left:20px!important;right:18px!important;display:block!important;
+ opacity:1!important;visibility:visible!important;pointer-events:none!important;
+ color:#fff!important;text-align:left!important;
+}
+#section-jejak .ghl-trail-card>div h3,
+#section-jejak .ghl-trail-card>div p{
+ display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;
+}
+#section-jejak .ghl-trail-card>div a{
+ display:inline-flex!important;visibility:visible!important;opacity:1!important;
+ pointer-events:auto!important;position:relative!important;z-index:5!important;
+}
+#section-jejak .ghl-trail-card:hover,
+#section-jejak .ghl-trail-card:focus-within{
+ border:0!important;outline:0!important;transform:translateY(-8px)!important;
+ box-shadow:0 16px 34px rgba(0,37,26,.30),0 0 17px rgba(170,218,113,.35)!important;
+}
+#section-jejak .ghl-trail-card:nth-child(2):hover,
+#section-jejak .ghl-trail-card:nth-child(2):focus-within{
+ border:0!important;box-shadow:0 16px 34px rgba(0,37,26,.30),0 0 17px rgba(245,181,83,.35)!important;
+}
+#section-jejak .ghl-trail-card:nth-child(3):hover,
+#section-jejak .ghl-trail-card:nth-child(3):focus-within{
+ border:0!important;box-shadow:0 16px 34px rgba(0,37,26,.30),0 0 17px rgba(242,138,98,.35)!important;
+}
+</style>
 </body></html>
