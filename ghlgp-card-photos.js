@@ -53,3 +53,47 @@ document.addEventListener('DOMContentLoaded',()=>{
   source.src=spec.url;
  }
 });
+
+
+/* Gallery GHLGp: use the nine original PNGs uploaded to the repository.
+   Existing Batu Arang and Selayang gallery content is preserved. */
+(function(){
+ const photos=Array.from({length:9},(_,i)=>`${i+1}.png`);
+ function installGallery(){
+  if(document.getElementById('ghl-uploaded-gallery'))return true;
+  const headings=[...document.querySelectorAll('h1,h2,h3,h4,h5,[role="heading"]')];
+  const heading=headings.find(el=>/^galeri\s*(?:ghlgp|gombak\s*[–-]\s*hulu\s*langat)$/i.test(el.textContent.trim()));
+  if(!heading)return false;
+  const gallery=document.createElement('section');
+  gallery.id='ghl-uploaded-gallery';
+  gallery.setAttribute('aria-label','Galeri foto GHLGp');
+  const grid=document.createElement('div');grid.className='ghl-uploaded-grid';
+  photos.forEach((src,i)=>{
+   const anchor=document.createElement('a');
+   anchor.className='ghl-uploaded-photo';anchor.href=src;anchor.target='_blank';anchor.rel='noopener';
+   const img=document.createElement('img');img.src=src;img.alt='Galeri GHLGp – Foto '+(i+1);
+   img.loading='lazy';img.decoding='async';
+   anchor.append(img);grid.append(anchor);
+  });
+  gallery.append(grid);
+  heading.insertAdjacentElement('afterend',gallery);
+  return true;
+ }
+ const style=document.createElement('style');
+ style.textContent=`
+ #ghl-uploaded-gallery{width:100%;margin:20px 0 30px}
+ .ghl-uploaded-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+ .ghl-uploaded-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:16px;background:#183e28;box-shadow:0 6px 18px rgba(12,52,28,.12)}
+ .ghl-uploaded-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+ .ghl-uploaded-photo:hover img{transform:scale(1.055)}
+ .ghl-uploaded-photo:focus-visible{outline:3px solid #ed9637;outline-offset:3px}
+ @media(max-width:700px){.ghl-uploaded-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}}
+ @media(max-width:420px){.ghl-uploaded-grid{grid-template-columns:1fr}}
+ @media(prefers-reduced-motion:reduce){.ghl-uploaded-photo img{transition:none}}
+ `;
+ document.head.append(style);
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installGallery,{once:true});
+ else installGallery();
+ const watcher=new MutationObserver(()=>{if(installGallery())watcher.disconnect()});
+ watcher.observe(document.documentElement,{childList:true,subtree:true});
+})();
