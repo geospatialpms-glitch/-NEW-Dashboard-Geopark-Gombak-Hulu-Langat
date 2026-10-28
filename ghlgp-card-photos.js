@@ -60,7 +60,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 (function(){
  const paths=Array.from({length:9},(_,i)=>String(i+1)+'.png');
  const normalized=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+ function removeSeparateGrid(){
+  // Remove only the gallery-grid added by the previous update; preserve other galleries.
+  document.querySelectorAll('#ghl-uploaded-gallery, .ghl-uploaded-grid').forEach(el=>{
+   if(el.id==='ghl-uploaded-gallery'||el.classList.contains('ghl-uploaded-grid'))el.remove();
+  });
+  document.getElementById('ghl-uploaded-style')?.remove();
+ }
  function locate(){
+  removeSeparateGrid();
   // Match the slideshow's existing central archival notice, not the main page heading.
   const nodes=[...document.querySelectorAll('div,p,span,small,strong,h1,h2,h3,h4')];
   const notice=nodes.find(n=>n.children.length===0 && /gambar arkib batu arang masih perlu dimuat naik/i.test(n.textContent||''));
@@ -99,6 +107,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
  }
  function setup(){
+  removeSeparateGrid();
   locate();
   let pending=false;
   const observer=new MutationObserver(()=>{
