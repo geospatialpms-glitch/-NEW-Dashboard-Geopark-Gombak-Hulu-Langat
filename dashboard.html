@@ -1612,7 +1612,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
           <img src="apa-itu-geopark.png" alt="Apa Itu Geopark?" loading="lazy">
         </div>
 
-        <div class="about-card full">
+        <div class="about-card full geopark-panorama-section">
           <h3 class="geopark-eight-heading">8 Komponen Geopark</h3>
           <p style="margin-bottom:10px">Geopark merupakan gagasan pembangunan (bukan perlindungan) yang tidak memerlukan perundangan atau pewartaan dan sentiasa menghormati hak dan bidang kuasa kerajaan negeri dan negara.</p>
           <div class="component-grid">
@@ -2900,6 +2900,69 @@ document.addEventListener('DOMContentLoaded',function(){
 @media(prefers-reduced-motion:reduce){
  #section-about button.ghl-outline[data-ghl-original="aboutGeoparkBtn"],
  #section-kronologi button.ghl-outline[data-ghl-original="chronologyBtn"]{transition:none!important}
+}
+</style>
+
+<style id="ghlgp-eight-panorama-20261028">
+/* Panorama & kad kaca seperti Sorotan Tentang GHL Geopark.
+   Jika panorama baharu belum berada dalam GitHub, paparkan gambar geopark sedia ada. */
+#aboutGeoparkModal .about-card.geopark-panorama-section{
+ position:relative!important;isolation:isolate!important;
+ padding:clamp(28px,4vw,58px) clamp(18px,3vw,48px)!important;
+ border:0!important;border-radius:18px!important;overflow:hidden!important;
+ background-image:linear-gradient(180deg,rgba(0,47,39,.43),rgba(0,39,31,.76)),
+ url("geopark-panorama-8-komponen.jpg"),
+ url("jejak-geologi-kad.webp")!important;
+ background-size:cover,cover,cover!important;
+ background-position:center,center 45%,center!important;
+ background-repeat:no-repeat!important;
+ box-shadow:0 14px 34px rgba(6,46,30,.19)!important;
+}
+#aboutGeoparkModal .geopark-panorama-section>h3.geopark-eight-heading{
+ color:#fff!important;text-align:center!important;
+ font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(28px,3.1vw,43px)!important;margin:0 auto 14px!important;
+ text-shadow:0 2px 12px #05291b99!important;
+}
+#aboutGeoparkModal .geopark-panorama-section>p{
+ color:#fff!important;text-align:center!important;
+ max-width:950px!important;margin:0 auto 30px!important;
+ font-size:13px!important;line-height:1.7!important;
+ text-shadow:0 1px 6px #002b24d9!important;
+}
+#aboutGeoparkModal .geopark-panorama-section .component-grid{
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:18px!important;margin:0 auto!important;
+}
+#aboutGeoparkModal .geopark-panorama-section .component-grid>.component-item,
+#aboutGeoparkModal .geopark-panorama-section .component-grid>.component-item:nth-child(odd),
+#aboutGeoparkModal .geopark-panorama-section .component-grid>.component-item:nth-child(even){
+ background:rgba(255,255,255,.76)!important;
+ backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+ border:1px solid rgba(255,255,255,.84)!important;
+ box-shadow:0 6px 22px rgba(1,28,21,.18)!important;
+ min-height:175px!important;
+}
+#aboutGeoparkModal .geopark-panorama-section .component-grid>.component-item:hover{
+ transform:translateY(-5px)!important;
+ background:rgba(255,255,255,.91)!important;
+ box-shadow:0 0 0 2px #d4e99f80,0 15px 28px #00251f5c!important;
+}
+#aboutGeoparkModal .geopark-panorama-section .component-item .component-label{
+ color:#084d3a!important;font-weight:700!important;
+}
+@media(max-width:1100px){
+ #aboutGeoparkModal .geopark-panorama-section .component-grid{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px){
+ #aboutGeoparkModal .geopark-panorama-section .component-grid{
+ grid-template-columns:1fr!important;gap:12px!important}
+ #aboutGeoparkModal .geopark-panorama-section .component-grid>.component-item{
+ min-height:130px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #aboutGeoparkModal .geopark-panorama-section .component-item{transition:none!important}
 }
 </style>
 </body></html>
