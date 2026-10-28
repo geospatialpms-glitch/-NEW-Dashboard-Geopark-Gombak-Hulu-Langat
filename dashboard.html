@@ -2652,4 +2652,68 @@ document.addEventListener('DOMContentLoaded',function(){
  #jejakFrame:not(.jejak-show-detail)>.jejak-frame-image{border-radius:11px!important}
 }
 </style>
+
+<style id="ghlgp-mockup-pilihan-jejak-hover-20261028">
+/* Kesan mockup HTML: kad terangkat, border cahaya dan CTA bertukar putih.
+   Pautan Teroka Jejak sahaja boleh diklik; kad tidak dijadikan butang. */
+#section-jejak .ghl-trail-card{
+ position:relative!important;cursor:default!important;
+ border:2px solid rgba(176,214,105,.5)!important;
+ box-shadow:0 7px 18px rgba(0,43,30,.14)!important;
+ transform:translateY(0)!important;
+ transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease!important;
+}
+#section-jejak .ghl-trail-card:nth-child(2){border-color:rgba(245,181,83,.5)!important}
+#section-jejak .ghl-trail-card:nth-child(3){border-color:rgba(242,138,98,.5)!important}
+#section-jejak .ghl-trail-card::after{
+ content:""!important;position:absolute!important;left:0!important;right:0!important;bottom:0!important;
+ height:4px!important;background:#b0d669!important;z-index:3!important;pointer-events:none!important;
+}
+#section-jejak .ghl-trail-card:nth-child(2)::after{background:#f5b553!important}
+#section-jejak .ghl-trail-card:nth-child(3)::after{background:#f28a62!important}
+#section-jejak .ghl-trail-card:hover,
+#section-jejak .ghl-trail-card:focus-within{
+ transform:translateY(-8px)!important;
+ border-color:#e7f3b4!important;
+ box-shadow:0 0 0 2px rgba(176,214,105,.22),0 20px 38px rgba(0,36,25,.33)!important;
+}
+#section-jejak .ghl-trail-card:nth-child(2):hover,
+#section-jejak .ghl-trail-card:nth-child(2):focus-within{
+ border-color:#f5b553!important;box-shadow:0 0 0 2px #f5b5533b,0 20px 38px #372a1559!important;
+}
+#section-jejak .ghl-trail-card:nth-child(3):hover,
+#section-jejak .ghl-trail-card:nth-child(3):focus-within{
+ border-color:#f28a62!important;box-shadow:0 0 0 2px #f28a623b,0 20px 38px #251b1b59!important;
+}
+#section-jejak .ghl-trail-card img{
+ transition:transform .38s ease,filter .38s ease!important;
+}
+#section-jejak .ghl-trail-card:hover img,
+#section-jejak .ghl-trail-card:focus-within img{
+ transform:scale(1.045)!important;filter:saturate(1.1) brightness(1.06)!important;
+}
+#section-jejak .ghl-trail-card a{
+ position:relative!important;z-index:5!important;
+ transition:transform .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease!important;
+}
+#section-jejak .ghl-trail-card a:hover,
+#section-jejak .ghl-trail-card a:focus-visible{
+ background:#fff!important;color:#14583e!important;
+ transform:translateY(-2px)!important;
+ box-shadow:0 0 0 3px #f3ffcb91,0 5px 20px #063e2d65!important;
+ outline:none!important;
+}
+/* Pilihan dalam gambar jejak: highlight bercahaya seperti butang mockup. */
+#jejakFrame:not(.jejak-show-detail) .jejak-frame-hotspot:hover,
+#jejakFrame:not(.jejak-show-detail) .jejak-frame-hotspot:focus-visible{
+ border-color:#e6f8b6!important;box-shadow:0 0 0 3px #b0d66966,0 0 22px 7px #a4cc5fa6!important;
+}
+@media(hover:none){
+ #section-jejak .ghl-trail-card:hover{transform:none!important;box-shadow:0 7px 18px rgba(0,43,30,.14)!important}
+ #section-jejak .ghl-trail-card:hover img{transform:none!important;filter:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #section-jejak .ghl-trail-card,#section-jejak .ghl-trail-card img,#section-jejak .ghl-trail-card a{transition:none!important}
+}
+</style>
 </body></html>
