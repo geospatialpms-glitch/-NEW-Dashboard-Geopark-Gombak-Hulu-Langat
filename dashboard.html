@@ -2965,4 +2965,21 @@ document.addEventListener('DOMContentLoaded',function(){
  #aboutGeoparkModal .geopark-panorama-section .component-item{transition:none!important}
 }
 </style>
+
+<style id="ghlgp-persetujuan-no-outer-card-20261028">
+/* Buang hanya kad/bingkai luar di belakang infografik Persetujuan Pihak Berkuasa Negeri. */
+#chronologyModal figure.kronologi-infografik,
+#chronologyModal .kronologi-intro-layout>.kronologi-infografik,
+#chronologyModal .kronologi-cards-layout>.kronologi-infografik{
+ background:transparent!important;background-image:none!important;border:0!important;
+ box-shadow:none!important;outline:0!important;padding:0!important;
+ border-radius:0!important;filter:none!important;
+}
+#chronologyModal figure.kronologi-infografik::before,
+#chronologyModal figure.kronologi-infografik::after{content:none!important;display:none!important}
+#chronologyModal figure.kronologi-infografik img{
+ display:block!important;margin:0 auto!important;max-width:100%!important;height:auto!important;
+ box-shadow:none!important;border:0!important;
+}
+</style>
 </body></html>
