@@ -2628,4 +2628,28 @@ document.addEventListener('DOMContentLoaded',function(){
 }
 @media(prefers-reduced-motion:reduce){#jejakFrame .jejak-frame-hotspot,#jejakFrameBack{transition:none!important}}
 </style>
+
+<style id="ghlgp-jejak-no-outer-card-20261028">
+/* Pilihan Jejak: buang kad luar putih dan satukan dengan latar topografi. */
+#jejakFrame:not(.jejak-show-detail){
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;padding:0!important;margin:0 0 18px!important;
+ overflow:visible!important;
+}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-head{
+ margin:0 0 18px!important;padding:20px 12px 18px!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-image{
+ width:100%!important;margin:0!important;border-radius:15px!important;
+ overflow:hidden!important;box-shadow:0 7px 22px rgba(14,63,43,.09)!important;
+}
+#jejakFrame:not(.jejak-show-detail)>.jejak-frame-source{margin:8px 2px 0!important}
+@media(max-width:700px){
+ #jejakFrame:not(.jejak-show-detail)>.jejak-frame-head{
+ margin:0 0 13px!important;padding:14px 3px!important;
+ }
+ #jejakFrame:not(.jejak-show-detail)>.jejak-frame-image{border-radius:11px!important}
+}
+</style>
 </body></html>
