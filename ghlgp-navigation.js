@@ -42,35 +42,52 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Repair only the two informational-modal to interactive-map paths.
-   A fresh dashboard document restores native map/chart/list initialization,
-   avoiding hidden panels and map overlays left behind by modal state. */
+/* Two modal-to-map routes: reuse native sidebar click logic, never navigate away. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- let informationalView=false;
+ let lastInfo=false, replaying=false;
  sidebar.addEventListener('click',event=>{
-   const button=event.target.closest('button,a,[role="button"]');
-   if(!button)return;
-   const label=(button.textContent||'').replace(/\\s+/g,' ').trim().toLowerCase();
-   if(label==='apa itu geopark?'||label==='kronologi'){
-     informationalView=true;
-     return;
+  const button=event.target.closest('button,a,[role="button"]');
+  if(!button)return;
+  const label=(button.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+  if(label==='apa itu geopark?'||label==='kronologi'){
+   lastInfo=true;
+   return;
+  }
+  if(label!=='peta interaktif'){lastInfo=false;return}
+  if(replaying){replaying=false;lastInfo=false;return}
+  const visibleModals=['aboutModal','chronologyModal'].map(id=>document.getElementById(id)).filter(modal=>{
+   if(!modal)return false;
+   const s=getComputedStyle(modal);
+   return s.display!=='none'&&s.visibility!=='hidden';
+  });
+  if(!lastInfo&&!visibleModals.length)return;
+  // Cancel this one click while the information modal closes; retry the SAME
+  // button afterwards so its own original handler runs just like other sidebar links.
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  for(const modal of visibleModals){
+   const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
+   if(close)close.click();
+   if(getComputedStyle(modal).display!=='none'){
+    modal.classList.remove('open','active','show');
+    modal.style.display='none';
+    modal.setAttribute('aria-hidden','true');
    }
-   if(label!=='peta interaktif')return;
-   const modalIsVisible=['aboutModal','chronologyModal'].some(id=>{
-     const element=document.getElementById(id);
-     if(!element)return false;
-     const style=getComputedStyle(element);
-     return style.display!=='none'&&style.visibility!=='hidden';
-   });
-   if(!informationalView&&!modalIsVisible)return;
-   informationalView=false;
-   event.preventDefault();
-   event.stopImmediatePropagation();
-   // A hard navigation is deliberately scoped to these two failing transitions only.
-   // It rebuilds the original dashboard rather than forcing modal/panel display styles.
-   const destination=new URL('dashboard.html#utama',document.baseURI);
-   window.location.assign(destination.href);
+  }
+  document.body.classList.remove('modal-open','overflow-hidden');
+  if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
+  if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
+  replaying=true;
+  requestAnimationFrame(()=>{
+   button.click();
+   setTimeout(()=>{
+    window.dispatchEvent(new Event('resize'));
+    for(const key of ['map','leafletMap','mapInstance','geoMap']){
+     try{window[key]?.invalidateSize?.()}catch(e){}
+    }
+   },250);
+  });
  },true);
 });
