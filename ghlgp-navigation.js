@@ -1,3 +1,6 @@
+/* G31: update only the geotapak description used by the native Info Lanjut popup. */
+if(typeof GEOTAPAK_INFO_PDF!=='undefined') GEOTAPAK_INFO_PDF.G31="Geotapak hasilan aktiviti manusia atau antropogenik ini terbentuk melalui proses penggerudian. Jumlah air panas yang keluar daripada telaga berkedalaman 160 kaki ini direkodkan sebagai yang terbanyak di Malaysia dengan suhu di antara 47-49°C. Pembentukan air panas ini dikaitkan dengan kemasukan air permukaan melalui siri retakan yang wujud selaras dengan sesar Kuala Lumpur dan Bukit Tinggi yang dipanaskan berdekatan dengan perut bumi. Air panas ini terperangkap di bawah lapisan batuan granit dan penggerudian melepaskan air yang terperangkap ke permukaan. Pada masa ini kawasan geotapak merupakan kawasan wakaf untuk tujuan masjid namun jangka masa panjang adalah pembangunan pelancongan berasaskan mata air panas dan juga kegunaan komuniti setempat.";
+
 /* Dashboard GHLGp navigation: avoid overriding original modal/trail click handlers. */
 document.addEventListener('DOMContentLoaded',()=>{
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
