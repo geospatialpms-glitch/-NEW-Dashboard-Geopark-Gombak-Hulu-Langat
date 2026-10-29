@@ -42,40 +42,35 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Fix only About/Kronologi -> Peta Interaktif.
-   Close the two overlays BEFORE native sidebar click handlers run.
-   Never cancel the click, simulate Utama, move the map or change section display. */
+/* Repair only the two informational-modal to interactive-map paths.
+   A fresh dashboard document restores native map/chart/list initialization,
+   avoiding hidden panels and map overlays left behind by modal state. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
+ let informationalView=false;
  sidebar.addEventListener('click',event=>{
-  const target=event.target.closest('button,a,[role="button"]');
-  if(!target||!/peta\\s*interaktif/i.test(target.textContent||''))return;
-  const modals=['aboutModal','chronologyModal']
-   .map(id=>document.getElementById(id)).filter(Boolean);
-  let closed=false;
-  for(const modal of modals){
-   const css=getComputedStyle(modal);
-   if(css.display==='none'||css.visibility==='hidden')continue;
-   const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
-   if(close)close.click();
-   if(getComputedStyle(modal).display!=='none'){
-    modal.classList.remove('open','active','show');
-    modal.style.display='none';
-    modal.setAttribute('aria-hidden','true');
+   const button=event.target.closest('button,a,[role="button"]');
+   if(!button)return;
+   const label=(button.textContent||'').replace(/\\s+/g,' ').trim().toLowerCase();
+   if(label==='apa itu geopark?'||label==='kronologi'){
+     informationalView=true;
+     return;
    }
-   closed=true;
-  }
-  if(!closed)return;
-  document.body.classList.remove('modal-open','overflow-hidden');
-  if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
-  if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
-  // After the original map button handler has run, refresh the map geometry.
-  setTimeout(()=>{
-   window.dispatchEvent(new Event('resize'));
-   for(const key of ['map','leafletMap','mapInstance','geoMap']){
-    try{window[key]?.invalidateSize?.()}catch(e){}
-   }
-  },250);
+   if(label!=='peta interaktif')return;
+   const modalIsVisible=['aboutModal','chronologyModal'].some(id=>{
+     const element=document.getElementById(id);
+     if(!element)return false;
+     const style=getComputedStyle(element);
+     return style.display!=='none'&&style.visibility!=='hidden';
+   });
+   if(!informationalView&&!modalIsVisible)return;
+   informationalView=false;
+   event.preventDefault();
+   event.stopImmediatePropagation();
+   // A hard navigation is deliberately scoped to these two failing transitions only.
+   // It rebuilds the original dashboard rather than forcing modal/panel display styles.
+   const destination=new URL('dashboard.html#utama',document.baseURI);
+   window.location.assign(destination.href);
  },true);
 });
