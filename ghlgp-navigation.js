@@ -42,36 +42,40 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Fix map navigation after About Geopark and Chronology modal views. */
+/* Recover the original Peta Interaktif route from modal pages. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- const isMapButton=el=>{
-  const text=(el.textContent||el.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim().toLowerCase();
-  return text==='peta interaktif'||el.dataset.ghlGo==='peta-interaktif';
- };
  sidebar.addEventListener('click',event=>{
-  const button=event.target.closest('button,a,[role="button"]');
-  if(!button||!isMapButton(button))return;
-  // Close only open informational modals; leave the map and original page intact.
-  for(const modal of document.querySelectorAll('#aboutModal,#chronologyModal,.geo-modal')){
-   if(modal.matches('.open,.active,[aria-hidden="false"]')||getComputedStyle(modal).display!=='none'){
-    const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
-    if(close)close.click();
-    else{
-     modal.classList.remove('open','active','show');
-     modal.setAttribute('aria-hidden','true');
-     modal.style.display='none';
-    }
+  const btn=event.target.closest('button,a,[role="button"]');
+  if(!btn||!(/peta\s*interaktif/i.test(btn.textContent||'')||btn.dataset.ghlGo==='peta-interaktif'))return;
+  // Informational overlays often lock the whole document and intercept navigation.
+  const activeModals=[...document.querySelectorAll('#aboutModal,#chronologyModal,.geo-modal,[role="dialog"]')].filter(el=>{
+   const css=getComputedStyle(el);
+   return css.display!=='none'&&css.visibility!=='hidden';
+  });
+  activeModals.forEach(modal=>{
+   const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
+   if(close)close.click();
+   if(getComputedStyle(modal).display!=='none'){
+    modal.classList.remove('open','active','show');
+    modal.style.display='none';
+    modal.setAttribute('aria-hidden','true');
    }
-  }
-  // Follow original navigation if it works; only restore the visible map section.
-  requestAnimationFrame(()=>{
+  });
+  document.body.classList.remove('modal-open','overflow-hidden');
+  if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
+  if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
+  if(typeof window.closeJejakFrame==='function')window.closeJejakFrame();
+  const main=document.getElementById('utama');
+  if(main)main.classList.remove('jejak-frame-active');
+  // Delegate to the native map navigation first. The fallback targets its section only.
+  setTimeout(()=>{
    const map=document.querySelector('.leaflet-container');
    if(!map)return;
-   const container=map.closest('section')||map;
-   if(container.getBoundingClientRect().height>0)container.scrollIntoView({behavior:'smooth',block:'start'});
+   const section=map.closest('section')||map;
+   section.scrollIntoView({behavior:'smooth',block:'start'});
    window.dispatchEvent(new Event('resize'));
-  });
+  },100);
  },true);
 });
