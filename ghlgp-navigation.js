@@ -42,38 +42,40 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Only repair the two modal-to-map routes; leave all other navigation untouched. */
+/* Fix only About/Kronologi -> Peta Interaktif.
+   Close the two overlays BEFORE native sidebar click handlers run.
+   Never cancel the click, simulate Utama, move the map or change section display. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- const visible=el=>el && getComputedStyle(el).display!=='none' && getComputedStyle(el).visibility!=='hidden';
  sidebar.addEventListener('click',event=>{
-  const btn=event.target.closest('button,a,[role="button"]');
-  if(!btn||!/peta\s*interaktif/i.test(btn.textContent||''))return;
-  const opened=['aboutModal','chronologyModal'].map(id=>document.getElementById(id)).filter(visible);
-  if(!opened.length)return; // native map navigation remains unchanged in all other cases
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  for(const modal of opened){
+  const target=event.target.closest('button,a,[role="button"]');
+  if(!target||!/peta\\s*interaktif/i.test(target.textContent||''))return;
+  const modals=['aboutModal','chronologyModal']
+   .map(id=>document.getElementById(id)).filter(Boolean);
+  let closed=false;
+  for(const modal of modals){
+   const css=getComputedStyle(modal);
+   if(css.display==='none'||css.visibility==='hidden')continue;
    const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
    if(close)close.click();
-   modal.classList.remove('open','active','show');
-   modal.style.display='none';
-   modal.setAttribute('aria-hidden','true');
+   if(getComputedStyle(modal).display!=='none'){
+    modal.classList.remove('open','active','show');
+    modal.style.display='none';
+    modal.setAttribute('aria-hidden','true');
+   }
+   closed=true;
   }
+  if(!closed)return;
   document.body.classList.remove('modal-open','overflow-hidden');
-  document.body.style.removeProperty('overflow');
-  document.documentElement.style.removeProperty('overflow');
-  // Return through the original dashboard view action, then locate the actual map.
-  const homeButton=[...sidebar.querySelectorAll('button,a,[role="button"]')].find(el=>(el.textContent||'').trim().toLowerCase()==='utama');
-  homeButton?.click();
-  requestAnimationFrame(()=>{
-   const main=document.getElementById('utama');
-   const map=main?.querySelector('.leaflet-container')||document.querySelector('.leaflet-container');
-   const section=map?.closest('section')||main;
-   if(section) section.scrollIntoView({behavior:'smooth',block:'start'});
-   document.querySelectorAll('.sidebar .navbtn').forEach(el=>el.classList.toggle('active',el===btn));
+  if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
+  if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
+  // After the original map button handler has run, refresh the map geometry.
+  setTimeout(()=>{
    window.dispatchEvent(new Event('resize'));
-  });
+   for(const key of ['map','leafletMap','mapInstance','geoMap']){
+    try{window[key]?.invalidateSize?.()}catch(e){}
+   }
+  },250);
  },true);
 });
