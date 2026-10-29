@@ -42,55 +42,38 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Recover the two information-modal -> native map routes only.
-   No synthetic clicks, no page reload and no forced panel styling. */
+/* Fix only About Geopark / Chronology -> Peta Interaktif.
+   Original HTML uses #aboutGeoparkModal and #chronologyModal; the destination is #taburan.
+   Close them through their native close buttons before the existing data-ghl-go handler. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- let fromInfo=false;
- const normalize=value=>(value||'').replace(/\\s+/g,' ').trim().toLowerCase();
- function closeInfo(){
+ const routes=[
+  ['aboutGeoparkModal','aboutGeoparkClose'],
+  ['chronologyModal','chronologyClose']
+ ];
+ sidebar.addEventListener('click',event=>{
+  const button=event.target.closest('[data-ghl-go="taburan"]');
+  if(!button||!sidebar.contains(button))return;
   let closed=false;
-  for(const id of ['aboutModal','chronologyModal']){
-   const modal=document.getElementById(id);
-   if(!modal)continue;
-   const style=getComputedStyle(modal);
-   if(style.display==='none'||style.visibility==='hidden')continue;
-   const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
+  for(const [modalId,closeId] of routes){
+   const modal=document.getElementById(modalId);
+   if(!modal||!modal.classList.contains('open'))continue;
+   const close=document.getElementById(closeId);
    if(close)close.click();
-   if(getComputedStyle(modal).display!=='none'){
-    modal.classList.remove('show','open','active');
-    modal.style.display='none';
+   else{
+    modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
    }
    closed=true;
   }
-  if(closed){
-   document.body.classList.remove('modal-open','overflow-hidden');
-   if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
-   if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
-  }
- }
- function handle(event){
-  const btn=event.target.closest('button,a,[role="button"]');
-  if(!btn||!sidebar.contains(btn))return;
-  const label=normalize(btn.textContent||btn.getAttribute('aria-label'));
-  if(label.includes('apa itu geopark')||label.includes('kronologi')){fromInfo=true;return}
-  if(!label.includes('peta interaktif')){fromInfo=false;return}
-  if(!fromInfo)return;
-  closeInfo();
-  fromInfo=false;
-  // Let the dashboard's own click handler perform the view transition.
-  // Only refresh map sizing after that handler runs.
-  setTimeout(()=>{
+  if(!closed)return;
+  // The normal sidebar click still scrolls to #taburan; do not cancel or replay it.
+  const destination=document.getElementById('taburan');
+  requestAnimationFrame(()=>{
+   if(destination)destination.scrollIntoView({behavior:'smooth',block:'start'});
+   document.querySelectorAll('.sidebar .navbtn').forEach(nav=>nav.classList.toggle('active',nav===button));
    window.dispatchEvent(new Event('resize'));
-   for(const key of ['map','leafletMap','mapInstance','geoMap']){
-    try{window[key]?.invalidateSize?.()}catch(e){}
-   }
-  },300);
- }
- // Pointerdown runs before the native click, so the modal closes in time.
- sidebar.addEventListener('pointerdown',handle,true);
- // Keyboard activation has no pointerdown.
- sidebar.addEventListener('click',handle,true);
+  });
+ },true);
 });
