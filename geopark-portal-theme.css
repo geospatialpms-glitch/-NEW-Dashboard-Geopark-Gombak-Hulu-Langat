@@ -292,3 +292,6 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  #chronologyModal .ghl-chrono-hero-text h2{font-size:48px!important}
  #chronologyModal .ghl-chrono-hero-text h3{font-size:27px!important}
 }
+
+/* Hide only the bottom sidebar slogan, preserve sidebar background and navigation. */
+.sidebar .sidebar-slogan{display:none!important}
