@@ -42,38 +42,30 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Fix only About Geopark / Chronology -> Peta Interaktif.
-   Original HTML uses #aboutGeoparkModal and #chronologyModal; the destination is #taburan.
-   Close them through their native close buttons before the existing data-ghl-go handler. */
+/* Peta Interaktif after inline About/Kronologi: restore the native dashboard view.
+   The main page CSS hides every non-info child while .inline-page-mode is set. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- const routes=[
-  ['aboutGeoparkModal','aboutGeoparkClose'],
-  ['chronologyModal','chronologyClose']
- ];
  sidebar.addEventListener('click',event=>{
-  const button=event.target.closest('[data-ghl-go="taburan"]');
-  if(!button||!sidebar.contains(button))return;
-  let closed=false;
-  for(const [modalId,closeId] of routes){
-   const modal=document.getElementById(modalId);
-   if(!modal||!modal.classList.contains('open'))continue;
-   const close=document.getElementById(closeId);
-   if(close)close.click();
-   else{
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-   }
-   closed=true;
+  const btn=event.target.closest('[data-ghl-go="taburan"]');
+  if(!btn||!sidebar.contains(btn))return;
+  const main=document.getElementById('utama');
+  if(!main||!main.classList.contains('inline-page-mode'))return;
+  // Mirror the inline-page script's home activation, without changing its other routes.
+  main.classList.remove('inline-page-mode','chronology-mode','jejak-frame-active');
+  for(const id of ['aboutGeoparkModal','chronologyModal']){
+   const panel=document.getElementById(id);
+   if(panel){panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
   }
-  if(!closed)return;
-  // The normal sidebar click still scrolls to #taburan; do not cancel or replay it.
-  const destination=document.getElementById('taburan');
+  const frame=document.getElementById('jejakFrame');
+  if(frame)frame.hidden=true;
+  // Allow normal data-ghl-go="taburan" listener to scroll to the restored dashboard.
   requestAnimationFrame(()=>{
-   if(destination)destination.scrollIntoView({behavior:'smooth',block:'start'});
-   document.querySelectorAll('.sidebar .navbtn').forEach(nav=>nav.classList.toggle('active',nav===button));
+   document.getElementById('taburan')?.scrollIntoView({behavior:'smooth',block:'start'});
+   document.querySelectorAll('.sidebar .navbtn').forEach(el=>el.classList.toggle('active',el===btn));
    window.dispatchEvent(new Event('resize'));
+   try{if(typeof map!=='undefined'&&map.invalidateSize)map.invalidateSize(true)}catch(e){}
   });
  },true);
 });
