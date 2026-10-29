@@ -40,3 +40,38 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
   // Card links go to detailed trail pages; never hijack those links.
 });
+
+
+/* Fix map navigation after About Geopark and Chronology modal views. */
+document.addEventListener('DOMContentLoaded',()=>{
+ const sidebar=document.querySelector('.sidebar');
+ if(!sidebar)return;
+ const isMapButton=el=>{
+  const text=(el.textContent||el.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim().toLowerCase();
+  return text==='peta interaktif'||el.dataset.ghlGo==='peta-interaktif';
+ };
+ sidebar.addEventListener('click',event=>{
+  const button=event.target.closest('button,a,[role="button"]');
+  if(!button||!isMapButton(button))return;
+  // Close only open informational modals; leave the map and original page intact.
+  for(const modal of document.querySelectorAll('#aboutModal,#chronologyModal,.geo-modal')){
+   if(modal.matches('.open,.active,[aria-hidden="false"]')||getComputedStyle(modal).display!=='none'){
+    const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
+    if(close)close.click();
+    else{
+     modal.classList.remove('open','active','show');
+     modal.setAttribute('aria-hidden','true');
+     modal.style.display='none';
+    }
+   }
+  }
+  // Follow original navigation if it works; only restore the visible map section.
+  requestAnimationFrame(()=>{
+   const map=document.querySelector('.leaflet-container');
+   if(!map)return;
+   const container=map.closest('section')||map;
+   if(container.getBoundingClientRect().height>0)container.scrollIntoView({behavior:'smooth',block:'start'});
+   window.dispatchEvent(new Event('resize'));
+  });
+ },true);
+});
