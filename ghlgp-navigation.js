@@ -42,52 +42,55 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-/* Two modal-to-map routes: reuse native sidebar click logic, never navigate away. */
+/* Recover the two information-modal -> native map routes only.
+   No synthetic clicks, no page reload and no forced panel styling. */
 document.addEventListener('DOMContentLoaded',()=>{
  const sidebar=document.querySelector('.sidebar');
  if(!sidebar)return;
- let lastInfo=false, replaying=false;
- sidebar.addEventListener('click',event=>{
-  const button=event.target.closest('button,a,[role="button"]');
-  if(!button)return;
-  const label=(button.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
-  if(label==='apa itu geopark?'||label==='kronologi'){
-   lastInfo=true;
-   return;
-  }
-  if(label!=='peta interaktif'){lastInfo=false;return}
-  if(replaying){replaying=false;lastInfo=false;return}
-  const visibleModals=['aboutModal','chronologyModal'].map(id=>document.getElementById(id)).filter(modal=>{
-   if(!modal)return false;
-   const s=getComputedStyle(modal);
-   return s.display!=='none'&&s.visibility!=='hidden';
-  });
-  if(!lastInfo&&!visibleModals.length)return;
-  // Cancel this one click while the information modal closes; retry the SAME
-  // button afterwards so its own original handler runs just like other sidebar links.
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  for(const modal of visibleModals){
+ let fromInfo=false;
+ const normalize=value=>(value||'').replace(/\\s+/g,' ').trim().toLowerCase();
+ function closeInfo(){
+  let closed=false;
+  for(const id of ['aboutModal','chronologyModal']){
+   const modal=document.getElementById(id);
+   if(!modal)continue;
+   const style=getComputedStyle(modal);
+   if(style.display==='none'||style.visibility==='hidden')continue;
    const close=modal.querySelector('[data-close],.geo-modal-close,.modal-close,[aria-label="Tutup"],[aria-label="Close"]');
    if(close)close.click();
    if(getComputedStyle(modal).display!=='none'){
-    modal.classList.remove('open','active','show');
+    modal.classList.remove('show','open','active');
     modal.style.display='none';
     modal.setAttribute('aria-hidden','true');
    }
+   closed=true;
   }
-  document.body.classList.remove('modal-open','overflow-hidden');
-  if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
-  if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
-  replaying=true;
-  requestAnimationFrame(()=>{
-   button.click();
-   setTimeout(()=>{
-    window.dispatchEvent(new Event('resize'));
-    for(const key of ['map','leafletMap','mapInstance','geoMap']){
-     try{window[key]?.invalidateSize?.()}catch(e){}
-    }
-   },250);
-  });
- },true);
+  if(closed){
+   document.body.classList.remove('modal-open','overflow-hidden');
+   if(document.body.style.overflow==='hidden')document.body.style.removeProperty('overflow');
+   if(document.documentElement.style.overflow==='hidden')document.documentElement.style.removeProperty('overflow');
+  }
+ }
+ function handle(event){
+  const btn=event.target.closest('button,a,[role="button"]');
+  if(!btn||!sidebar.contains(btn))return;
+  const label=normalize(btn.textContent||btn.getAttribute('aria-label'));
+  if(label.includes('apa itu geopark')||label.includes('kronologi')){fromInfo=true;return}
+  if(!label.includes('peta interaktif')){fromInfo=false;return}
+  if(!fromInfo)return;
+  closeInfo();
+  fromInfo=false;
+  // Let the dashboard's own click handler perform the view transition.
+  // Only refresh map sizing after that handler runs.
+  setTimeout(()=>{
+   window.dispatchEvent(new Event('resize'));
+   for(const key of ['map','leafletMap','mapInstance','geoMap']){
+    try{window[key]?.invalidateSize?.()}catch(e){}
+   }
+  },300);
+ }
+ // Pointerdown runs before the native click, so the modal closes in time.
+ sidebar.addEventListener('pointerdown',handle,true);
+ // Keyboard activation has no pointerdown.
+ sidebar.addEventListener('click',handle,true);
 });
