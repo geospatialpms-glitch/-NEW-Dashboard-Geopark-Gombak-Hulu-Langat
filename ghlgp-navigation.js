@@ -229,3 +229,20 @@ document.addEventListener('DOMContentLoaded',()=>{
  enhanced.__ghlMockup=true;
  window.openGeotapakInfo=enhanced;
 });
+
+/* Gallery control: icon-only pause/play without modifying the 5-second timer. */
+document.addEventListener('DOMContentLoaded',()=>{
+ const play=document.getElementById('ghlGalleryPlay');
+ if(!play)return;
+ const sync=()=>{
+  const label=play.textContent||'';
+  const isPause=/Jeda|Ⅱ|❚❚/.test(label);
+  const icon=isPause?'Ⅱ':'▶';
+  play.setAttribute('aria-label',isPause?'Jeda Slideshow':'Main Slideshow');
+  play.setAttribute('title',isPause?'Jeda Slideshow':'Main Slideshow');
+  play.setAttribute('aria-pressed',String(!isPause));
+  if(label!==icon)play.textContent=icon;
+ };
+ new MutationObserver(sync).observe(play,{childList:true,characterData:true,subtree:true});
+ sync();
+});
