@@ -392,29 +392,30 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  }
 }
 
-/* Restore original interactive spotlight on chronology and Jejak cards. */
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
- #utama .ghl-trail-cards>.ghl-trail-card,
- #utama .ghl-years>article{
-  transition:transform .3s ease,filter .3s ease,box-shadow .3s ease,border-color .3s ease!important;
-  transform-origin:center center;
- }
- #utama .ghl-trail-cards:hover>.ghl-trail-card:not(:hover),
- #utama .ghl-years:hover>article:not(:hover){
-  transform:scale(.965)!important;
-  filter:saturate(.88) brightness(.92);
- }
- #utama .ghl-trail-cards>.ghl-trail-card:hover{
-  transform:translateY(-7px) scale(1.025)!important;
-  filter:brightness(1.06) saturate(1.1)!important;
-  box-shadow:0 18px 40px rgba(5,66,42,.24),0 0 0 2px rgba(176,223,92,.48)!important;
-  z-index:2;
- }
- #utama .ghl-years>article:hover{
-  transform:translateY(-6px) scale(1.025)!important;
-  filter:none!important;
-  border-color:#a1c68f!important;
-  box-shadow:0 16px 35px rgba(8,75,48,.15)!important;
-  position:relative;z-index:2;
- }
+/* Match the existing Jumlah Geotapak KPI hover glow on both card groups. */
+#utama .ghl-years > article,
+#utama .ghl-trail-cards > .ghl-trail-card{
+ --ghl-card-glow:#64af42;
+ position:relative;
+ transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important;
+}
+#utama .ghl-years > article:hover,
+#utama .ghl-trail-cards > .ghl-trail-card:hover{
+ transform:translateY(-5px)!important;
+ border-color:var(--ghl-card-glow)!important;
+ box-shadow:0 0 0 2px color-mix(in srgb,var(--ghl-card-glow) 18%,transparent),
+            0 0 22px color-mix(in srgb,var(--ghl-card-glow) 27%,transparent),
+            0 14px 28px #0b47251e!important;
+ filter:none!important;
+ z-index:2;
+}
+#utama .ghl-years > article:nth-child(2),
+#utama .ghl-trail-cards > .ghl-trail-card:nth-child(2){--ghl-card-glow:#e5a05d}
+#utama .ghl-years > article:nth-child(3),
+#utama .ghl-trail-cards > .ghl-trail-card:nth-child(3){--ghl-card-glow:#79b873}
+@media(prefers-reduced-motion:reduce){
+ #utama .ghl-years > article,#utama .ghl-trail-cards > .ghl-trail-card{transition:none!important}
+}
+@media(hover:none){
+ #utama .ghl-years > article:hover,#utama .ghl-trail-cards > .ghl-trail-card:hover{transform:none!important}
 }
