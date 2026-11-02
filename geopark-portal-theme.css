@@ -545,3 +545,29 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 
 /* Remove only the horizontal divider above Geotapak map popup footer. */
 .leaflet-popup-content .popup-footer{border-top:0!important;padding-top:0!important}
+
+/* Info Lanjut: independent scroll reveal for every geotapak popup. */
+@media(prefers-reduced-motion:no-preference){
+ .geotapak-more-overlay .ghl-more-reveal{
+  transition:opacity .65s cubic-bezier(.2,.7,.2,1),translate .65s cubic-bezier(.2,.7,.2,1)!important;
+  transition-delay:var(--ghl-reveal-delay,0ms)!important;
+  opacity:.15;
+  translate:0 16px;
+ }
+ .geotapak-more-overlay .ghl-more-reveal.ghl-more-revealed{
+  opacity:1;
+  translate:0 0;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .geotapak-more-overlay .ghl-more-reveal{opacity:1!important;translate:none!important;transition:none!important}
+}
+/* Preserve original pixels: no blur, faded overlay, scaling/filter sharpening or forced crop. */
+.geotapak-more-overlay .ghl-more-photo-trigger{background:#eaf2e8!important}
+.geotapak-more-overlay .ghl-more-photo-trigger img{
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:contain!important;object-position:center!important;
+ filter:none!important;opacity:1!important;transform:none!important;
+ image-rendering:auto!important;max-height:none!important;
+}
+.geotapak-more-overlay .ghl-more-lightbox img{filter:none!important;image-rendering:auto!important}
