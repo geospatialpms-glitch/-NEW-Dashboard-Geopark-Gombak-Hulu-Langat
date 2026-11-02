@@ -80,21 +80,9 @@ document.addEventListener('DOMContentLoaded',()=>{
    }
  },true);
  function findStage(){
-   const msg=[...document.querySelectorAll('p,small,span,div')].find(e=>e.children.length===0&&noticeText.test(e.textContent||''));
-   if(!msg)return null;
-   const ancestors=[];for(let e=msg,n=0;e&&n<8;e=e.parentElement,n++)ancestors.push(e);
-   // The native slide stage is the smallest sizeable ancestor of the archive notice.
-   const stage=ancestors.find(e=>{const r=e.getBoundingClientRect();return r.width>=300&&r.height>=220;});
-   if(!stage)return null;
-   // Require its slideshow frame counter in a nearby container. No homepage/hero modification.
-   let wrap=stage;
-   for(let k=0;k<5&&wrap;k++,wrap=wrap.parentElement){
-     const txt=wrap.textContent||'';
-     if(/galeri warisan batu arang/i.test(txt) && /0?[1-9]\s*\/\s*0?9/.test(txt) && wrap.querySelectorAll('button').length>=2){
-       return {stage,wrap};
-     }
-   }
-   return null;
+   const stage=document.querySelector('#section-galeri-ghlgp .ghl-gallery-visual');
+   const wrap=document.querySelector('#section-galeri-ghlgp .ghl-gallery-viewer');
+   return stage&&wrap?{stage,wrap}:null;
  }
  function draw(){
   if(homeSelected){
@@ -122,9 +110,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     surface.className='ghl-gallery-photos-only';
     Object.assign(surface.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none',zIndex:'5',borderRadius:'inherit'});
     stage.append(surface);
-    // Only the old central placeholder is hidden, not the original footer or buttons.
-    const msg=[...stage.querySelectorAll('*')].find(e=>e.children.length===0&&noticeText.test(e.textContent||''));
-    if(msg){let panel=msg;while(panel.parentElement!==stage&&panel.parentElement){panel=panel.parentElement;}panel.style.display='none';}
+    // Native placeholder and fallback photo are hidden by targeted gallery CSS.
   }
   if(index===current||index===pending)return;
   pending=index;
