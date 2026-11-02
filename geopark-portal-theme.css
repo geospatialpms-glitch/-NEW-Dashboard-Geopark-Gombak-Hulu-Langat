@@ -295,3 +295,8 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 
 /* Hide only the bottom sidebar slogan, preserve sidebar background and navigation. */
 .sidebar .sidebar-slogan{display:none!important}
+
+/* Gallery: prevent legacy Jejak Warisan fallback flashing before Batu Arang photo loads. */
+#section-galeri-ghlgp #ghlGalleryPhoto,
+#section-galeri-ghlgp #ghlGalleryEmpty{visibility:hidden!important}
+#section-galeri-ghlgp .ghl-gallery-visual{background:#e4eee6!important}
