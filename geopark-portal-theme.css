@@ -323,3 +323,25 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   border-radius:20px!important;
  }
 }
+
+/* Ensure Jejak Warisan real-photo popup gets the same visible image frame as geology. */
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{
+ position:relative!important;
+ box-sizing:border-box!important;
+ border:6px solid #fff!important;
+ border-radius:23px!important;
+ box-shadow:0 10px 26px rgba(11,68,47,.17)!important;
+ background:#edf3ec!important;
+ overflow:hidden!important;
+}
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo img.heritage-real-img{
+ position:relative!important;
+ inset:auto!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:0!important;
+ max-width:100%!important;
+ object-fit:contain!important;
+ border-radius:16px!important;
+}
