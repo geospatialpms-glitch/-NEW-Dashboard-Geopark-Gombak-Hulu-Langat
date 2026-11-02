@@ -474,3 +474,22 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  width:100%!important;
  height:100%!important;
 }
+
+/* About Geopark and Chronology: smooth on-scroll entrance, no layout shift. */
+@media(prefers-reduced-motion:no-preference){
+ #aboutGeoparkModal .ghl-info-reveal,
+ #chronologyModal .ghl-info-reveal{
+  animation:ghlInfoAppear .7s cubic-bezier(.22,.68,.2,1) both;
+  animation-play-state:paused;
+ }
+ #aboutGeoparkModal .ghl-info-reveal.ghl-info-visible,
+ #chronologyModal .ghl-info-reveal.ghl-info-visible{animation-play-state:running}
+ @keyframes ghlInfoAppear{
+  from{opacity:.7;transform:translate3d(0,20px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #aboutGeoparkModal .ghl-info-reveal,
+ #chronologyModal .ghl-info-reveal{animation:none!important;opacity:1!important;transform:none!important}
+}
