@@ -542,3 +542,6 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 .leaflet-popup-content .popup-footer .popup-tag{margin:0!important}
 .leaflet-popup-content .popup-footer .popup-info-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;border-radius:10px!important;padding:9px 13px!important;white-space:nowrap!important}
 @media(max-width:420px){.leaflet-popup-content .popup-footer{justify-content:center!important}.leaflet-popup-content .popup-footer .popup-tag{flex:0 1 auto}}
+
+/* Remove only the horizontal divider above Geotapak map popup footer. */
+.leaflet-popup-content .popup-footer{border-top:0!important;padding-top:0!important}
