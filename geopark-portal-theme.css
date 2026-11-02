@@ -346,31 +346,10 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  border-radius:16px!important;
 }
 
-/* Jejak grid: remove excessive white card frame; keep imagery, labels and buttons. */
-#geoTrailModal .jejak-panel .jejak-entry{
- background:transparent!important;
+/* Remove only the outer frame around the Jejak view; preserve all individual cards. */
+#jejakFrame{
  border:0!important;
  box-shadow:none!important;
- border-radius:13px!important;
- padding-bottom:12px!important;
- overflow:visible!important;
-}
-#geoTrailModal .jejak-panel .jejak-entry:hover{
- box-shadow:none!important;
- transform:translateY(-3px)!important;
-}
-#geoTrailModal .jejak-panel .jejak-entry .jejak-geology-photo,
-#geoTrailModal .jejak-panel .jejak-entry .jejak-food-photo,
-#geoTrailModal .jejak-panel .jejak-entry .jejak-heritage-photo{
- border-radius:12px!important;
- overflow:hidden!important;
-}
-#geoTrailModal .jejak-panel .jejak-entry .jejak-code{
- margin-left:0!important;
-}
-#geoTrailModal .jejak-panel .jejak-entry>span:not(.jejak-code):not(.jejak-geology-photo):not(.jejak-food-photo):not(.jejak-heritage-photo){
- padding-left:0!important;padding-right:0!important;
-}
-#geoTrailModal .jejak-panel .jejak-entry:after{
- margin-left:0!important;
+ background:transparent!important;
+ border-radius:0!important;
 }
