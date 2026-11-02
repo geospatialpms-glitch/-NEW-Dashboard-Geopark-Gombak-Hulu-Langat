@@ -72,3 +72,39 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
  },true);
 });
+
+/* Gentle, accessible scroll reveal. Only existing content sections/cards.
+   Don't animate Leaflet, modal layers, sticky/sidebar controls or chart canvases. */
+document.addEventListener('DOMContentLoaded',()=>{
+ if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const targets='#utama .ghl-scroll-block, #utama .ghl-trail-card, #utama .dashboard-main-grid > .panel, #utama .ghl-years > article, #jejakFrame .jejak-entry';
+ const observed=new WeakSet();
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries){
+   if(!entry.isIntersecting)continue;
+   entry.target.classList.add('ghl-reveal-visible');
+   observer.unobserve(entry.target);
+  }
+ },{threshold:0.08,rootMargin:'0px 0px 30px 0px'});
+ function register(){
+  document.querySelectorAll(targets).forEach(el=>{
+   if(observed.has(el)||el.closest('.leaflet-container'))return;
+   observed.add(el);
+   const rect=el.getBoundingClientRect();
+   if(rect.top<window.innerHeight*0.92&&rect.bottom>0){
+    el.classList.add('ghl-reveal-visible');return;
+   }
+   el.classList.add('ghl-scroll-reveal');
+   observer.observe(el);
+  });
+ }
+ register();
+ const host=document.getElementById('utama');
+ if(host){
+  let pending=false;
+  new MutationObserver(()=>{
+   if(pending)return;pending=true;
+   requestAnimationFrame(()=>{pending=false;register()});
+  }).observe(host,{childList:true,subtree:true});
+ }
+});
