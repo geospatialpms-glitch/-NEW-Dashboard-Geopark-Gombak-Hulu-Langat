@@ -145,3 +145,71 @@ document.addEventListener('DOMContentLoaded',()=>{
   }).observe(main,{subtree:true,childList:true});
  }
 });
+
+/* Mockup Info Lanjut: enhancement shared by all geotapak, original data preserved. */
+document.addEventListener('DOMContentLoaded',()=>{
+ const original=window.openGeotapakInfo;
+ if(typeof original!=='function'||original.__ghlMockup)return;
+ function decorate(code){
+  const overlay=document.querySelector('.geotapak-more-overlay');
+  if(!overlay||overlay.dataset.ghlMockup==='1')return;
+  overlay.dataset.ghlMockup='1';
+  const key=String(code||'').trim().toUpperCase();
+  const card=overlay.querySelector('.geotapak-more-card');
+  const right=overlay.querySelector('.geotapak-info-right');
+  const infra=right?.querySelector('.geotapak-infra');
+  const left=overlay.querySelector('.geotapak-info-left');
+  if(!card||!right||!infra||!left)return;
+  const h=left.querySelector('h3');
+  const line=document.createElement('div');line.className='ghl-info-accent';
+  if(h)h.after(line);
+  const controls=document.createElement('div');controls.className='ghl-more-tabs';
+  controls.setAttribute('role','tablist');controls.setAttribute('aria-label','Kandungan geotapak');
+  const infraBtn=document.createElement('button');infraBtn.type='button';infraBtn.textContent='◈  Infrastruktur Asas';infraBtn.setAttribute('role','tab');
+  const imageBtn=document.createElement('button');imageBtn.type='button';imageBtn.textContent='▧  Gambar Geotapak';imageBtn.setAttribute('role','tab');
+  controls.append(infraBtn,imageBtn);
+  const photo=document.createElement('section');photo.className='ghl-more-photo-panel';photo.hidden=true;photo.setAttribute('role','tabpanel');
+  const label=document.createElement('div');label.className='ghl-more-panel-title';
+  label.textContent='Gambar Geotapak';
+  const count=document.createElement('small');count.textContent='1 Gambar';label.append(count);photo.append(label);
+  let src='';
+  try{if(typeof IMG!=='undefined')src=IMG[key]||'';}catch(e){}
+  if(src){
+   const trigger=document.createElement('button');trigger.type='button';trigger.className='ghl-more-photo-trigger';trigger.setAttribute('aria-label','Paparan penuh gambar geotapak');
+   const image=document.createElement('img');image.src=src;image.alt='Gambar '+(h?.textContent||key);image.loading='eager';
+   const zoom=document.createElement('span');zoom.textContent='⛶  Paparan Penuh';
+   trigger.append(image,zoom);photo.append(trigger);
+   const light=document.createElement('div');light.className='ghl-more-lightbox';light.hidden=true;
+   const exit=document.createElement('button');exit.type='button';exit.className='ghl-more-lightbox-close';exit.textContent='×';exit.setAttribute('aria-label','Tutup gambar');
+   const full=document.createElement('img');full.src=src;full.alt=image.alt;
+   light.append(exit,full);overlay.append(light);
+   const closeLight=()=>{light.hidden=true;trigger.focus()};
+   trigger.addEventListener('click',()=>{light.hidden=false;exit.focus()});
+   exit.addEventListener('click',closeLight);
+   light.addEventListener('click',e=>{if(e.target===light)closeLight()});
+   overlay.addEventListener('keydown',e=>{if(e.key==='Escape'&&!light.hidden){e.stopImmediatePropagation();closeLight()}},true);
+  }else{
+   count.textContent='Belum tersedia';
+   const placeholder=document.createElement('p');placeholder.textContent='Gambar geotapak belum tersedia.';photo.append(placeholder);
+  }
+  right.prepend(controls);
+  right.append(photo);
+  const select=mode=>{
+   const show=mode==='photo';
+   infra.hidden=show;photo.hidden=!show;
+   infraBtn.setAttribute('aria-selected',String(!show));
+   imageBtn.setAttribute('aria-selected',String(show));
+  };
+  infraBtn.addEventListener('click',()=>select('infra'));
+  imageBtn.addEventListener('click',()=>select('photo'));
+  select('infra');
+  // Existing six status indicators and legend remain from createGeotapakInfra().
+ }
+ function enhanced(code){
+  const result=original.apply(this,arguments);
+  decorate(code);
+  return result;
+ }
+ enhanced.__ghlMockup=true;
+ window.openGeotapakInfo=enhanced;
+});
