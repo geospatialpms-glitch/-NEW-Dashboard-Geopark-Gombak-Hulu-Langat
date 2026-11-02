@@ -465,3 +465,12 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  border:0!important;
  border-radius:16px!important;
 }
+
+/* Warisan popup image must fill the inner frame just like Geologi / Makanan. */
+#jejakFrame #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo > img.heritage-real-img,
+#geoTrailModal .jejak-card-overlay .jejak-card-popup-body .jejak-heritage-detail-photo > img.heritage-real-img{
+ object-fit:cover!important;
+ object-position:center center!important;
+ width:100%!important;
+ height:100%!important;
+}
