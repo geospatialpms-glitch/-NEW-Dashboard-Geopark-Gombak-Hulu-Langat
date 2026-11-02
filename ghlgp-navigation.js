@@ -108,3 +108,40 @@ document.addEventListener('DOMContentLoaded',()=>{
   }).observe(host,{childList:true,subtree:true});
  }
 });
+
+/* Scroll reveals within the two inline informational pages only. */
+document.addEventListener('DOMContentLoaded',()=>{
+ if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const ids=['aboutGeoparkModal','chronologyModal'];
+ const selectors='.about-card,.geopark-eight-heading,.kronologi-text-card,.chrono-phase,.chronology-approval,.ghl-chrono-hero,.geopark-narrative-frame';
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add('ghl-info-visible');
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:.08,rootMargin:'0px 0px 25px 0px'});
+ const seen=new WeakSet();
+ function register(){
+  ids.forEach(id=>{
+   const host=document.getElementById(id);
+   if(!host)return;
+   host.querySelectorAll(selectors).forEach(el=>{
+    if(seen.has(el))return;
+    seen.add(el);
+    el.classList.add('ghl-info-reveal');
+    observer.observe(el);
+   });
+  });
+ }
+ register();
+ const main=document.getElementById('utama');
+ if(main){
+  let queued=false;
+  new MutationObserver(()=>{
+   if(queued)return;queued=true;
+   requestAnimationFrame(()=>{queued=false;register()});
+  }).observe(main,{subtree:true,childList:true});
+ }
+});
