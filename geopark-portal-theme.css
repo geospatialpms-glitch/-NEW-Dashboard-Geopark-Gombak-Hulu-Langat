@@ -421,3 +421,19 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 @media(hover:none){
  #utama .ghl-years > article:hover,#utama .ghl-trail-cards > .ghl-trail-card:hover{transform:none!important}
 }
+
+/* Smooth first paint after refresh, then retain native KPI-like hover glow. */
+@media (prefers-reduced-motion:no-preference){
+ #utama .ghl-years>article,
+ #utama .ghl-trail-cards>.ghl-trail-card{
+  animation:ghlCardGlowArrival 950ms cubic-bezier(.22,.68,.2,1) both!important;
+ }
+ #utama .ghl-years>article:nth-child(2),
+ #utama .ghl-trail-cards>.ghl-trail-card:nth-child(2){animation-delay:90ms!important}
+ #utama .ghl-years>article:nth-child(3),
+ #utama .ghl-trail-cards>.ghl-trail-card:nth-child(3){animation-delay:180ms!important}
+ @keyframes ghlCardGlowArrival{
+  from{opacity:.85;filter:brightness(.98);box-shadow:0 0 0 0 transparent,0 0 0 transparent,0 3px 10px #0b47250a}
+  to{opacity:1;filter:brightness(1);box-shadow:0 0 0 1px color-mix(in srgb,var(--ghl-card-glow) 24%,transparent),0 0 12px color-mix(in srgb,var(--ghl-card-glow) 15%,transparent),0 8px 22px #0b472513}
+ }
+}
