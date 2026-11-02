@@ -437,3 +437,31 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   to{opacity:1;filter:brightness(1);box-shadow:0 0 0 1px color-mix(in srgb,var(--ghl-card-glow) 24%,transparent),0 0 12px color-mix(in srgb,var(--ghl-card-glow) 15%,transparent),0 8px 22px #0b472513}
  }
 }
+
+/* Warisan popup photo frame — match Geologi, including the actual PNG image. */
+#jejakFrame #geoTrailModal .jejak-card-dialog .jejak-card-popup-body .jejak-heritage-detail-photo,
+#geoTrailModal .jejak-card-overlay .jejak-card-dialog .jejak-card-popup-body .jejak-heritage-detail-photo{
+ position:relative!important;
+ box-sizing:border-box!important;
+ display:block!important;
+ border:6px solid #fff!important;
+ outline:1px solid #dae6d6!important;
+ border-radius:23px!important;
+ box-shadow:0 10px 26px rgba(11,68,47,.17)!important;
+ background:#edf3ec!important;
+ overflow:hidden!important;
+}
+#jejakFrame #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo > img.heritage-real-img,
+#geoTrailModal .jejak-card-overlay .jejak-card-popup-body .jejak-heritage-detail-photo > img.heritage-real-img{
+ position:static!important;
+ inset:auto!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:0!important;
+ max-width:100%!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ border:0!important;
+ border-radius:16px!important;
+}
