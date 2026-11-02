@@ -398,6 +398,8 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  --ghl-card-glow:#64af42;
  position:relative;
  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important;
+ border-color:color-mix(in srgb,var(--ghl-card-glow) 48%,#dce7d9)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--ghl-card-glow) 24%,transparent),0 0 12px color-mix(in srgb,var(--ghl-card-glow) 15%,transparent),0 8px 22px #0b472513!important;
 }
 #utama .ghl-years > article:hover,
 #utama .ghl-trail-cards > .ghl-trail-card:hover{
