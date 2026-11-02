@@ -353,3 +353,21 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  background:transparent!important;
  border-radius:0!important;
 }
+
+/* Remove the nested topographic backdrop/frame inside active Jejak category.
+   Keep all individual .jejak-entry cards untouched. */
+#jejakFrame.jejak-show-detail,
+#jejakFrame.jejak-show-detail #geoTrailModal.jejak-embedded,
+#jejakFrame.jejak-show-detail #geoTrailModal.jejak-embedded .geo-modal-card,
+#jejakFrame.jejak-show-detail #geoTrailModal.jejak-embedded .geo-modal-body,
+#jejakFrame.jejak-show-detail #geoTrailModal.jejak-embedded .jejak-panel:not([hidden]){
+ background:transparent!important;
+ background-image:none!important;
+ border:0!important;
+ outline:0!important;
+ box-shadow:none!important;
+}
+#jejakFrame.jejak-show-detail #geoTrailModal.jejak-embedded .geo-modal-body{
+ padding-left:0!important;
+ padding-right:0!important;
+}
