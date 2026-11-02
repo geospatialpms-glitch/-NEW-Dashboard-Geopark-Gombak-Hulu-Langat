@@ -203,6 +203,22 @@ document.addEventListener('DOMContentLoaded',()=>{
   infraBtn.addEventListener('click',()=>select('infra'));
   imageBtn.addEventListener('click',()=>select('photo'));
   select('infra');
+  // Reveal individual content blocks when they enter the popup's own scroll area.
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+   const scroller=card.querySelector('.geotapak-more-content');
+   const revealItems=[...left.children,controls,...infra.querySelectorAll('.geotapak-infra-item'),infra.querySelector('.geotapak-infra-legend'),photo.querySelector('.ghl-more-panel-title'),photo.querySelector('.ghl-more-photo-trigger')].filter(Boolean);
+   const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+     if(entry.isIntersecting){entry.target.classList.add('ghl-more-revealed');revealObserver.unobserve(entry.target)}
+    });
+   },{root:scroller,threshold:.08,rootMargin:'0px 0px 18px 0px'});
+   revealItems.forEach((el,i)=>{
+    el.classList.add('ghl-more-reveal');
+    el.style.setProperty('--ghl-reveal-delay',Math.min(i%6,4)*65+'ms');
+    revealObserver.observe(el);
+   });
+   imageBtn.addEventListener('click',()=>{requestAnimationFrame(()=>photo.querySelectorAll('.ghl-more-reveal').forEach(el=>el.classList.add('ghl-more-revealed')))});
+  }
   // Existing six status indicators and legend remain from createGeotapakInfra().
  }
  function enhanced(code){
