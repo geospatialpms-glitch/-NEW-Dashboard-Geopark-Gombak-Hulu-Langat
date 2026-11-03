@@ -608,3 +608,35 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  padding:0!important;border-radius:50%!important;
  font-size:19px!important;line-height:1!important;
 }
+
+/* Jejak Makanan — Lihat Lokasi matching the uploaded orange/gold mockup. */
+#geoTrailModal #jejakCardPopup .jejak-card-popup-body:has(.jejak-food-detail-photo) .ghl-food-location-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ gap:10px!important;align-self:flex-start!important;
+ width:max-content!important;max-width:100%!important;
+ margin:19px 0 0!important;padding:12px 21px!important;
+ border:0!important;border-radius:999px!important;
+ background:linear-gradient(100deg,#f15b2b,#f6a520)!important;
+ color:#fff!important;text-decoration:none!important;
+ font:800 13px/1.4 Arial,sans-serif!important;white-space:nowrap!important;
+ box-shadow:0 8px 19px rgba(240,106,52,.28)!important;
+ transition:transform .22s ease,box-shadow .22s ease!important;
+ cursor:pointer!important;
+}
+#geoTrailModal #jejakCardPopup .ghl-food-location-btn svg{
+ width:19px!important;height:19px!important;flex:0 0 19px!important;
+ stroke:currentColor!important;
+}
+#geoTrailModal #jejakCardPopup .ghl-food-location-btn:hover,
+#geoTrailModal #jejakCardPopup .ghl-food-location-btn:focus-visible{
+ transform:translateY(-3px)!important;
+ box-shadow:0 12px 24px rgba(240,106,52,.4)!important;
+}
+@media(max-width:700px){
+ #geoTrailModal #jejakCardPopup .jejak-card-popup-body:has(.jejak-food-detail-photo) .ghl-food-location-btn{
+  align-self:stretch!important;width:100%!important;margin-top:20px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #geoTrailModal #jejakCardPopup .ghl-food-location-btn{transition:none!important}
+}
