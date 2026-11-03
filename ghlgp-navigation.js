@@ -246,3 +246,35 @@ document.addEventListener('DOMContentLoaded',()=>{
  new MutationObserver(sync).observe(play,{childList:true,characterData:true,subtree:true});
  sync();
 });
+
+/* Jejak Makanan: 'Lihat Lokasi' based on the supplied GHLGp popup mockup. */
+document.addEventListener('DOMContentLoaded',()=>{
+ const original=window.showJejakCardPopup;
+ if(typeof original!=='function'||original.__foodLocationEnhanced)return;
+ function enhanced(detail){
+  const result=original.apply(this,arguments);
+  if(!detail?.querySelector?.('.jejak-food-detail-photo'))return result;
+  const body=document.querySelector('#jejakCardPopup .jejak-card-popup-body');
+  if(!body||body.querySelector('.ghl-food-location-btn'))return result;
+  const label=body.querySelector('h3')?.textContent?.trim()||'';
+  const match=label.match(/^\s*(E\d+)\s*[·—-]\s*(.+)$/i);
+  if(!match)return result;
+  const code=match[1].toUpperCase(),name=match[2].trim();
+  const address=Array.from(body.querySelectorAll('p')).find(p=>/Alamat\s*:/i.test(p.textContent||''))?.textContent?.replace(/^\s*Alamat\s*:\s*/i,'').trim()||'';
+  // The supplied reference contains a verified target Place ID for E1.
+  // Other entries use their own recorded name and address, not E1's pin.
+  const query=encodeURIComponent([name,address].filter(Boolean).join(', '));
+  const href=code==='E1'
+   ?'https://www.google.com/maps/search/?api=1&query=Roti%20Leleh%20Batu%20Arang&query_place_id=ChIJy53W3a5dzDERhWB3jCUS7hk'
+   :'https://www.google.com/maps/search/?api=1&query='+query;
+  const a=document.createElement('a');
+  a.className='ghl-food-location-btn';
+  a.href=href;a.target='_blank';a.rel='noopener noreferrer';
+  a.setAttribute('aria-label','Lihat lokasi '+name+' di Google Maps');
+  a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-8-8 18-2.8-7.2L3 11Z"/><path d="m10.2 13.8 4.7-4.7"/></svg><span>Lihat Lokasi</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+  body.append(a);
+  return result;
+ }
+ enhanced.__foodLocationEnhanced=true;
+ window.showJejakCardPopup=enhanced;
+});
