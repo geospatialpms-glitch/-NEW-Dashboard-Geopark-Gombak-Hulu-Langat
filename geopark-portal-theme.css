@@ -652,14 +652,3 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  backface-visibility:hidden;
 }
 #map .leaflet-tile-container{overflow:visible}
-
-/* Anti-grid seam: Leaflet positions tiles on a 256px grid; overlap the raster
-   edge by 2px to cover subpixel gaps on zoom / fractional display scaling. */
-#map .leaflet-tile-pane img.leaflet-tile{
- width:258px!important;
- height:258px!important;
- border:0!important;
- outline:0!important;
- box-shadow:none!important;
- max-width:none!important;
-}
