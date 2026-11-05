@@ -344,6 +344,12 @@ body>main.hero>.hero-content,body>main.hero>.credit{z-index:2!important}
 }
 </style>
 <!-- END GHLGp SERIF HOMEPAGE TITLE -->
+<!-- Prevent an embedded fallback landscape from flashing on reload. Video stays intact. -->
+<style id="ghlgp-home-no-static-image-on-refresh">
+html body>main.hero,
+html body main.hero{background-image:none!important;background-color:#052e23!important}
+</style>
+
 
 <!-- GHLGp HOME FULLSCREEN FIX 20261026 -->
 <style id="ghlgp-home-fullscreen-fix">
