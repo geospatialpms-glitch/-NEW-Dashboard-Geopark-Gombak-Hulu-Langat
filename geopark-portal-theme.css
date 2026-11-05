@@ -640,3 +640,15 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 @media(prefers-reduced-motion:reduce){
  #geoTrailModal #jejakCardPopup .ghl-food-location-btn{transition:none!important}
 }
+
+/* Leaflet satellite basemap: suppress hairline seams between adjacent raster tiles.
+   Scoped to the map tile images; district polygons and markers are unaffected. */
+#map .leaflet-tile-pane img.leaflet-tile{
+ border:0!important;
+ box-shadow:none!important;
+ outline:1px solid transparent!important;
+ max-width:none!important;
+ image-rendering:auto!important;
+ backface-visibility:hidden;
+}
+#map .leaflet-tile-container{overflow:visible}
