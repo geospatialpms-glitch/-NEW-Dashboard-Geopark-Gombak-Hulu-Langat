@@ -372,11 +372,17 @@ body>main.hero::after{bottom:0!important;height:100%!important;pointer-events:no
 body>main.hero>.credit{bottom:16px!important}
 @media(max-width:720px){body>main.hero>.credit{bottom:10px!important}}
 </style>
+<!-- Neutral first paint: no green background while homepage video is loading. -->
+<style id="ghlgp-no-green-refresh-20261105">
+html,body,body>main.hero,html body>main.hero{background-color:#000!important;background-image:none!important}
+body>main.hero::after{opacity:0;transition:opacity .3s ease}
+body>main.hero.ghlgp-video-ready::after{opacity:1}
+</style>
 </head>
 <body>
 
 <main class="hero">
-<video class="ghlgp-home-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="Video-Project-4-web.mp4" type="video/mp4"></video>
+<video class="ghlgp-home-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" onplaying="this.parentElement.classList.add('ghlgp-video-ready')" onloadeddata="this.parentElement.classList.add('ghlgp-video-ready')"><source src="Video-Project-4-web.mp4" type="video/mp4"></video>
   <section class="hero-content">
     <h1 class="hero-title">Dashboard<br><span class="hero-title-place">Gombak - Hulu Langat Geopark</span><br>(GHLGp)</h1>
     <div class="hero-desc">Pemantauan Geotapak Dan Pengurusan Spatial GHL Geopark.</div>
