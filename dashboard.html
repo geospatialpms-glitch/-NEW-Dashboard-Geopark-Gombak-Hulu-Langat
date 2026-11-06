@@ -1210,6 +1210,33 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  display:block!important;margin:0 auto!important;width:100%!important;height:auto!important;
 }
 </style>
+<style id="ghl-area-mockup-20261106">
+/* Kad keluasan mengikut daerah: adaptasi mockup GHLGp */
+#areaPanel{cursor:default;overflow:hidden}
+#areaPanel .ghl-area-chartbox{display:flex!important;flex-direction:column;gap:10px;padding:10px 12px 12px!important;min-height:0!important}
+#areaPanel .ghl-area-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;flex:1;min-height:0}
+#areaPanel .ghl-area-district{font:inherit;position:relative;isolation:isolate;text-align:left;min-width:0;overflow:hidden;border:1px solid #d4e4c6;border-radius:15px;background:linear-gradient(140deg,#fbfdf7,#f3f8eb);padding:14px 12px 11px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;color:#073e2d}
+#areaPanel .ghl-area-orange{border-color:#f9d4b9;background:linear-gradient(140deg,#fffaf5,#fff0e5)}
+#areaPanel .ghl-area-district:hover,#areaPanel .ghl-area-district.selected{transform:translateY(-2px);box-shadow:0 8px 18px rgba(48,88,45,.12)}
+#areaPanel .ghl-area-green.selected{border-color:#82c622;box-shadow:0 0 0 2px rgba(130,198,34,.15),0 8px 18px rgba(48,88,45,.12)}
+#areaPanel .ghl-area-orange.selected{border-color:#f56c29;box-shadow:0 0 0 2px rgba(245,108,41,.15),0 8px 18px rgba(48,88,45,.12)}
+#areaPanel .ghl-area-district:focus-visible{outline:2px solid #34885a;outline-offset:2px}
+#areaPanel .ghl-area-landscape{position:absolute;right:-3px;bottom:0;width:78%;height:85%;z-index:-1;opacity:.6}
+#areaPanel .ghl-area-name{font:bold clamp(13px,1.4vw,18px) Georgia,serif;display:flex;gap:7px;align-items:center;white-space:nowrap}
+#areaPanel .ghl-area-pin{width:27px;height:27px;border-radius:50%;display:inline-grid;place-items:center;background:linear-gradient(135deg,#b9df64,#73bc09);color:white;font:700 22px Arial;flex:none}
+#areaPanel .ghl-area-orange .ghl-area-pin{background:linear-gradient(135deg,#ffa96c,#f4661f)}
+#areaPanel .ghl-area-district strong{font:800 clamp(25px,2.4vw,38px) Arial,sans-serif;letter-spacing:-1px;line-height:1.1;color:#07482f;margin-top:12px}
+#areaPanel .ghl-area-orange strong{color:#bd4a15}
+#areaPanel .ghl-area-sub{font:11px Arial,sans-serif;color:#65756c;margin-top:6px;white-space:nowrap}
+#areaPanel .ghl-area-total{position:relative;overflow:hidden;flex:0 0 71px;border:1px solid #e0eacc;border-radius:15px;background:linear-gradient(105deg,#e9f3db,#f0f6e8 55%,#e2efd4);display:flex;align-items:center;gap:10px;padding:10px 15px}
+#areaPanel .ghl-area-total>div{z-index:1;position:relative;display:flex;flex-direction:column;gap:3px}
+#areaPanel .ghl-area-total strong{font:bold clamp(19px,2vw,27px) Arial,sans-serif;color:#06472e;letter-spacing:-.5px;white-space:nowrap}
+#areaPanel .ghl-area-total span:not(.ghl-area-leaf){font:11px Arial,sans-serif;color:#5d705f}
+#areaPanel .ghl-area-leaf{font-size:34px;color:#6eae2b;border-right:1px solid #abc48d;padding-right:10px;z-index:1}
+#areaPanel .ghl-area-total svg{position:absolute;right:0;bottom:0;width:48%;height:100%;pointer-events:none;opacity:.53}
+@media(max-width:540px){#areaPanel .ghl-area-grid{gap:7px}#areaPanel .ghl-area-district{padding:12px 8px}#areaPanel .ghl-area-name{font-size:12px;gap:4px}#areaPanel .ghl-area-pin{width:22px;height:22px;font-size:17px}#areaPanel .ghl-area-district strong{font-size:clamp(21px,6vw,30px)}#areaPanel .ghl-area-sub{font-size:10px;white-space:normal}#areaPanel .ghl-area-total strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){#areaPanel .ghl-area-district{transition:none}}
+</style>
 </head>
 <body><div class="topline"></div>
 
@@ -1324,7 +1351,21 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  <div class="dashboard-main-grid" id="analisis">
    <div class="panel map-panel"><div class="panel-title"><div class="accent">Taburan Geotapak Gombak - Hulu Langat Geopark</div><span class="panel-sub" style="color:#fff">Satelit • sempadan daerah • popup geotapak</span></div><div style="position:relative"><input id="mapSearch" class="map-search" placeholder="Cari nama atau kod geotapak..."><div id="map"></div></div></div>
    <div class="right-analysis">
-     <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9v9z" fill="#ffae35"/><path d="M13 3a9 9 0 1 1-9 10h9z" fill="#f36c18"/></svg>Keluasan Mengikut Daerah</div></div><div class="chartbox"><canvas id="areaChart"></canvas></div></div>
+     <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9v9z" fill="#ffae35"/><path d="M13 3a9 9 0 1 1-9 10h9z" fill="#f36c18"/></svg>Keluasan Mengikut Daerah</div></div><div class="chartbox ghl-area-chartbox">
+ <div class="ghl-area-grid" aria-label="Perbandingan keluasan mengikut daerah">
+  <button type="button" class="ghl-area-district ghl-area-green" id="ghlAreaGombak" aria-pressed="false" aria-label="Pilih Gombak, 47,947 hektar, 13 geotapak">
+   <svg class="ghl-area-landscape" viewBox="0 0 260 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 153 42 125 87 107 125 69 164 93 204 37 260 70V160H0Z" fill="#dbeccb"/><path d="M0 159 57 132 109 144 164 103 211 114 260 87V160H0Z" fill="#cce2b8"/></svg>
+   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true">⌖</span>Gombak</span>
+   <strong>47,947</strong><span class="ghl-area-sub">hektar · 13 geotapak</span>
+  </button>
+  <button type="button" class="ghl-area-district ghl-area-orange" id="ghlAreaHuluLangat" aria-pressed="false" aria-label="Pilih Hulu Langat, 65,008 hektar, 7 geotapak">
+   <svg class="ghl-area-landscape" viewBox="0 0 260 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 158 55 132 109 107 160 119 210 39 260 75V160H0Z" fill="#fce2ce"/><path d="M0 158 70 148 115 130 166 110 216 123 260 93V160H0Z" fill="#f6ceac"/></svg>
+   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true">⌖</span>Hulu Langat</span>
+   <strong>65,008</strong><span class="ghl-area-sub">hektar · 7 geotapak</span>
+  </button>
+ </div>
+ <div class="ghl-area-total"><span class="ghl-area-leaf" aria-hidden="true">❧</span><div><strong>112,955 hektar</strong><span>Jumlah keluasan Geopark</span></div><svg viewBox="0 0 470 145" preserveAspectRatio="none" aria-hidden="true"><path d="m0 145 70-36 52 11 69-49 58 34 70-57 79 38 72-23V145Z" fill="#b8d7a1"/><path d="m0 145 68-22 89 12 59-34 79 27 79-54 96 37V145Z" fill="#94c47a"/><path d="m0 145 110-26 72 14 62-15 55 19 82-17 89-6v31Z" fill="#77ad66" opacity=".65"/></svg></div>
+</div></div>
      <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5l5-2 7 3 6-3v16l-6 3-7-3-5 2z" fill="#ff8e20"/><path d="M8 3v16M15 6v16" stroke="#fff" stroke-width="1.8"/><path d="M3 5v16" stroke="#f26c13" stroke-width="1.3"/></svg>Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
    </div>
  </div>
@@ -1531,8 +1572,25 @@ function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visible
 let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
 function makeCharts(data){
- const centerTextPlugin={id:"centerText",afterDraw(chart){const{ctx,chartArea}=chart;if(!chartArea)return;const x=(chartArea.left+chartArea.right)/2,y=(chartArea.top+chartArea.bottom)/2;ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#17233b";ctx.font="800 18px Arial, sans-serif";ctx.fillText("112,955",x,y-8);ctx.fillStyle="#6d7482";ctx.font="700 11px Arial, sans-serif";ctx.fillText("hektar",x,y+13);ctx.restore();}};
- if(areaChart)areaChart.destroy();areaChart=new Chart(document.getElementById("areaChart"),{type:"doughnut",data:{labels:["Gombak — 47,947 hektar","Hulu Langat — 65,008 hektar"],datasets:[{data:[47947,65008],backgroundColor:[C.lime,C.orange],borderWidth:2,borderColor:"#fff"}]},plugins:[centerTextPlugin],options:{responsive:true,maintainAspectRatio:false,cutout:"64%",onHover:(event,elements,chart)=>{chart.canvas.style.cursor=elements.length?"pointer":"default"},onClick:(event,elements)=>{if(elements.length)selectAreaDistrict(elements[0].index)},plugins:{legend:{position:"right",labels:{usePointStyle:true,boxWidth:8,font:{size:11}},onClick:(event,item)=>selectAreaDistrict(item.index)},tooltip:{callbacks:{title:items=>items.length?items[0].label.split(" — ")[0]:"",label:c=>`${c.label}`}}}}});
+ // Keluasan mengikut daerah kini menggunakan kad interaktif HTML, bukan canvas.
+ const g=document.getElementById("ghlAreaGombak"),h=document.getElementById("ghlAreaHuluLangat");
+ if(!g||!h)return;
+ const sync=()=>{
+  const selected=document.getElementById("districtFilter")?.value||"";
+  [[g,"Gombak"],[h,"Hulu Langat"]].forEach(([el,name])=>{
+   const active=selected===name;
+   el.classList.toggle("selected",active);
+   el.setAttribute("aria-pressed",String(active));
+  });
+ };
+ if(!g.dataset.bound){
+  g.dataset.bound="1";h.dataset.bound="1";
+  g.addEventListener("click",()=>{selectAreaDistrict(0);sync();});
+  h.addEventListener("click",()=>{selectAreaDistrict(1);sync();});
+  document.getElementById("districtFilter")?.addEventListener("change",sync);
+  document.getElementById("resetBtn")?.addEventListener("click",()=>requestAnimationFrame(sync));
+ }
+ sync();
 }
 function renderTable(data){let tb=document.getElementById("tableBody");tb.innerHTML=data.map((s,i)=>`<tr data-code="${s.code}"><td>${i+1}</td><td><b>${s.code}</b></td><td>${s.name}</td><td>${s.district}</td><td>${s.pbt}</td><td><span class="badge"><span class="status-dot"></span>Aktif</span></td></tr>`).join("");document.getElementById("tableCount").textContent=data.length+" rekod";tb.querySelectorAll("tr").forEach(tr=>tr.onclick=()=>focusSite(tr.dataset.code))}
 function filtered(){return SITES.filter(s=>(!districtFilter.value||s.district===districtFilter.value)&&(!pbtFilter.value||s.pbt===pbtFilter.value)&&(!importanceFilter.value||s.importance===importanceFilter.value)&&(!catFilter.value||s.cat===catFilter.value))}
