@@ -1264,6 +1264,23 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #areaPanel .ghl-area-total{background:linear-gradient(105deg,#edf6e3 0%,#e5f2d8 100%)!important}
 #areaPanel .ghl-area-total>div{min-width:0}
 @media(max-width:540px){#areaPanel .ghl-area-pin .ghl-area-icon-svg{width:14px;height:14px}#areaPanel .ghl-area-total .ghl-area-leaf{width:29px;height:32px;flex-basis:29px;padding-right:8px!important}#areaPanel .ghl-area-total .ghl-area-leaf .ghl-area-icon-svg{width:26px;height:26px}}
+
+/* Buang bingkai putih dalaman, kekalkan bingkai luar kad dashboard */
+#areaPanel .chartbox.ghl-area-chartbox,
+.right-analysis #areaPanel .chartbox.ghl-area-chartbox{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#areaPanel .ghl-area-chartbox::before,
+#areaPanel .ghl-area-chartbox::after{
+  content:none!important;
+  display:none!important;
+}
+#areaPanel .ghl-area-grid{background:transparent!important;border:0!important;box-shadow:none!important}
 </style>
 </head>
 <body><div class="topline"></div>
