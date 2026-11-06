@@ -372,25 +372,28 @@ body>main.hero::after{bottom:0!important;height:100%!important;pointer-events:no
 body>main.hero>.credit{bottom:16px!important}
 @media(max-width:720px){body>main.hero>.credit{bottom:10px!important}}
 </style>
-<!-- Homepage video only: remove the forced black frame on refresh. -->
+<!-- Homepage refresh fix: no white canvas while the existing video starts. -->
 <style id="ghlgp-video-only-refresh-20261106">
 html,body,body>main.hero,html body>main.hero{
-  background-color:transparent!important;
+  background-color:#052e23!important;
   background-image:none!important;
 }
 body>main.hero>video.ghlgp-home-video{
   display:block!important;
   visibility:visible!important;
   opacity:1!important;
+  background-color:#052e23!important;
 }
-body>main.hero::after{opacity:0;transition:opacity .3s ease}
-body>main.hero.ghlgp-video-ready::after{opacity:1}
+body>main.hero::after{opacity:1!important}
+@media(prefers-reduced-motion:reduce){
+  body>main.hero>video.ghlgp-home-video{display:block!important}
+}
 </style>
 </head>
 <body>
 
 <main class="hero">
-<video class="ghlgp-home-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" onplaying="this.parentElement.classList.add('ghlgp-video-ready')" onloadeddata="this.parentElement.classList.add('ghlgp-video-ready')"><source src="Video-Project-4-web.mp4" type="video/mp4"></video>
+<video class="ghlgp-home-video" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true" onplaying="this.parentElement.classList.add('ghlgp-video-ready')" onloadeddata="this.parentElement.classList.add('ghlgp-video-ready')"><source src="Video-Project-4-web.mp4" type="video/mp4"></video>
   <section class="hero-content">
     <h1 class="hero-title">Dashboard<br><span class="hero-title-place">Gombak - Hulu Langat Geopark</span><br>(GHLGp)</h1>
     <div class="hero-desc">Pemantauan Geotapak Dan Pengurusan Spatial GHL Geopark.</div>
@@ -407,6 +410,30 @@ body>main.hero.ghlgp-video-ready::after{opacity:1}
   <span>Gombak - Hulu Langat Geopark · Selangor Urban Observatory</span>
 </div>
 </main>
+<script>
+/* Restore homepage video playback after refresh, page restore or tab return. */
+(function(){
+  const video=document.querySelector('main.hero > video.ghlgp-home-video');
+  if(!video)return;
+  video.muted=true;
+  video.defaultMuted=true;
+  video.autoplay=true;
+  video.loop=true;
+  video.playsInline=true;
+  function startVideo(){
+    if(video.readyState>=2)video.parentElement.classList.add('ghlgp-video-ready');
+    if(video.paused){
+      const attempt=video.play();
+      if(attempt&&typeof attempt.catch==='function')attempt.catch(function(){});
+    }
+  }
+  video.addEventListener('loadeddata',startVideo);
+  video.addEventListener('canplay',startVideo);
+  window.addEventListener('pageshow',startVideo);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)startVideo()});
+  startVideo();
+})();
+</script>
 
 </body>
 </html>
