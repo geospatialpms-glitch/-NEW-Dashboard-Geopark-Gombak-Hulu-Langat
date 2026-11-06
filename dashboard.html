@@ -1233,7 +1233,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #areaPanel .ghl-area-total strong{font:bold clamp(19px,2vw,27px) Arial,sans-serif;color:#06472e;letter-spacing:-.5px;white-space:nowrap}
 #areaPanel .ghl-area-total span:not(.ghl-area-leaf){font:11px Arial,sans-serif;color:#5d705f}
 #areaPanel .ghl-area-leaf{font-size:34px;color:#6eae2b;border-right:1px solid #abc48d;padding-right:10px;z-index:1}
-#areaPanel .ghl-area-total svg{position:absolute;right:0;bottom:0;width:48%;height:100%;pointer-events:none;opacity:.53}
+#areaPanel .ghl-area-total > svg{position:absolute;right:0;bottom:0;width:48%;height:100%;pointer-events:none;opacity:.53}
 @media(max-width:540px){#areaPanel .ghl-area-grid{gap:7px}#areaPanel .ghl-area-district{padding:12px 8px}#areaPanel .ghl-area-name{font-size:12px;gap:4px}#areaPanel .ghl-area-pin{width:22px;height:22px;font-size:17px}#areaPanel .ghl-area-district strong{font-size:clamp(21px,6vw,30px)}#areaPanel .ghl-area-sub{font-size:10px;white-space:normal}#areaPanel .ghl-area-total strong{font-size:21px}}
 @media(prefers-reduced-motion:reduce){#areaPanel .ghl-area-district{transition:none}}
 
@@ -1249,7 +1249,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #areaPanel .ghl-area-total{width:100%!important;max-width:none!important;box-sizing:border-box!important;flex:0 0 65px!important;min-height:65px!important;border-radius:14px!important;padding:9px 16px!important;justify-content:flex-start!important}
 #areaPanel .ghl-area-total strong{font:800 clamp(20px,2.2vw,29px) Arial,Helvetica,sans-serif!important;letter-spacing:-.7px!important}
 #areaPanel .ghl-area-total .ghl-area-leaf{font-size:29px!important}
-#areaPanel .ghl-area-total svg{width:38%!important;opacity:.28!important}
+#areaPanel .ghl-area-total > svg{width:38%!important;opacity:.28!important}
 @media(max-width:540px){#areaPanel .ghl-area-chartbox{padding:9px!important;gap:8px!important}#areaPanel .ghl-area-grid{gap:7px!important}#areaPanel .ghl-area-district{padding:10px 9px!important}#areaPanel .ghl-area-name{font-size:12px!important}#areaPanel .ghl-area-district strong{font-size:clamp(23px,6.4vw,32px)!important;margin-top:8px!important}#areaPanel .ghl-area-total{padding:8px 12px!important}#areaPanel .ghl-area-total strong{font-size:20px!important}}
 
 /* Ikon geolokasi dan gunung konsisten dengan identiti Geopark GHLGp */
@@ -1281,6 +1281,29 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
   display:none!important;
 }
 #areaPanel .ghl-area-grid{background:transparent!important;border:0!important;box-shadow:none!important}
+
+/* Pastikan ikon geotapak/landskap di kiri jumlah keluasan kelihatan jelas */
+#areaPanel .ghl-area-total > .ghl-area-leaf{
+ position:relative!important;z-index:2!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 43px!important;width:43px!important;height:43px!important;
+ margin:0!important;padding:0 10px 0 0!important;
+ border-right:1px solid rgba(47,118,63,.27)!important;
+ background:transparent!important;opacity:1!important;overflow:visible!important;
+}
+#areaPanel .ghl-area-total > .ghl-area-leaf > svg.ghl-area-icon-svg{
+ position:static!important;inset:auto!important;display:block!important;
+ width:33px!important;height:33px!important;min-width:33px!important;min-height:33px!important;
+ flex:none!important;opacity:1!important;visibility:visible!important;
+ color:#32883b!important;stroke:#32883b!important;
+ transform:none!important;filter:none!important;
+}
+#areaPanel .ghl-area-total > svg{z-index:0!important}
+#areaPanel .ghl-area-total > div{z-index:1!important}
+@media(max-width:540px){
+ #areaPanel .ghl-area-total > .ghl-area-leaf{flex-basis:35px!important;width:35px!important;height:35px!important;padding-right:7px!important}
+ #areaPanel .ghl-area-total > .ghl-area-leaf > svg.ghl-area-icon-svg{width:27px!important;height:27px!important;min-width:27px!important;min-height:27px!important}
+}
 </style>
 </head>
 <body><div class="topline"></div>
