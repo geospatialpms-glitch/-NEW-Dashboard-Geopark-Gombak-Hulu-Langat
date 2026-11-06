@@ -1236,6 +1236,21 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #areaPanel .ghl-area-total svg{position:absolute;right:0;bottom:0;width:48%;height:100%;pointer-events:none;opacity:.53}
 @media(max-width:540px){#areaPanel .ghl-area-grid{gap:7px}#areaPanel .ghl-area-district{padding:12px 8px}#areaPanel .ghl-area-name{font-size:12px;gap:4px}#areaPanel .ghl-area-pin{width:22px;height:22px;font-size:17px}#areaPanel .ghl-area-district strong{font-size:clamp(21px,6vw,30px)}#areaPanel .ghl-area-sub{font-size:10px;white-space:normal}#areaPanel .ghl-area-total strong{font-size:21px}}
 @media(prefers-reduced-motion:reduce){#areaPanel .ghl-area-district{transition:none}}
+
+/* Harmonisasi ruang: kad memenuhi panel, angka dan teks lebih seimbang */
+#areaPanel .ghl-area-chartbox{width:100%!important;max-width:none!important;align-items:stretch!important;justify-content:stretch!important;gap:9px!important;padding:9px 12px 12px!important;box-sizing:border-box!important}
+#areaPanel .ghl-area-grid{width:100%!important;max-width:none!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;justify-items:stretch!important;gap:10px!important}
+#areaPanel .ghl-area-district{width:100%!important;max-width:none!important;min-height:0!important;align-items:flex-start!important;justify-content:center!important;padding:12px 14px!important;border-radius:14px!important;box-sizing:border-box!important}
+#areaPanel .ghl-area-name{font-family:Arial,Helvetica,sans-serif!important;font-size:clamp(13px,1.35vw,17px)!important;font-weight:800!important;letter-spacing:-.2px;line-height:1.25!important}
+#areaPanel .ghl-area-district strong{font-family:Arial,Helvetica,sans-serif!important;font-size:clamp(28px,3vw,42px)!important;letter-spacing:-1.4px!important;line-height:1.08!important;margin-top:10px!important}
+#areaPanel .ghl-area-sub{font-size:11px!important;line-height:1.35!important;margin-top:6px!important;white-space:normal!important}
+#areaPanel .ghl-area-landscape{width:75%;height:68%;opacity:.36!important}
+#areaPanel .ghl-area-pin{width:27px!important;height:27px!important;font-size:19px!important}
+#areaPanel .ghl-area-total{width:100%!important;max-width:none!important;box-sizing:border-box!important;flex:0 0 65px!important;min-height:65px!important;border-radius:14px!important;padding:9px 16px!important;justify-content:flex-start!important}
+#areaPanel .ghl-area-total strong{font:800 clamp(20px,2.2vw,29px) Arial,Helvetica,sans-serif!important;letter-spacing:-.7px!important}
+#areaPanel .ghl-area-total .ghl-area-leaf{font-size:29px!important}
+#areaPanel .ghl-area-total svg{width:38%!important;opacity:.28!important}
+@media(max-width:540px){#areaPanel .ghl-area-chartbox{padding:9px!important;gap:8px!important}#areaPanel .ghl-area-grid{gap:7px!important}#areaPanel .ghl-area-district{padding:10px 9px!important}#areaPanel .ghl-area-name{font-size:12px!important}#areaPanel .ghl-area-district strong{font-size:clamp(23px,6.4vw,32px)!important;margin-top:8px!important}#areaPanel .ghl-area-total{padding:8px 12px!important}#areaPanel .ghl-area-total strong{font-size:20px!important}}
 </style>
 </head>
 <body><div class="topline"></div>
