@@ -1251,6 +1251,19 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #areaPanel .ghl-area-total .ghl-area-leaf{font-size:29px!important}
 #areaPanel .ghl-area-total svg{width:38%!important;opacity:.28!important}
 @media(max-width:540px){#areaPanel .ghl-area-chartbox{padding:9px!important;gap:8px!important}#areaPanel .ghl-area-grid{gap:7px!important}#areaPanel .ghl-area-district{padding:10px 9px!important}#areaPanel .ghl-area-name{font-size:12px!important}#areaPanel .ghl-area-district strong{font-size:clamp(23px,6.4vw,32px)!important;margin-top:8px!important}#areaPanel .ghl-area-total{padding:8px 12px!important}#areaPanel .ghl-area-total strong{font-size:20px!important}}
+
+/* Ikon geolokasi dan gunung konsisten dengan identiti Geopark GHLGp */
+#areaPanel .ghl-area-pin{display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:50%!important;box-shadow:inset 0 1px 1px rgba(255,255,255,.45),0 3px 8px rgba(20,60,30,.1)}
+#areaPanel .ghl-area-icon-svg{display:block;width:17px;height:17px;flex:none;color:#fff}
+#areaPanel .ghl-area-total .ghl-area-leaf{display:inline-flex;align-items:center;justify-content:center;width:38px;height:39px;padding-right:11px!important;box-sizing:content-box;flex:0 0 38px;color:#397f38!important}
+#areaPanel .ghl-area-total .ghl-area-leaf .ghl-area-icon-svg{width:32px;height:32px;color:#397f38}
+#areaPanel .ghl-area-district{border-width:1px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.65)}
+#areaPanel .ghl-area-green{background:linear-gradient(135deg,#fbfdf8 0%,#f2f8eb 100%)!important}
+#areaPanel .ghl-area-orange{background:linear-gradient(135deg,#fffaf6 0%,#fff0e5 100%)!important}
+#areaPanel .ghl-area-district strong{font-weight:800!important}
+#areaPanel .ghl-area-total{background:linear-gradient(105deg,#edf6e3 0%,#e5f2d8 100%)!important}
+#areaPanel .ghl-area-total>div{min-width:0}
+@media(max-width:540px){#areaPanel .ghl-area-pin .ghl-area-icon-svg{width:14px;height:14px}#areaPanel .ghl-area-total .ghl-area-leaf{width:29px;height:32px;flex-basis:29px;padding-right:8px!important}#areaPanel .ghl-area-total .ghl-area-leaf .ghl-area-icon-svg{width:26px;height:26px}}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -1370,16 +1383,16 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  <div class="ghl-area-grid" aria-label="Perbandingan keluasan mengikut daerah">
   <button type="button" class="ghl-area-district ghl-area-green" id="ghlAreaGombak" aria-pressed="false" aria-label="Pilih Gombak, 47,947 hektar, 13 geotapak">
    <svg class="ghl-area-landscape" viewBox="0 0 260 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 153 42 125 87 107 125 69 164 93 204 37 260 70V160H0Z" fill="#dbeccb"/><path d="M0 159 57 132 109 144 164 103 211 114 260 87V160H0Z" fill="#cce2b8"/></svg>
-   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true">⌖</span>Gombak</span>
+   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true"><svg class="ghl-area-icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.6" stroke="currentColor" stroke-width="2"/></svg></span>Gombak</span>
    <strong>47,947</strong><span class="ghl-area-sub">hektar · 13 geotapak</span>
   </button>
   <button type="button" class="ghl-area-district ghl-area-orange" id="ghlAreaHuluLangat" aria-pressed="false" aria-label="Pilih Hulu Langat, 65,008 hektar, 7 geotapak">
    <svg class="ghl-area-landscape" viewBox="0 0 260 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 158 55 132 109 107 160 119 210 39 260 75V160H0Z" fill="#fce2ce"/><path d="M0 158 70 148 115 130 166 110 216 123 260 93V160H0Z" fill="#f6ceac"/></svg>
-   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true">⌖</span>Hulu Langat</span>
+   <span class="ghl-area-name"><span class="ghl-area-pin" aria-hidden="true"><svg class="ghl-area-icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.6" stroke="currentColor" stroke-width="2"/></svg></span>Hulu Langat</span>
    <strong>65,008</strong><span class="ghl-area-sub">hektar · 7 geotapak</span>
   </button>
  </div>
- <div class="ghl-area-total"><span class="ghl-area-leaf" aria-hidden="true">❧</span><div><strong>112,955 hektar</strong><span>Jumlah keluasan Geopark</span></div><svg viewBox="0 0 470 145" preserveAspectRatio="none" aria-hidden="true"><path d="m0 145 70-36 52 11 69-49 58 34 70-57 79 38 72-23V145Z" fill="#b8d7a1"/><path d="m0 145 68-22 89 12 59-34 79 27 79-54 96 37V145Z" fill="#94c47a"/><path d="m0 145 110-26 72 14 62-15 55 19 82-17 89-6v31Z" fill="#77ad66" opacity=".65"/></svg></div>
+ <div class="ghl-area-total"><span class="ghl-area-leaf" aria-hidden="true"><svg class="ghl-area-icon-svg" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m2.5 25 9.2-15 6.4 10 4.3-6.6L30 25H2.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="m8.8 14.8 3 2.8 2.9-2.7m5.2 3.3 2.4 2 2.3-2" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3 28h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><strong>112,955 hektar</strong><span>Jumlah keluasan Geopark</span></div><svg viewBox="0 0 470 145" preserveAspectRatio="none" aria-hidden="true"><path d="m0 145 70-36 52 11 69-49 58 34 70-57 79 38 72-23V145Z" fill="#b8d7a1"/><path d="m0 145 68-22 89 12 59-34 79 27 79-54 96 37V145Z" fill="#94c47a"/><path d="m0 145 110-26 72 14 62-15 55 19 82-17 89-6v31Z" fill="#77ad66" opacity=".65"/></svg></div>
 </div></div>
      <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5l5-2 7 3 6-3v16l-6 3-7-3-5 2z" fill="#ff8e20"/><path d="M8 3v16M15 6v16" stroke="#fff" stroke-width="1.8"/><path d="M3 5v16" stroke="#f26c13" stroke-width="1.3"/></svg>Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
    </div>
