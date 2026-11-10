@@ -662,7 +662,7 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   min-height:clamp(460px,33.3vw,680px)!important;
   isolation:isolate!important;
   overflow:hidden!important;
-  background-image:linear-gradient(90deg,rgba(0,54,35,.86) 0%,rgba(2,57,37,.68) 26%,rgba(9,63,38,.29) 53%,rgba(3,38,28,.06) 100%),url("geopark-sunrise-header.svg.jpg"),url("geopark-sunrise-header.jpg")!important;
+  background-image:linear-gradient(90deg,rgba(0,54,35,.86) 0%,rgba(2,57,37,.68) 26%,rgba(9,63,38,.29) 53%,rgba(3,38,28,.06) 100%),url("geopark-sunrise-header.svg.jpg"),url("header-geopark.png")!important;
   background-position:center,center 53%,center!important;
   background-size:cover,cover,cover!important;
   background-repeat:no-repeat!important;
