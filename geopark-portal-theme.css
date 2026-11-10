@@ -752,3 +752,11 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   #utama > .ghl-mock-hero h2{font-size:clamp(29px,7vw,40px)!important;line-height:1.15!important}
   #utama > .ghl-mock-hero p{font-size:clamp(22px,5.7vw,31px)!important}
 }
+
+/* GHLGp chronology Geopark word accent | 2026-11-10 */
+#section-kronologi .ghl-chrono-geopark-accent,
+#chronologyModal .ghl-chrono-geopark-accent{
+ color:#D88932!important;
+ font:inherit!important;
+ text-shadow:0 1px 1px rgba(65,43,8,.08)!important;
+}
