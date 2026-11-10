@@ -373,21 +373,23 @@ body>main.hero>.credit{bottom:16px!important}
 @media(max-width:720px){body>main.hero>.credit{bottom:10px!important}}
 </style>
 <!-- Homepage refresh fix: no white canvas while the existing video starts. -->
-<style id="ghlgp-video-only-refresh-20261106">
-html,body,body>main.hero,html body>main.hero{
-  background-color:#052e23!important;
-  background-image:none!important;
+<style id="ghlgp-home-video-refresh-fix-20261110">
+/* Gunakan imej hero asal ketika video dimuatkan; jangan paksa latar hijau kosong. */
+html,body{background-color:#102e20!important}
+body>main.hero{
+  background-color:#102e20!important;
+  /* background-image asal pada .hero dikekalkan sebagai poster sementara */
 }
 body>main.hero>video.ghlgp-home-video{
   display:block!important;
   visibility:visible!important;
   opacity:1!important;
-  background-color:#052e23!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  object-fit:cover!important;
+  object-position:center!important;
 }
-body>main.hero::after{opacity:1!important}
-@media(prefers-reduced-motion:reduce){
-  body>main.hero>video.ghlgp-home-video{display:block!important}
-}
+body>main.hero::after{pointer-events:none!important}
 </style>
 </head>
 <body>
@@ -429,6 +431,7 @@ body>main.hero::after{opacity:1!important}
   }
   video.addEventListener('loadeddata',startVideo);
   video.addEventListener('canplay',startVideo);
+  video.addEventListener('stalled',function(){if(!document.hidden)startVideo()});
   window.addEventListener('pageshow',startVideo);
   document.addEventListener('visibilitychange',function(){if(!document.hidden)startVideo()});
   startVideo();
