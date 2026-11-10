@@ -311,3 +311,42 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(bounds.isValid())map.fitBounds(bounds,{padding:[18,18],maxZoom:11});
  }catch(err){console.warn('GHLGp: sempadan mockup tidak dapat digunakan',err)}
 })();
+
+
+/* GHLGp chronology subheading text and gold accent, 2026-11-10 */
+(function(){
+  function reviseChronologyTitle(root){
+    if(!root || !root.querySelectorAll)return;
+    const candidates=root.querySelectorAll('h1,h2,h3,h4,h5,h6,p,small,.subtitle,.section-subtitle');
+    candidates.forEach(el=>{
+      if(el.querySelector('.ghl-chrono-geopark-accent'))return;
+      const label=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(!/^Geopark\s+Gombak\s*[-–—]\s*Hulu Langat$/i.test(label) &&
+         !/^Gombak\s*[-–—]\s*Hulu Langat\s+Geopark$/i.test(label))return;
+      const prefix=document.createTextNode('Gombak-Hulu Langat ');
+      const accent=document.createElement('span');
+      accent.className='ghl-chrono-geopark-accent';
+      accent.textContent='Geopark';
+      el.replaceChildren(prefix,accent);
+    });
+  }
+  function apply(){
+    reviseChronologyTitle(document.getElementById('section-kronologi'));
+    reviseChronologyTitle(document.getElementById('chronologyModal'));
+  }
+  function ready(){
+    apply();
+    const containers=['section-kronologi','chronologyModal'];
+    containers.forEach(id=>{
+      const root=document.getElementById(id);
+      if(root)new MutationObserver(apply).observe(root,{childList:true,subtree:true});
+    });
+    document.addEventListener('click',e=>{
+      if(e.target.closest('[href*="kronologi"],[data-target*="kronologi"],[onclick*="chronology"],[onclick*="Kronologi"]')){
+        requestAnimationFrame(apply);
+      }
+    },true);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});
+  else ready();
+})();
