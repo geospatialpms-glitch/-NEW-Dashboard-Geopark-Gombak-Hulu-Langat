@@ -652,3 +652,103 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  backface-visibility:hidden;
 }
 #map .leaflet-tile-container{overflow:visible}
+
+
+/* GHLGp 2026-11-10 | Dashboard sunrise header refresh */
+#utama > .ghl-mock-hero{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  min-height:clamp(460px,33.3vw,680px)!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background-image:linear-gradient(90deg,rgba(0,54,35,.86) 0%,rgba(2,57,37,.68) 26%,rgba(9,63,38,.29) 53%,rgba(3,38,28,.06) 100%),url("geopark-sunrise-header.svg.jpg"),url("geopark-sunrise-header.jpg")!important;
+  background-position:center,center 53%,center!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+#utama > .ghl-mock-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(0deg,rgba(0,54,35,.22),transparent 38%)!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+#utama > .ghl-mock-hero .ghl-mock-hero-inner{
+  position:relative!important;
+  z-index:1!important;
+  width:100%!important;
+  max-width:none!important;
+  padding:clamp(40px,6vw,100px) 5.8%!important;
+  text-align:left!important;
+}
+#utama > .ghl-mock-hero-inner, #utama > .ghl-mock-hero .ghl-mock-hero-inner{box-sizing:border-box!important}
+#utama > .ghl-mock-hero .ghl-suo-mark{
+  width:96px!important;
+  height:96px!important;
+  padding:5px!important;
+  margin:0 0 14px!important;
+  background:#fff!important;
+  border-radius:14px!important;
+  box-shadow:0 8px 28px rgba(0,29,19,.24)!important;
+}
+#utama > .ghl-mock-hero small{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  font-family:Arial,sans-serif!important;
+  font-size:clamp(12px,1.04vw,18px)!important;
+  font-weight:800!important;
+  letter-spacing:.27em!important;
+  line-height:1.6!important;
+  color:#fff7d5!important;
+  text-transform:uppercase!important;
+  margin:0 0 24px!important;
+}
+#utama > .ghl-mock-hero small::after{
+  content:""!important;
+  display:block!important;
+  width:min(330px,100%)!important;
+  height:5px!important;
+  margin-top:14px!important;
+  border-radius:6px!important;
+  background:linear-gradient(90deg,#f6aa27,#f6c22b 62%,transparent)!important;
+}
+#utama > .ghl-mock-hero h2{
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(36px,3.35vw,72px)!important;
+  font-weight:700!important;
+  letter-spacing:-.028em!important;
+  line-height:1.13!important;
+  color:#fff9e8!important;
+  text-shadow:0 3px 18px rgba(0,31,20,.42)!important;
+  margin:0 0 14px!important;
+  white-space:normal!important;
+  max-width:1600px!important;
+}
+#utama > .ghl-mock-hero h2 em{color:#e4edab!important;font-style:normal!important}
+#utama > .ghl-mock-hero p{
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(25px,2.35vw,45px)!important;
+  font-weight:600!important;
+  font-style:italic!important;
+  line-height:1.3!important;
+  margin:0!important;
+  color:#f7f4e5!important;
+  text-shadow:0 2px 14px rgba(0,30,20,.4)!important;
+}
+@media(max-width:900px){
+  #utama > .ghl-mock-hero{min-height:500px!important;background-position:center,58% center,center!important}
+  #utama > .ghl-mock-hero .ghl-mock-hero-inner{padding:56px 6%!important}
+  #utama > .ghl-mock-hero h2{font-size:clamp(33px,5.3vw,54px)!important}
+}
+@media(max-width:600px){
+  #utama > .ghl-mock-hero{min-height:470px!important;align-items:center!important;background-position:center,60% center,center!important}
+  #utama > .ghl-mock-hero .ghl-mock-hero-inner{padding:38px 7%!important}
+  #utama > .ghl-mock-hero .ghl-suo-mark{width:70px!important;height:70px!important;margin-bottom:12px!important}
+  #utama > .ghl-mock-hero small{font-size:10px!important;letter-spacing:.15em!important;margin-bottom:22px!important}
+  #utama > .ghl-mock-hero small::after{height:4px!important;width:220px!important;margin-top:12px!important}
+  #utama > .ghl-mock-hero h2{font-size:clamp(29px,7vw,40px)!important;line-height:1.15!important}
+  #utama > .ghl-mock-hero p{font-size:clamp(22px,5.7vw,31px)!important}
+}
