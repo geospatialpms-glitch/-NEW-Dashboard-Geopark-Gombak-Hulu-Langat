@@ -731,9 +731,10 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
 #utama > .ghl-mock-hero p{
   font-family:Georgia,"Times New Roman",serif!important;
   font-size:clamp(25px,2.35vw,45px)!important;
-  font-weight:600!important;
+  font-weight:400!important;
   font-style:italic!important;
-  line-height:1.3!important;
+  letter-spacing:.012em!important;
+  line-height:1.34!important;
   margin:0!important;
   color:#f7f4e5!important;
   text-shadow:0 2px 14px rgba(0,30,20,.4)!important;
