@@ -1306,14 +1306,18 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 }
 </style>
 <style id="ghlgp-satellite-tile-seam-fix-20261112">
-/* Hilangkan garis sambungan kepingan peta (tile seams) tanpa menyentuh sempadan daerah dan marker. */
+/* Pembetulan sambungan jubin imej satelit Leaflet: overlap simetri 2px,
+   bukan pelebaran sebelah kanan/bawah yang menyebabkan garisan makin jelas.
+   Hanya jubin raster terjejas; polygon sempadan, marker dan popup tidak berubah. */
 #map .leaflet-tile-pane img.leaflet-tile {
   border: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
-  width: 257px !important;
-  height: 257px !important;
   max-width: none !important;
+  width: 260px !important;
+  height: 260px !important;
+  margin: -2px !important;
+  image-rendering: auto !important;
 }
 </style>
 </head>
