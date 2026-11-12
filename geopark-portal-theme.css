@@ -761,3 +761,61 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
  font:inherit!important;
  text-shadow:0 1px 1px rgba(65,43,8,.08)!important;
 }
+
+
+/* GHLGp 2026-11-12: District-area cards only; remove redundant total strip */
+#areaPanel .ghl-area-total{display:none!important}
+#areaPanel .ghl-area-chartbox{
+  gap:0!important;
+  padding:12px!important;
+}
+#areaPanel .ghl-area-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+#areaPanel .ghl-area-district{
+  min-height:174px!important;
+  padding:17px 15px 15px!important;
+  border-radius:16px!important;
+  justify-content:center!important;
+  box-shadow:0 5px 14px rgba(10,65,44,.05)!important;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease!important;
+}
+#areaPanel .ghl-area-green{
+  background:linear-gradient(150deg,#fbfdf9 0%,#f1f8e9 100%)!important;
+  border-color:#d2e3c4!important;
+}
+#areaPanel .ghl-area-orange{
+  background:linear-gradient(150deg,#fffaf6 0%,#fff0e7 100%)!important;
+  border-color:#f3d0b6!important;
+}
+#areaPanel .ghl-area-name{
+  color:#0a4837!important;
+  font-size:clamp(13px,1.3vw,17px)!important;
+  font-weight:800!important;
+  gap:8px!important;
+}
+#areaPanel .ghl-area-district strong{
+  font-size:clamp(31px,3vw,44px)!important;
+  letter-spacing:-1.1px!important;
+  margin-top:12px!important;
+}
+#areaPanel .ghl-area-sub{font-size:11px!important;color:#596b60!important;margin-top:6px!important}
+#areaPanel .ghl-area-landscape{opacity:.25!important;width:78%!important;height:60%!important}
+#areaPanel .ghl-area-district:hover{
+  transform:translateY(-3px)!important;
+  box-shadow:0 10px 23px rgba(13,71,47,.12)!important;
+}
+@media(max-width:540px){
+  #areaPanel .ghl-area-chartbox{padding:9px!important}
+  #areaPanel .ghl-area-grid{gap:8px!important}
+  #areaPanel .ghl-area-district{min-height:148px!important;padding:13px 10px!important}
+  #areaPanel .ghl-area-name{font-size:12px!important;gap:5px!important}
+  #areaPanel .ghl-area-district strong{font-size:clamp(24px,6vw,34px)!important;margin-top:9px!important}
+  #areaPanel .ghl-area-sub{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #areaPanel .ghl-area-district{transition:none!important}
+  #areaPanel .ghl-area-district:hover{transform:none!important}
+}
