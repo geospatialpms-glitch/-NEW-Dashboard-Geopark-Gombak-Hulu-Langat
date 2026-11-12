@@ -350,3 +350,17 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});
   else ready();
 })();
+
+
+/* Remove redundant area-total strip without altering district buttons or map handlers. */
+(function(){
+  function removeRedundantTotal(){
+    const total=document.querySelector('#areaPanel .ghl-area-total');
+    if(total)total.remove();
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',removeRedundantTotal,{once:true});
+  }else{
+    removeRedundantTotal();
+  }
+})();
