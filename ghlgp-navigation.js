@@ -364,3 +364,27 @@ document.addEventListener('DOMContentLoaded',()=>{
     removeRedundantTotal();
   }
 })();
+
+
+/* GHLGp KPI total area: replace leaf with supplied mountain icon (2026-11-12). */
+(function(){
+  function applyMountainIcon(){
+    const card=Array.from(document.querySelectorAll('.kpi')).find(el=>
+      (el.querySelector('.kpi-label')?.textContent||'').trim()==='Jumlah Keluasan Geopark');
+    if(!card)return;
+    const icon=card.querySelector('.kpi-icon');
+    if(!icon||icon.querySelector('.ghl-keluasan-mountain'))return;
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('class','ghl-keluasan-mountain');
+    svg.setAttribute('viewBox','0 0 36 36');
+    svg.setAttribute('fill','none');
+    svg.setAttribute('aria-hidden','true');
+    svg.setAttribute('focusable','false');
+    svg.innerHTML='<path d="M3.5 28.5 13.5 10.5l7 11.2 4.2-7.4 7.8 14.2H3.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="m9.7 17.3 4 3.6 3.6-3.4m5.2 3.4 2.6 2.5 2.4-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 32h31" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>';
+    icon.replaceChildren(svg);
+  }
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',applyMountainIcon,{once:true});
+  else applyMountainIcon();
+})();
