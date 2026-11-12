@@ -819,3 +819,18 @@ html{scroll-behavior:smooth;scroll-padding-top:92px}
   #areaPanel .ghl-area-district{transition:none!important}
   #areaPanel .ghl-area-district:hover{transform:none!important}
 }
+
+
+/* Supplied mountain icon for total-area KPI | 2026-11-12 */
+.kpi.kpi-green .kpi-icon .ghl-keluasan-mountain{
+  display:block;
+  width:32px;
+  height:32px;
+  color:#278b38;
+  flex:none;
+}
+.kpi.kpi-green .kpi-icon:has(.ghl-keluasan-mountain){
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
